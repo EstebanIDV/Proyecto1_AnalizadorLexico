@@ -7,6 +7,7 @@
 #include <stdlib.h>
 #include "global.h"
 #include "preprocessor.h"
+#include "scanner.h"
 FILE *tempfptr;
 char token_buffer[500];
 Array Open_files;
@@ -203,11 +204,11 @@ void start(){
     openFile(filename);
     prescanner();
     closeuserfile();
+/////////////////
+    generateSlides();
+    //rewind(tempfptr);
 
-
-    rewind(tempfptr);
-
-    while (!feof(tempfptr))
+    //while (!feof(tempfptr))
         putchar(fgetc(tempfptr));
 }
 

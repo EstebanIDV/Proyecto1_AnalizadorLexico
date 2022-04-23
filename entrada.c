@@ -3,4 +3,6 @@
 //
 #include "entrada2.c"
 
-abc def hgs
+if(A == 10){
+    A = 30;
+}
