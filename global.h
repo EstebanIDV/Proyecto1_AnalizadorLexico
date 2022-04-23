@@ -4,7 +4,7 @@
 
 #ifndef PROYECTO1_ANALIZADORLEXICO_GLOBAL_H
 #define PROYECTO1_ANALIZADORLEXICO_GLOBAL_H
-
+#include <stddef.h>
 #include <bits/types/FILE.h>
 #include <stdbool.h>
 typedef struct {

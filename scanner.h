@@ -4,7 +4,7 @@
 
 #ifndef PROYECTO1_ANALIZADORLEXICO_SCANNER_H
 #define PROYECTO1_ANALIZADORLEXICO_SCANNER_H
-
+#include <bits/types/FILE.h>
 typedef enum token_types {
     KEYWORD, OPERATOR, STRING, CONSTANT, SPECIALCHAR, IDENT, ERROR
 } token_type;
