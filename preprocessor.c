@@ -8,6 +8,8 @@
 #include "global.h"
 #include "preprocessor.h"
 #include "scanner.h"
+#include "definetable.h"
+
 FILE *tempfptr;
 char token_buffer[500];
 Array Open_files;
@@ -98,6 +100,8 @@ void buffer_line(char c){
 
 };
 
+
+
 void transportToFile(){
     for(int i=0; i<strlen(token_buffer);i++)
         fputc(token_buffer[i], tempfptr);
@@ -145,7 +149,43 @@ void prescanner(){
             for(c=fgetc(Open_files.array[Open_files.used-1]); isalnum(c) || c=='_';c=fgetc(Open_files.array[Open_files.used-1]))
                 buffer_char(c);
             switch (check_directive()) {
+
+                // Define directive
                 case DEFINE:
+
+                    // Clearing the buffer to avoid memory issues
+                    clear_buffer();
+
+                    // Getting define name
+                    for(c=fgetc(Open_files.array[Open_files.used-1]);  isalnum(c) || c == '_';c=fgetc(Open_files.array[Open_files.used-1]))
+                    {
+                        if(c=='\t' && !isalnum(c)){
+                            break;
+                        }
+//                        printf("El char name es: %c \n", c);
+                        buffer_char(c);
+                    }
+                    char defineName[500];
+                    strcpy(defineName, token_buffer);
+
+                    clear_buffer();
+
+                    // ToDo:
+                    // Getting define value
+                    for(c=fgetc(Open_files.array[Open_files.used-1]);  isalnum(c) || c == '_';c=fgetc(Open_files.array[Open_files.used-1]))
+                    {
+                        if(c=='\n' && !isalnum(c)){
+                            break;
+                        }
+//                        printf("El char value es: %c \n", c);
+                        buffer_char(c);
+                    }
+
+//                    printf("%s", defineName);
+                    insertDefine(defineName, token_buffer);
+                    printAll();
+                    clear_buffer();
+
                     break;
                 case INCLUDE:
                     clear_buffer();
@@ -203,6 +243,8 @@ void start(){
     initArray(&Open_files, 10);
     openFile(filename);
     prescanner();
+//    expansion();
+
     closeuserfile();
 /////////////////
     generateSlides();
