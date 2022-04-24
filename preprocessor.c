@@ -183,7 +183,7 @@ void prescanner(){
 
 //                    printf("%s", defineName);
                     insertDefine(defineName, token_buffer);
-                    printAll();
+//                    printAll();
                     clear_buffer();
 
                     break;
@@ -244,7 +244,6 @@ void start(){
     openFile(filename);
     prescanner();
 //    expansion();
-
     closeuserfile();
 /////////////////
     generateSlides();
@@ -252,6 +251,7 @@ void start(){
 
     //while (!feof(tempfptr))
         putchar(fgetc(tempfptr));
+
 }
 
 

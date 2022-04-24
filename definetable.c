@@ -62,18 +62,21 @@ void printAll() {
     }
 }
 
-//char *symbolByIndex(int index) {
-//    struct node *tmp = headNode;
-//    int tmpIndex = 0;
-//    while (tmp != NULL) {
-//        if (tmpIndex == index) {
-//            return tmp->name;
-//        }
-//        tmp = tmp->next;
-//        tmpIndex++;
-//    }
-//    return NULL;
-//}
+struct define symbolByIndex(int index) {
+    struct node *tmp = headNode;
+    int tmpIndex = 0;
+    struct define def;
+    while (tmp != NULL) {
+        if (tmpIndex == index) {
+            strcpy(def.defineName, tmp->defineName);
+            strcpy(def.defineValue, tmp->defineValue);
+            return def;
+        }
+        tmp = tmp->next;
+        tmpIndex++;
+    }
+    return def;
+}
 
 int len() {
     return listLen + 1;
@@ -83,11 +86,16 @@ int len() {
 //    string name = "abc";
 //    string value = "diego";
 //
-//    insert(name, value);
+////    insertDefine(name, value);
 //
 //    string name2 = "abcd";
 //    string value2 = "diegod";
 //
-//    insert(name2, value2);
-//    printAll();
+////    insertDefine(name2, value2);
+//
+//    for (int i = 0; i < listLen+1; ++i) {
+//        struct define tmp = symbolByIndex(i);
+//        printf("Name: %s \n", tmp.defineName);
+//        printf("Value: %s \n", tmp.defineValue);
+//    }
 //}

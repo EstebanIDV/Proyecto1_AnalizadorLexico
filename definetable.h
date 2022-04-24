@@ -7,9 +7,15 @@
 
 #include <stdio.h>
 typedef char string[500];
+
+struct define {
+    string defineName;
+    string defineValue;
+};
+
 extern void insertDefine(string name, string value);
 extern void printAll();
 extern int len();
-extern char * symbolByIndex(int index);
+extern struct define symbolByIndex(int index);
 
 #endif //PROYECTO1_ANALIZADORLEXICO_DEFINETABLE_H
