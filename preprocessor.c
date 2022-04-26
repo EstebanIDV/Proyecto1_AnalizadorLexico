@@ -296,8 +296,8 @@ void replaceDefine() {
                 buffer_char(c);
             ungetc(c, tempfptr);
             defAux = checkDefineExists(token_buffer);
-            printf("Revisando el string: %s \n", token_buffer);
-            printf("El valor del define es: %s \n\n", defAux.defineValue);
+//            printf("Revisando el string: %s \n", token_buffer);
+//            printf("El valor del define es: %s \n\n", defAux.defineValue);
 
             if (lookup(token_buffer)==1 && (strcmp(defAux.defineValue, ""))!=0){
                 // ToDo: Mostrar error que hay una variable con el nombre de un define
@@ -358,7 +358,7 @@ void start(){
     // Call the function to expand the defines in case is necessary
     expandDefine();
     printAll();
-    printf("El valor de define ba es: %s", checkDefineExists("ba").defineName);
+//    printf("El valor de define ba es: %s", checkDefineExists("ba").defineName);
 
     rewind(tempfptr);
     replaceDefine();

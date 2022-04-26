@@ -2,7 +2,11 @@
 // Created by diegomv on 25/04/22.
 //
 #define ab 20
-#define ba (20 + ab)
+#define ba (20 + ab) c
+#define c 33 z
+#define z ab
+#define y 1
+
 
 int a = 1;
 char b ='ab';
