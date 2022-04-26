@@ -15,6 +15,7 @@ int replaceCounter = 0;
 struct node {
     string defineName;
     string defineValue;
+    int loopError;
     struct node *next;
 };
 
@@ -44,6 +45,7 @@ void insertDefine(string name, string value) {
     struct node *newSymNode = malloc(sizeof(struct node));
     strcpy(newSymNode->defineName, name);
     strcpy(newSymNode->defineValue, value);
+    newSymNode->loopError=0;
     newSymNode->next = NULL;
 
     // This is the first insertion where list if full empty
@@ -109,6 +111,8 @@ void expandDefine() {
             int checkExpansion = 0;
             replaceCounter = 0;
 
+            printf("Revisando el name %s \n", tmp->defineName);
+
             for (int j = 0; j < strlen(tmp->defineValue); ++j) {
 
                 currentChar = tmp->defineValue[j];
@@ -127,7 +131,10 @@ void expandDefine() {
                     strcat(newDefineValue, tmpStr);
                     checkExpansion = 1;
                 } else {
-                    replaceDefineValue(tmp->defineName);
+                    if (strlen(token_buffer) > 0){
+                        replaceDefineValue(tmp->defineName);
+                    }
+
                     strcat(newDefineValue, tmpStr);
                     checkExpansion = 0;
 
@@ -141,9 +148,12 @@ void expandDefine() {
                 if (j + 1 == strlen(tmp->defineValue)) {
 
 
-                    replaceDefineValue(tmp->defineName);
+                    if (strlen(token_buffer) > 0){
+                        replaceDefineValue(tmp->defineName);
+                    }
                     if (replaceCounter == 0) {
                         stopExpansion = 1;
+                        checkExpansion = 0;
                     }
 //                        struct define def = getDefineValue(token_buffer);
 //                        if (strcmp(def.defineValue, "") != 0){
@@ -187,11 +197,17 @@ struct define checkDefineExists(string defineName) {
 
 void replaceDefineValue(string defineName) {
     struct define def = getDefineValue(token_buffer);
-    if (strcmp(def.defineValue, "") != 0 && strcmp(defineName, def.defineName)!= 0) {
+    if (strcmp(def.defineValue, "") != 0 && strcmp(defineName, def.defineName) != 0) {
         strcat(newDefineValue, def.defineValue);
         replaceCounter++;
-    } else {
+    }
+    else if(strcmp(defineName, defineName) == 0){
+        insertError(defineName);
         strcat(newDefineValue, token_buffer);
+    }
+    else {
+        strcat(newDefineValue, token_buffer);
+        insertError(defineName);
     }
 
 
@@ -201,12 +217,24 @@ void replaceDefineValue(string defineName) {
     clear_buffer();
 }
 
+void insertError(string name){
+    struct node *tmp = headNode;
+
+    while (tmp != NULL) {
+        if (strcmp(tmp->defineName, name) == 0) {
+            tmp->loopError=1;
+            break;
+        }
+        tmp = tmp->next;
+    }
+}
+
 struct define getDefineValue(string name) {
     struct node *tmp = headNode;
     struct define def = {"", ""};
 
     while (tmp != NULL) {
-        if (strcmp(tmp->defineName, name) == 0) {
+        if (strcmp(tmp->defineName, name) == 0 && tmp->loopError==0) {
 
             strcpy(def.defineName, tmp->defineName);
             strcpy(def.defineValue, tmp->defineValue);

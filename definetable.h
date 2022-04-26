@@ -22,5 +22,6 @@ extern void expandDefine();
 struct define getDefineValue(string defineName);
 void replaceDefineValue();
 struct define checkDefineExists(string defineName);
+void insertError(string name);
 
 #endif //PROYECTO1_ANALIZADORLEXICO_DEFINETABLE_H
