@@ -169,7 +169,7 @@ struct define checkDefineExists(string defineName){
     struct node *tmp = headNode;
     struct define def = {"", ""};
     while (tmp != NULL) {
-        if (tmp->defineName == defineName) {
+        if (strcmp(tmp->defineName, defineName) == 0) {
             strcpy(def.defineName, tmp->defineName);
             strcpy(def.defineValue, tmp->defineValue);
             return def;

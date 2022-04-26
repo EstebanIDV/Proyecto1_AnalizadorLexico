@@ -3,7 +3,5 @@
 
 
 int a = 1;
-char b ='zab';
-int c = ba;
-
-
+char b ='ab';
+int (20 + 20) = bac + 20 + 20 - (20 + 20);

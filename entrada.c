@@ -5,7 +5,5 @@
 #define ba (20 + ab)
 
 int a = 1;
-char b ='zab';
-int c = ba;
-
-
+char b ='ab';
+int ba = bac + ab + ab - ba;

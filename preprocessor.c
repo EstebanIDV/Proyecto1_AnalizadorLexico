@@ -125,23 +125,25 @@ void prescanner(){
                 buffer_char(c);
             ungetc(c,Open_files.array[Open_files.used-1]);
             if (lookup(token_buffer) == 0){
-                if ( assign == 1){
-
-                }
-                enter(token_buffer);
+//                if ( assign == 1){
+//
+//                }
+//                enter(token_buffer);
             }
             transportToFile(tempfptr);
             clear_buffer();
             continue;
-        } else if (in_char == "=") {
-            assign = 1;
-            buffer_char(in_char);
-            transportToFile(tempfptr);
-        }else if (in_char == ";"){
-            assign = 0;
-            buffer_char(in_char);
-            transportToFile(tempfptr);
-        } else if (in_char=='/') {
+        }
+//        else if (in_char == "=") {
+//            assign = 1;
+//            buffer_char(in_char);
+//            transportToFile(tempfptr);
+//        }else if (in_char == ";"){
+//            assign = 0;
+//            buffer_char(in_char);
+//            transportToFile(tempfptr);
+//        }
+        else if (in_char=='/') {
             c = fgetc(Open_files.array[Open_files.used - 1]);
             if (c == '/') {
                 do
@@ -294,13 +296,20 @@ void replaceDefine() {
                 buffer_char(c);
             ungetc(c, tempfptr);
             defAux = checkDefineExists(token_buffer);
-//            if (lookup(token_buffer)==1 && (strcmp(defAux.defineValue, ""))!=0){
-//                // ToDo: Mostrar error que hay una variable con el nombre de un define
-//            }
-//            else {
-//                clear_buffer();
-////                strcpy(token_buffer, defAux.defineValue);
-//            }
+            printf("Revisando el string: %s \n", token_buffer);
+            printf("El valor del define es: %s \n\n", defAux.defineValue);
+
+            if (lookup(token_buffer)==1 && (strcmp(defAux.defineValue, ""))!=0){
+                // ToDo: Mostrar error que hay una variable con el nombre de un define
+            }
+            else {
+                if ((strcmp(defAux.defineValue, ""))!=0)
+                {
+                    clear_buffer();
+                    strcpy(token_buffer, defAux.defineValue);
+                }
+
+            }
 
             transportToFile(tempfptr2);
             clear_buffer();
@@ -345,10 +354,12 @@ void start(){
     initArray(&Open_files, 10);
     openFile(filename);
     prescanner();
-    printAllSym();
+//    printAllSym();
     // Call the function to expand the defines in case is necessary
     expandDefine();
-//    printAll();
+    printAll();
+    printf("El valor de define ba es: %s", checkDefineExists("ba").defineName);
+
     rewind(tempfptr);
     replaceDefine();
     closeuserfile();
