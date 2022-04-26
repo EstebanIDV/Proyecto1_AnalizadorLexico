@@ -16,10 +16,9 @@ typedef struct {
 #define MAXIDLEN 33
 
 
-
-
 extern FILE *fptr;
 extern FILE *tempfptr;
+extern FILE *tempfptr2;
 typedef enum  directive_types{
     INCLUDE, DEFINE, NADA
 } directive;

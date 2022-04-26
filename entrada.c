@@ -1,12 +1,11 @@
 //
-// Created by diegomv on 23/04/22.
+// Created by diegomv on 25/04/22.
 //
-#define a 211 + (221+4) \n
-#define b 211 \n
-#define c 211 \n
+#define ab 20
+#define ba (20 + ab)
+
+int a = 1;
+char b ='zab';
+int c = ba;
 
 
-
-
-
-int bs = a;

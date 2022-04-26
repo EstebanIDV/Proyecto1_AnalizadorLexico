@@ -6,6 +6,9 @@
 #include <stdlib.h>
 #include "string.h"
 #include "definetable.h"
+#include "ctype.h"
+
+string newDefineValue = "";
 
 // A simple node to use a linked symbol list as a symbol table, not another info needed
 struct node {
@@ -55,17 +58,19 @@ void insertDefine(string  name, string value) {
 }
 
 void printAll() {
+    printf("_______________________________________\n");
     struct node *tmp = headNode;
     while (tmp != NULL) {
         printf("Name: %s - Value: %s \n", tmp->defineName, tmp->defineValue);
         tmp = (struct node *) tmp->next;
     }
+    printf("_______________________________________\n");
 }
 
 struct define symbolByIndex(int index) {
     struct node *tmp = headNode;
     int tmpIndex = 0;
-    struct define def;
+    struct define def = {"", ""};
     while (tmp != NULL) {
         if (tmpIndex == index) {
             strcpy(def.defineName, tmp->defineName);
@@ -80,6 +85,129 @@ struct define symbolByIndex(int index) {
 
 int len() {
     return listLen + 1;
+}
+
+
+void expandDefine(){
+//    printAll();
+    // Getting each define from define table
+    struct node *tmp = headNode;
+
+    while (tmp != NULL) {
+        // Flag to know when end define expansion for the current define
+        int stopExpansion = 0;
+        //Temporal string to hold define value while it expands
+//        newDefineValue = "";
+        strcpy(newDefineValue, "");
+
+        while (stopExpansion == 0) {
+            // Cleaning the buffer
+            clear_buffer();
+
+            char currentChar = ' ';
+            int checkExpansion = 0;
+
+            for (int j = 0; j < strlen(tmp->defineValue); ++j) {
+
+                currentChar = tmp->defineValue[j];
+
+                char tmpStr[2] = {' ', '\0'};
+                tmpStr[0] = currentChar;
+                // If buffers is empty that means we are stating to read a token
+                // If current token is alpha, save into bufferS
+
+                if (isalpha(currentChar) && checkExpansion == 0) {
+                    buffer_char(currentChar);
+                } else if ((isdigit((int) currentChar) || currentChar == '_') && strlen(token_buffer) > 0) {
+                    buffer_char(currentChar);
+
+                } else if((isdigit((int) currentChar) || currentChar == '_') && strlen(token_buffer) == 0){
+                    strcat(newDefineValue, tmpStr);
+                    checkExpansion = 1;
+                }else {
+                    replaceDefineValue();
+                    strcat(newDefineValue, tmpStr);
+                    checkExpansion = 0;
+
+                }
+
+//                printf("Buffer : %s \n", token_buffer);
+
+                // If we read all the value, that means no need more expansions on value
+//                printf("El indice acutal es: %d", j);
+//                printf("El largo acutal es: %lu", strlen(tmp->defineValue));
+                if (j + 1 == strlen(tmp->defineValue)) {
+                    stopExpansion = 1;
+
+                        struct define def = getDefineValue(token_buffer);
+                        if (strcmp(def.defineValue, "") != 0){
+                            strcat(newDefineValue, def.defineValue);
+                        }else
+                        {
+                            strcat(newDefineValue, token_buffer);
+                        }
+//                        printf("Voy a revisar para reemplazo 1 con -> %s \n", def.defineValue);
+//                        printf("El new values es: %s \n", newDefineValue);
+
+                        strcpy(tmp->defineValue, newDefineValue);
+                        clear_buffer();
+                        break;
+
+                }
+            }
+            clear_buffer();
+//            printf("###########################\n");
+
+            tmp = tmp->next;
+        }
+    }
+
+//    printAll();
+}
+
+struct define checkDefineExists(string defineName){
+    struct node *tmp = headNode;
+    struct define def = {"", ""};
+    while (tmp != NULL) {
+        if (tmp->defineName == defineName) {
+            strcpy(def.defineName, tmp->defineName);
+            strcpy(def.defineValue, tmp->defineValue);
+            return def;
+        }
+        tmp = tmp->next;
+    }
+    return def;
+}
+
+void replaceDefineValue(){
+    struct define def = getDefineValue(token_buffer);
+    if (strcmp(def.defineValue, "") != 0){
+        strcat(newDefineValue, def.defineValue);
+    }else
+    {
+        strcat(newDefineValue, token_buffer);
+    }
+
+//    printf("El new values es: %s \n", newDefineValue);
+//    printf("Voy a revisar para reemplazo 2 con -> %s \n", def.defineValue);
+
+    clear_buffer();
+}
+
+struct define getDefineValue(string name){
+    struct node *tmp = headNode;
+    struct define def = {"", ""};
+
+    while (tmp != NULL) {
+        if (strcmp(tmp->defineName, name)==0) {
+
+            strcpy(def.defineName, tmp->defineName);
+            strcpy(def.defineValue, tmp->defineValue);
+            return def;
+        }
+        tmp = tmp->next;
+    }
+    return def;
 }
 
 //int main() {
