@@ -1,0 +1,44 @@
+\documentclass[xcolor={dvipsnames}]{beamer}
+\mode<presentation>
+{
+  \usetheme{default}      % or try Darmstadt, Madrid, Warsaw, ...
+  \usecolortheme{default}
+  \usepackage{beamerthemesplit}% or try albatross, beaver, crane, ...
+  \usefonttheme{default}  % or try serif, structurebold, ...
+  \setbeamertemplate{navigation symbols}{}
+  \setbeamertemplate{caption}[numbered]
+}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{pgf-pie}
+\title[Analizador Lexico\hspace{0.5cm}\insertframenumber/\inserttotalframenumber]{Proyecto 1: Analizador Lexico }
+\author{ Esteban Durán \and David Hernández  \and Diego Mendez   }
+\institute{Instuto Tecnológico De Costa Rica\\ Compiladores e Intérpretes}
+\date{27-04-2022}
+\begin{document}
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}{Scanning and Flex}
+El proceso de scanning es una fase de la compilación la cual se encarga de tomar el código fuente de entrada (el cual ya pasó por la etapa de preprocesado) y generar tokens que sean representativos del código escrito en este. Cada uno de estos tokens está compuesto por uno o más símbolos que lo representan, este conjunto se le conoce como "Lexema".
+\begin{figure}
+\includegraphics[width=9cm]{phases.png}
+\end{figure}
+  \end{frame}
+
+%\section{Problem Statement}
+
+\begin{frame}{Scanning y Flex}
+
+
+  Flex genera este scanner de manera sencilla. Este procesa cada token de un archivo de entrada donde uno a uno se extraen mediante una función propia de Flex. Este conjunto de tokens por lo general siguen una string específica o un caracter que los idéntifique. Si un token lo requiere, se pueden identificar reglas mediante expresiones regulares que ayuden a extraerlo específicamente. Esto también permite crear funciones dentro del mismo scanner que permita manipular esta información según la funcionalidad del scanner.
+  \begin{figure}
+\includegraphics[width=3cm]{flex.jpg}
+\end{figure}
+
+\end{frame}
+\include{analysis}
+\end{document}

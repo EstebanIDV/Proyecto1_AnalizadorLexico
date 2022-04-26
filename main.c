@@ -66,7 +66,6 @@ int main(int argc, char** argv) {
     // Calling system to translate and run nasm code
 
     //char command[200] = "nasm -f elf32 entrada.asm && gcc -m32 -static entrada.o -o entrada && ./entrada";
-    char command[200];
     strcpy(rawname,"");
     strcpy(rawname,filename);
     rawname[strlen(rawname)-1] = *"\0";
@@ -80,7 +79,8 @@ int main(int argc, char** argv) {
 
     start();
 
-
+    system("pdflatex --interaction=nonstopmode result.tex ");
+    system("evince --fullscreen result.pdf");
 
 
 

@@ -1,0 +1,45 @@
+\begin{frame}[allowframebreaks]{Programa Fuente}
+		\newline 
+\newline 
+\newline 
+\newline 
+\newline 
+\newline 
+\fontfamily{cmr}\selectfont\textcolor{Blue}{\colorbox{Cyan}{enum}}\fontfamily{cmss}\selectfont\textcolor{Yellow}{\colorbox{Violet}{expr}}\fontfamily{put}\selectfont\textcolor{white}{\colorbox{teal}{\{}}\fontfamily{cmss}\selectfont\textcolor{Yellow}{\colorbox{Violet}{IDEXPR}}\fontfamily{put}\selectfont\textcolor{white}{\colorbox{teal}{,}}\fontfamily{cmss}\selectfont\textcolor{Yellow}{\colorbox{Violet}{LITERALEXPR}}\fontfamily{put}\selectfont\textcolor{white}{\colorbox{teal}{,}}\fontfamily{cmss}\selectfont\textcolor{Yellow}{\colorbox{Violet}{TEMPEXPR}}\fontfamily{put}\selectfont\textcolor{white}{\colorbox{teal}{\}}}\fontfamily{put}\selectfont\textcolor{white}{\colorbox{teal}{;}}\newline 
+\newline 
+\fontfamily{cmr}\selectfont\textcolor{Blue}{\colorbox{Cyan}{if}}\fontfamily{put}\selectfont\textcolor{white}{\colorbox{teal}{(}}\fontfamily{cmss}\selectfont\textcolor{Yellow}{\colorbox{Violet}{A}}\fontfamily{lmtt}\selectfont\textcolor{ForestGreen}{\colorbox{LimeGreen}{==}}\fontfamily{qag}\selectfont\textcolor{orange}{\colorbox{Yellow}{10}}\fontfamily{put}\selectfont\textcolor{white}{\colorbox{teal}{)}}\fontfamily{put}\selectfont\textcolor{white}{\colorbox{teal}{\{}}\newline 
+\fontfamily{cmss}\selectfont\textcolor{Yellow}{\colorbox{Violet}{A}}\fontfamily{lmtt}\selectfont\textcolor{ForestGreen}{\colorbox{LimeGreen}{=}}\fontfamily{qag}\selectfont\textcolor{orange}{\colorbox{Yellow}{30}}\fontfamily{put}\selectfont\textcolor{white}{\colorbox{teal}{;}}\newline 
+\fontfamily{put}\selectfont\textcolor{white}{\colorbox{teal}{\}}}
+	\end{frame}
+\begin{frame}[allowframebreaks]{Estadísticas}
+		\begin{tikzpicture}
+		\begin{axis}[ybar interval, xtick=empty,legend pos=outer north east,ymax=15,ymin=0]
+		\addplot[style = {fill=Cyan}] coordinates { (1, 2)  (1.5, 4)};
+	\addplot[style = {fill=LimeGreen}] coordinates { (1, 2)  (1.5, 4)};
+	\addplot[style = {fill=gray}] coordinates { (1, 0)  (1.5, 4)};
+	\addplot[style = {fill=Yellow}] coordinates { (1, 2)  (1.5, 4)};
+	\addplot[style = {fill=teal}] coordinates { (1, 10)  (1.5, 4)};
+	\addplot[style = {fill=Violet}] coordinates { (1, 6)  (1.5, 4)};
+	\addplot[style = {fill=red}] coordinates { (1, 0)  (1.5, 4)};
+	\legend{Keywords, Operator, String, Constant, Special character, Identifiers, Errors}  \end{axis}\end{tikzpicture}
+	\end{frame}
+
+	\begin{frame}[allowframebreaks]{Estadísticas}
+		\begin{tikzpicture}
+		\def\printonlypositive#1{\ifnum#1>0
+#1
+\fi}
+\pie [rotate = 90,
+text = legend,
+before number=\printonlypositive,   
+sum=auto,
+every only number node/.style={text=white},
+color={Cyan,LimeGreen,gray,Yellow,teal,Violet,red}] {2/Keywords,
+	2/Operators,
+	0/Strings,
+	2/Constants,
+	10/Special Characters,
+	6/Identifiers,
+	0/Errors} 
+	\end{tikzpicture}
+	\end{frame}

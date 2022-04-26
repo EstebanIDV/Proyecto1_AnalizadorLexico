@@ -15,7 +15,7 @@ inttoken [0-9]+
 floattoken [0-9]+\.[0-9]+
 chartoken \'.\'
 stringtoken \".*\"
-identifier ([a-zA-Z|_])([a-zA-Z|_])
+identifier ([a-zA-Z|_])([a-zA-Z|_])*
 doublequotationmark	\"
 singlequotationmark \'
 backslash	\\
