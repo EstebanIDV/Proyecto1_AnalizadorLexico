@@ -1,11 +1,9 @@
 //
 // Created by david on 26/04/22.
 //
-
-#include "prueba2.h"
+#include "palindrome.c"
 #define number1 "12703"
 #define number 12703
-#include <stdio.h>
 
 int reverseNumber(int num) {
 

@@ -2,11 +2,6 @@
 // Created by david on 26/04/22.
 //
 
-
-#include "stdio.h"
-#include "palindrome.h"
-#include "prueba2.h"
-
 int palindrome(int num) {
     int reversed = 0, remainder, original;
     original = num;

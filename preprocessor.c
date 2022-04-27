@@ -326,7 +326,8 @@ void start(){
     expandDefine();
 
     rewind(tempfptr);
-    tempfptr2 = tmpfile();
+    //tempfptr2 = tmpfile();
+    tempfptr2 = fopen("temporal2.txt", "w+");
     replaceDefine();
     closeuserfile();
 

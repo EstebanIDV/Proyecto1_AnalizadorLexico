@@ -198,9 +198,9 @@ void setLine(token_type currentType, char* toRead){
             fputs("\\",resulttex);
             fputc(toRead[currentPosition],resulttex);
         }else if(toRead[currentPosition] == '\\'){
-            fputs("\\textbackslash }}",resulttex);
+            fputs("\\textbackslash",resulttex);
         }else if(toRead[currentPosition] == '~'){
-            fputs("\\textasciitilde}}",resulttex);
+            fputs("\\textasciitilde",resulttex);
         }else if(toRead[currentPosition] == '>' || toRead[currentPosition] == '<'){
             fputs("$",resulttex);
             fputc(toRead[currentPosition],resulttex);

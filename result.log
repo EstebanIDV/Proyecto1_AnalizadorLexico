@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2022.4.26)  27 APR 2022 11:25
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2022.4.26)  27 APR 2022 11:52
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1096,97 +1096,141 @@ Package pdftex.def Info: flex.jpg  used on input line 42.
 \openout2 = `analysis.aux'.
 
  (./analysis.tex
-! Argument of \frame has an extra }.
-<inserted text> 
-                \par 
-l.10 ...{"Valor de PI es: \%i \textbackslash }}n"}
-                                                  }\fontfamily{put}\selectfo...
-I've run across a `}' that doesn't seem to match anything.
-For example, `\def\a#1{...}' and `\a}' would produce
-this error. If you simply proceed now, the `\par' that
-I've just inserted will cause me to report a runaway
-argument that might be the root of the problem. But if
-your `}' was spurious, just type `2' and it will go away.
 
-Runaway argument?
-{Programa Fuente} \newline \fontfamily {qtm}\selectfont \textcolor {S\ETC.
-! Paragraph ended before \frame was complete.
-<to be read again> 
-                   \par 
-l.10 ...{"Valor de PI es: \%i \textbackslash }}n"}
-                                                  }\fontfamily{put}\selectfo...
-I suspect you've forgotten a `}', causing me to apply this
-control sequence to too much text. How can we recover?
-My plan is to forget the whole thing and hope for the best.
+! LaTeX Error: There's no line here to end.
 
-! Extra }, or forgotten \endgroup.
-<recently read> }
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.14 	\end{frame}
                  
-l.10 ...{"Valor de PI es: \%i \textbackslash }}n"}
-                                                  }\fontfamily{put}\selectfo...
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
 
-! Extra }, or forgotten \endgroup.
-l.10 ..."Valor de PI es: \%i \textbackslash }}n"}}
-                                                  \fontfamily{put}\selectfon...
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
-
+LaTeX Font Info:    Trying to load font information for OT1+qtm on input line 1
+4.
+(/usr/share/texmf/tex/latex/tex-gyre/ot1qtm.fd
+File: ot1qtm.fd 2009/09/25 v1.2 font definition file for OT1/qtm
+)
 LaTeX Font Info:    Trying to load font information for OT1+put on input line 1
-0.
+4.
+
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1put.fd
 File: ot1put.fd 2001/06/04 font definitions for OT1/put.
 )
-LaTeX Font Info:    Trying to load font information for OT1+qag on input line 1
-0.
-
-(/usr/share/texmf/tex/latex/tex-gyre/ot1qag.fd
-File: ot1qag.fd 2009/09/25 v1.2 font definition file for OT1/qag
-)
 LaTeX Font Info:    Trying to load font information for OMS+put on input line 1
-3.
+4.
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omsput.fd
 File: omsput.fd 
 )
 LaTeX Font Info:    Font shape `OMS/put/m/n' in size <10.95> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 13.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 14.
+LaTeX Font Info:    Trying to load font information for OT1+lmdh on input line 
+14.
 
-! Extra }, or forgotten \endgroup.
-\endframe ->\egroup 
-                    \begingroup \def \@currenvir {frame}
+(/usr/share/texmf/tex/latex/lm/ot1lmdh.fd
+File: ot1lmdh.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+! Undefined control sequence.
+<argument> "Valor de PI es: \%i \textbackslashn 
+                                                "
 l.14 	\end{frame}
                  
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
 
+LaTeX Font Info:    Trying to load font information for OT1+qag on input line 1
+4.
+(/usr/share/texmf/tex/latex/tex-gyre/ot1qag.fd
+File: ot1qag.fd 2009/09/25 v1.2 font definition file for OT1/qag
 )
-Runaway argument?
- 
-! File ended while scanning use of \frame.
-<inserted text> 
-                \par 
-l.43 \include{analysis}
-                       
-I suspect you have forgotten a `}', causing me
-to read past where you wanted me to stop.
-I'll try to recover; but if the error is serious,
-you'd better type `E' or `X' now and fix your file.
+Overfull \hbox (71.09721pt too wide) in paragraph at lines 14--14
+[][][][][][][][][]  
+ []
 
 [4
 
 
 ]
+
+! Package PGF Math Error: Unknown function `empty' (in 'empty').
+
+See the PGF Math package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.26 	\end{frame}
+                 
+This error message was generated by an \errmessage
+command, so I can't give any explicit help.
+Pretend that you're Hercule Poirot: Examine all clues,
+and deduce the truth by order and method.
+
+
+! Package PGF Math Error: Sorry, an internal routine of the floating point unit
+ got an ill-formatted floating point number `0'. The unreadable part was near '
+0'..
+
+See the PGF Math package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.26 	\end{frame}
+                 
+(That was another \errmessage.)
+
+! Missing number, treated as zero.
+<to be read again> 
+                   n
+l.26 	\end{frame}
+                 
+A number should have been here; I inserted `0'.
+(If you can't figure out why I needed to see a number,
+look up `weird error' in the index to The TeXbook.)
+
+! Illegal unit of measure (pt inserted).
+<to be read again> 
+                   n
+l.26 	\end{frame}
+                 
+Dimensions can be in units of em, ex, in, pt, pc,
+cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
+I'll assume that you meant to say pt, for printer's points.
+To recover gracefully from this error, it's best to
+delete the erroneous units; e.g., type `2' to delete
+two letters. (See Chapter 27 of The TeXbook.)
+
+Missing character: There is no n in font nullfont!
+Missing character: There is no a in font nullfont!
+Missing character: There is no n in font nullfont!
+Missing character: There is no p in font nullfont!
+Missing character: There is no t in font nullfont!
+LaTeX Font Info:    Trying to load font information for U+msa on input line 26.
+
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Trying to load font information for U+msb on input line 26.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)
+Overfull \hbox (9.14557pt too wide) in paragraph at lines 26--26
+[][]  
+ []
+
+[5
+
+] [6
+
+])
 \tf@nav=\write6
 \openout6 = `result.nav'.
 
@@ -1196,57 +1240,40 @@ you'd better type `E' or `X' now and fix your file.
 \tf@snm=\write8
 \openout8 = `result.snm'.
 
-
-
-! LaTeX Error: \begin{frame} on input line 1 ended by \end{document}.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.44 \end{document}
-                   
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 44.
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 44.
-(./result.aux (./analysis.aux))
+ (./result.aux (./analysis.aux))
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 44.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 44.
 Package rerunfilecheck Info: File `result.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
- )
-(\end occurred inside a group at level 2)
-
-### semi simple group (level 2) entered at line 1 (\begingroup)
-### semi simple group (level 1) entered at line 1 (\begingroup)
-### bottom level 
+ ) 
 Here is how much of TeX's memory you used:
- 31880 strings out of 483183
- 757125 string characters out of 5966292
- 1166228 words of memory out of 5000000
- 46216 multiletter control sequences out of 15000+600000
- 541484 words of font info for 36 fonts, out of 8000000 for 9000
+ 32685 strings out of 483183
+ 777106 string characters out of 5966292
+ 1177228 words of memory out of 5000000
+ 46990 multiletter control sequences out of 15000+600000
+ 551806 words of font info for 55 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 63i,16n,98p,792b,609s stack positions out of 5000i,500n,10000p,200000b,80000s
-pdfTeX warning (dest): name{Navigation6} has been referenced bu
-t does not exist, replaced by a fixed one
+ 63i,18n,98p,792b,2172s stack positions out of 5000i,500n,10000p,200000b,80000s
+pdfTeX warning (dest): name{Navigation8} has been referenced but does not exi
+st, replaced by a fixed one
 
-{/usr/share/texmf/fonts/enc/dvips/tex-gyre/q-rm.enc}{/usr/share/texlive/texmf-d
-ist/fonts/enc/dvips/base/8r.enc}</usr/share/texlive/texmf-dist/fonts/type1/publ
-ic/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsf
-onts/cm/cmss10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/c
-m/cmss12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss
-8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pf
-b></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></us
-r/share/texlive/texmf-dist/fonts/type1/adobe/utopia/putr8a.pfb></usr/share/texm
-f/fonts/type1/public/tex-gyre/qagr.pfb>
-Output written on result.pdf (4 pages, 154511 bytes).
+{/usr/share/texmf/fonts/enc/dvips/tex-gyre/q-rm.enc}{/usr/share/texmf/fonts/enc
+/dvips/lm/lm-rm.enc}{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/s
+hare/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/share/t
+exlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb></usr/share/texlive
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb></usr/share/texlive/texmf-
+dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></usr/share/texlive/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf/fonts/type1/public
+/lm/lmdunh10.pfb></usr/share/texlive/texmf-dist/fonts/type1/adobe/utopia/putr8a
+.pfb></usr/share/texmf/fonts/type1/public/tex-gyre/qagr.pfb></usr/share/texmf/f
+onts/type1/public/tex-gyre/qtmr.pfb>
+Output written on result.pdf (6 pages, 213418 bytes).
 PDF statistics:
- 84 PDF objects out of 1000 (max. 8388607)
- 59 compressed objects within 1 object stream
- 10 named destinations out of 1000 (max. 500000)
+ 106 PDF objects out of 1000 (max. 8388607)
+ 77 compressed objects within 1 object stream
+ 14 named destinations out of 1000 (max. 500000)
  53 words of extra memory for PDF output out of 10000 (max. 10000000)
 

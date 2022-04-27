@@ -10,9 +10,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c24c6931-b0f6-41ed-b582-c375d7b4b452" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/temporal2.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/analysis.aux" beforeDir="false" afterPath="$PROJECT_DIR$/analysis.aux" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/analysis.tex" beforeDir="false" afterPath="$PROJECT_DIR$/analysis.tex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/palindrome.c" beforeDir="false" afterPath="$PROJECT_DIR$/palindrome.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/postprocessor.c" beforeDir="false" afterPath="$PROJECT_DIR$/postprocessor.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/preprocessor.c" beforeDir="false" afterPath="$PROJECT_DIR$/preprocessor.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prueba1.c" beforeDir="false" afterPath="$PROJECT_DIR$/prueba1.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prueba2.c" beforeDir="false" afterPath="$PROJECT_DIR$/prueba2.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/result.aux" beforeDir="false" afterPath="$PROJECT_DIR$/result.aux" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/result.log" beforeDir="false" afterPath="$PROJECT_DIR$/result.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/result.nav" beforeDir="false" afterPath="$PROJECT_DIR$/result.nav" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/result.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/result.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scanner" beforeDir="false" afterPath="$PROJECT_DIR$/scanner" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,6 +59,11 @@
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
@@ -63,7 +79,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1651011638947</updated>
-      <workItem from="1651011653549" duration="14061000" />
+      <workItem from="1651011653549" duration="15798000" />
     </task>
     <servers />
   </component>
