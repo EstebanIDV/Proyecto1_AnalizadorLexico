@@ -3,7 +3,7 @@
 //
 #define ba ab asiodjaoisd
 #include "palindrome.c"
-#include "prueba1.c"
+#include "prueba2.c"
 
 int main() {
     printf("Valor de PI es: %i \n",PI);
