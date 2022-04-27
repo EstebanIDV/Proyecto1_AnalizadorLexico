@@ -1,8 +1,16 @@
 //
-// Created by esteban on 26/3/22.
+// Created by diegomv on 25/04/22.
 //
-#include "entrada2.c"
+#define ab 0
+#define ba (20 + ab) c
+#define c 33 z
+#define z ab
+#define y 1
 
-if(A == 10){
-    A = 30;
-}
+#define r t
+#define t r
+
+
+int a = 1;
+char b ='ab';
+int ba = bac + ab + ab - ba;

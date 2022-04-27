@@ -8,7 +8,11 @@
 #include "global.h"
 #include "preprocessor.h"
 #include "scanner.h"
+#include "definetable.h"
+#include "symbols_table.h"
+
 FILE *tempfptr;
+FILE *tempfptr2;
 char token_buffer[500];
 Array Open_files;
 
@@ -55,10 +59,10 @@ extern void clear_buffer(void){
 
 void error(int in_char){
     fprintf(stderr, "Preprocessing Lexical Error located in: %c ", in_char);
-    if (remove(filename) == 0)
-        printf(".asm Deleted successfully!\n");
-    else
-        printf("Unable to delete the .asm file!\n");
+//    if (remove(filename) == 0)
+//        printf(".asm Deleted successfully!\n");
+//    else
+//        printf("Unable to delete the .asm file!\n");
     exit(1);
 }
 
@@ -82,7 +86,7 @@ void closeuserfile(){
 
 
  void buffer_char(int c){
-    if (strlen(token_buffer)<MAXIDLEN)
+    if (strlen(token_buffer)<500)
         token_buffer[strlen(token_buffer)] = c;
     else{
         printf("ERROR! An ID or expression exceeds length limits!\n");
@@ -98,9 +102,11 @@ void buffer_line(char c){
 
 };
 
-void transportToFile(){
+
+
+void transportToFile(FILE *fptr){
     for(int i=0; i<strlen(token_buffer);i++)
-        fputc(token_buffer[i], tempfptr);
+        fputc(token_buffer[i], fptr);
     clear_buffer();
 };
 
@@ -117,35 +123,86 @@ void prescanner(){
             for(c=fgetc(Open_files.array[Open_files.used-1]);  isalnum(c) || c == '_';c=fgetc(Open_files.array[Open_files.used-1]))
                 buffer_char(c);
             ungetc(c,Open_files.array[Open_files.used-1]);
-            transportToFile();
+            transportToFile(tempfptr);
             clear_buffer();
             continue;
-        } else if (in_char=='/'){
-            c=fgetc(Open_files.array[Open_files.used-1]);
-            if(c=='/'){
+        }
+        else if (in_char=='/') {
+            c = fgetc(Open_files.array[Open_files.used - 1]);
+            if (c == '/') {
                 do
-                    in_char = fgetc(Open_files.array[Open_files.used-1]);
-                while (in_char!='\n');
-            } else if(c=='*'){
+                    in_char = fgetc(Open_files.array[Open_files.used - 1]);
+                while (in_char != '\n');
+            } else if (c == '*') {
                 do {
-                    in_char = fgetc(Open_files.array[Open_files.used-1]);
-                    if(in_char=='*'){
-                        in_char = fgetc(Open_files.array[Open_files.used-1]);
-                        if(in_char=='/'){
+                    in_char = fgetc(Open_files.array[Open_files.used - 1]);
+                    if (in_char == '*') {
+                        in_char = fgetc(Open_files.array[Open_files.used - 1]);
+                        if (in_char == '/') {
                             break;
 
                         }
                     }
-                }while (in_char!=EOF);
+                } while (in_char != EOF);
             }
             clear_buffer();
-        } else if(in_char=='#'){
+        } else if (in_char == '"'){
+            buffer_char(in_char);
+            for (c = fgetc(Open_files.array[Open_files.used - 1]); c != '"' ; c = fgetc(Open_files.array[Open_files.used - 1]))
+                buffer_char(c);
+//            ungetc(c, Open_files.array[Open_files.used - 1]);
+            transportToFile(tempfptr);
+        }else if (in_char== 39) {
+            buffer_char(in_char);
+            for (c = fgetc(Open_files.array[Open_files.used - 1]); c != 39 ; c = fgetc(Open_files.array[Open_files.used - 1]))
+                buffer_char(c);
+            transportToFile(tempfptr);
+
+        }else if(in_char=='#'){
             clear_buffer();
             bool hasherror = false;
             for(c=fgetc(Open_files.array[Open_files.used-1]); isalnum(c) || c=='_';c=fgetc(Open_files.array[Open_files.used-1]))
                 buffer_char(c);
             switch (check_directive()) {
+
+                // Define directive
                 case DEFINE:
+
+                    // Clearing the buffer to avoid memory issues
+                    clear_buffer();
+
+                    // Getting define name
+                    for(c=fgetc(Open_files.array[Open_files.used-1]);  isalnum(c) || c == '_';c=fgetc(Open_files.array[Open_files.used-1]))
+                    {
+                        if(c=='\t' && !isalnum(c)){
+                            break;
+                        }
+//                        printf("El char name es: %c \n", c);
+                        buffer_char(c);
+                    }
+                    char defineName[500];
+                    strcpy(defineName, token_buffer);
+
+                    clear_buffer();
+
+                    // Getting define value
+                    //ToDo: Mejorar la captura del value
+                    c=fgetc(Open_files.array[Open_files.used-1]);
+                    buffer_line(c);
+//                    for(c=fgetc(Open_files.array[Open_files.used-1]);  isalnum(c) || c == '_' || || c == '"';;c=fgetc(Open_files.array[Open_files.used-1]))
+//                    {
+//                        if(c=='\n' && !isalnum(c)){
+//                            break;
+//                        }
+////                        printf("El char value es: %c \n", c);
+//                        buffer_char(c);
+//                    }
+
+//                    printf("%s", defineName);
+                    insertDefine(defineName, token_buffer);
+//                    printAll();
+                    clear_buffer();
+
                     break;
                 case INCLUDE:
                     clear_buffer();
@@ -174,7 +231,7 @@ void prescanner(){
 
                         fputc('#', tempfptr);
                         buffer_line(c);
-                        transportToFile();
+                        transportToFile(tempfptr);
                     }else{
                         openFile(token_buffer);
                     }
@@ -183,7 +240,7 @@ void prescanner(){
                 case NADA:
                     fputc('#', tempfptr);
                     buffer_line(c);
-                    transportToFile();
+                    transportToFile(tempfptr);
                     break;
 
             }
@@ -197,19 +254,87 @@ void prescanner(){
     prescanner();
 
 }
+void replaceDefine() {
+    tempfptr2 = tmpfile();
+    int in_char, c;
+    clear_buffer();
+
+    while ((in_char = fgetc(tempfptr)) != EOF) {
+        struct define defAux = {"", ""};
+        clear_buffer();
+        if (isalpha(in_char)) {
+            buffer_char(in_char);
+            for (c = fgetc(tempfptr); isalnum(c) || c == '_' ; c = fgetc(tempfptr))
+                buffer_char(c);
+            ungetc(c, tempfptr);
+            defAux = checkDefineExists(token_buffer);
+//            printf("Revisando el string: %s \n", token_buffer);
+//            printf("El valor del define es: %s \n\n", defAux.defineValue);
+
+            if (lookup(token_buffer)==1 && (strcmp(defAux.defineValue, ""))!=0){
+                // ToDo: Mostrar error que hay una variable con el nombre de un define
+            }
+            else {
+                if ((strcmp(defAux.defineValue, ""))!=0)
+                {
+                    clear_buffer();
+                    strcpy(token_buffer, defAux.defineValue);
+                }
+
+            }
+
+            transportToFile(tempfptr2);
+            clear_buffer();
+            continue;
+        }else if (in_char == '"'){
+            buffer_char(in_char);
+            do {
+                in_char = fgetc(tempfptr);
+                buffer_char(in_char);
+            }
+            while (in_char != '"');
+            if (in_char == EOF){
+                //ToDo: Reportar error de EOF en string
+            }
+            transportToFile(tempfptr2);
+            clear_buffer();
+        }else if (in_char== 39) {
+            buffer_char(in_char);
+            do {
+                in_char = fgetc(tempfptr);
+                buffer_char(in_char);
+            }
+            while (in_char != 39);
+            if (in_char == EOF){
+                //ToDo: Reportar error de EOF en string
+            }
+            transportToFile(tempfptr2);
+            clear_buffer();
+        }
+        else {
+            buffer_char(in_char);
+            transportToFile(tempfptr2);
+            clear_buffer();
+        }
+    }
+};
+
 
 void start(){
     tempfptr=tmpfile();
     initArray(&Open_files, 10);
     openFile(filename);
     prescanner();
-    closeuserfile();
-/////////////////
-    generateSlides();
-    //rewind(tempfptr);
+    // Call the function to expand the defines in case is necessary
+    expandDefine();
 
-    //while (!feof(tempfptr))
-        putchar(fgetc(tempfptr));
+    rewind(tempfptr);
+    replaceDefine();
+    closeuserfile();
+
+    generateSlides();
+    putchar(fgetc(tempfptr));
+
 }
 
 

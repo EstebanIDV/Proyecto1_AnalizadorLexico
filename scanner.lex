@@ -15,22 +15,24 @@ inttoken [0-9]+
 floattoken [0-9]+\.[0-9]+
 chartoken \'.\'
 stringtoken \".*\"
-identifier ([a-zA-Z|_])([a-zA-Z0-9|_])*
+identifier ([a-zA-Z|_])([a-zA-Z|_])*
 doublequotationmark	\"
 singlequotationmark \'
 backslash	\\
 comment	\/\/.*
 multilinecomment	/\*([^*]|[\r\n]|(\*+([^*/]|[\r\n])))*\*+/
-preprocess	\#.+
+preprocess	\#.*
 
 
 
 %%
-{inttoken} {intval = atoi(yytext) ;return INTVAL;}
-{floattoken} {floatval = atof(yytext) ;return FLOATVAL;}
-{stringtoken} {return STRINGVAL;}
+{inttoken}	{intval = atoi(yytext) ;return INTVAL;}
+{floattoken}	{floatval = atof(yytext) ;return FLOATVAL;}
+{stringtoken}	{return STRINGVAL;}
 {chartoken}	{return CHARVAL;}
-{preprocess} {return UNKNOWN;}
+{doublequotationmark}	{return DOUBLEQUOTATIONMARK;}
+{singlequotationmark}	{return SINGLEQUOTATIONMARK;}
+{backslash}	{return BACKSLASH;}
 \t {return TAB;}
 \n	{return NEWLINE;}
 "auto"	{ return AUTO;}
@@ -99,9 +101,6 @@ preprocess	\#.+
 "+"	{return PLUSSIGN;}
 "|"	{return VERTICALSIGN;}
 "`"	{return APOSTROPHE;}
-{backslash}	{return BACKSLASH;}
-{doublequotationmark}	{return DOUBLEQUOTATIONMARK;}
-{singlequotationmark}	{return SINGLEQUOTATIONMARK;}
 "-"	{return MINUSSIGN;}
 "="	{return EQUALSIGN;}
 "{"	{return LCURLY;}

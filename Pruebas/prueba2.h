@@ -1,0 +1,10 @@
+//
+// Created by david on 26/04/22.
+//
+
+#ifndef PROYECTO1_ANALIZADORLEXICO_PRUEBA2_H
+#define PROYECTO1_ANALIZADORLEXICO_PRUEBA2_H
+
+int reverseNumber(int num);
+
+#endif //PROYECTO1_ANALIZADORLEXICO_PRUEBA2_H

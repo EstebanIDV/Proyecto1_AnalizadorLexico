@@ -9,6 +9,7 @@
 
 extern char token_buffer[500];
 
+
 int is_equal(char* temp, char* token);
 directive check_directive(void);
  void clear_buffer(void);
