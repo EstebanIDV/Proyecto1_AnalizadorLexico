@@ -69,7 +69,7 @@ void error(int in_char){
 bool openFile(char *filename){
     FILE *newfile = fopen(filename,"r");
     if(newfile==NULL){
-        printf("No se abrió welp");
+        printf("No se abrió el archivo %s.\n", filename);
         return false;
     }else{
         insertArray(&Open_files,newfile);

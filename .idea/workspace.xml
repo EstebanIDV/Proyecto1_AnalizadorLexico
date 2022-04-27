@@ -10,15 +10,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c24c6931-b0f6-41ed-b582-c375d7b4b452" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/analysis.aux" beforeDir="false" afterPath="$PROJECT_DIR$/analysis.aux" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/analysis.tex" beforeDir="false" afterPath="$PROJECT_DIR$/analysis.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prueba1.c" beforeDir="false" afterPath="$PROJECT_DIR$/prueba1.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result.aux" beforeDir="false" afterPath="$PROJECT_DIR$/result.aux" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result.log" beforeDir="false" afterPath="$PROJECT_DIR$/result.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result.nav" beforeDir="false" afterPath="$PROJECT_DIR$/result.nav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/result.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/result.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/temporal2.txt" beforeDir="false" afterPath="$PROJECT_DIR$/temporal2.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/preprocessor.c" beforeDir="false" afterPath="$PROJECT_DIR$/preprocessor.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,7 +66,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1651011638947</updated>
-      <workItem from="1651011653549" duration="18556000" />
+      <workItem from="1651011653549" duration="18741000" />
     </task>
     <servers />
   </component>
