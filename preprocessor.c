@@ -259,7 +259,6 @@ void prescanner(){
 
 }
 void replaceDefine() {
-    tempfptr2 = tmpfile();
     int in_char, c;
     clear_buffer();
 
@@ -327,6 +326,7 @@ void start(){
     expandDefine();
 
     rewind(tempfptr);
+    tempfptr2 = tmpfile();
     replaceDefine();
     closeuserfile();
 

@@ -215,9 +215,9 @@ void setLine(token_type currentType, char* toRead){
 }
 void generateSlides(){
 
-    rewind(tempfptr);
+    rewind(tempfptr2);
     resulttex = fopen("analysis.tex","w");
-    infile(tempfptr);
+    infile(tempfptr2);
     char workingString[500];
     token currentToken = GetToken();
     bool isSpace = false;
