@@ -218,16 +218,23 @@ void generateSlides(){
     rewind(tempfptr);
     resulttex = fopen("analysis.tex","w");
     infile(tempfptr);
-    char workingString[100];
+    char workingString[500];
     token currentToken = GetToken();
+    bool isSpace = false;
     fputs("\\begin{frame}[allowframebreaks]{Programa Fuente}\n\t\t",resulttex);
     while(currentToken.tokenCode!= END_OF_FILE){
         if(currentToken.tokenCode==NEWLINE){
-            fputs("\\newline \n", resulttex);
+            if(isSpace==false){
+                fputs("\\newline \n", resulttex);
+                isSpace = true;
+            }
+
 
         }else if(currentToken.tokenCode==TAB){
-            fputs("\\hspace*{#1} \n",resulttex);
+            isSpace = false;
+            fputs("\\hspace*{1em} \n",resulttex);
         }else{
+            isSpace = false;
             token_type currentType = getCurrentToken(currentToken.tokenCode);
             switch (currentToken.tokenCode) {
                 case INTVAL:
