@@ -293,9 +293,6 @@ void replaceDefine() {
                 buffer_char(in_char);
             }
             while (in_char != '"');
-            if (in_char == EOF){
-                //ToDo: Reportar error de EOF en string
-            }
             transportToFile(tempfptr2);
             clear_buffer();
         }else if (in_char== 39) {
@@ -305,9 +302,6 @@ void replaceDefine() {
                 buffer_char(in_char);
             }
             while (in_char != 39);
-            if (in_char == EOF){
-                //ToDo: Reportar error de EOF en string
-            }
             transportToFile(tempfptr2);
             clear_buffer();
         }
