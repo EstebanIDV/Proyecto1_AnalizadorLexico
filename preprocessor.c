@@ -233,7 +233,11 @@ void prescanner(){
                         buffer_line(c);
                         transportToFile(tempfptr);
                     }else{
-                        openFile(token_buffer);
+                        if(openFile(token_buffer)==false){
+                            fputc('#', tempfptr);
+                            buffer_line(c);
+                            transportToFile(tempfptr);
+                        }
                     }
 
                     break;
