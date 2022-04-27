@@ -9,7 +9,16 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c24c6931-b0f6-41ed-b582-c375d7b4b452" name="Changes" comment="" />
+    <list default="true" id="c24c6931-b0f6-41ed-b582-c375d7b4b452" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/analysis.tex" beforeDir="false" afterPath="$PROJECT_DIR$/analysis.tex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lex.yy.c" beforeDir="false" afterPath="$PROJECT_DIR$/lex.yy.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/postprocessor.c" beforeDir="false" afterPath="$PROJECT_DIR$/postprocessor.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/result.log" beforeDir="false" afterPath="$PROJECT_DIR$/result.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/result.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/result.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scanner" beforeDir="false" afterPath="$PROJECT_DIR$/scanner" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scanner.lex" beforeDir="false" afterPath="$PROJECT_DIR$/scanner.lex" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -59,7 +68,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1651011638947</updated>
-      <workItem from="1651011653549" duration="10980000" />
+      <workItem from="1651011653549" duration="11654000" />
     </task>
     <servers />
   </component>
