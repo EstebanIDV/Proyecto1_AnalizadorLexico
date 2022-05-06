@@ -120,12 +120,10 @@ token_type getCurrentToken(token_code currentToken){
         case LCURLY:
         case SEMICOLON:
         case NUMBERSIGN:
-        case DOLLARSIGN:
         case LPARENTHESIS:
         case RPARENTHESIS:
         case UNDERSCORE:
         case BACKSLASH:
-        case APOSTROPHE:
         case RCURLY:
         case LBRACKET:
         case RBRACKET:

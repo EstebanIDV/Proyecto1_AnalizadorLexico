@@ -27,14 +27,12 @@ int main(int argc, char** argv) {
     char temp[MAXIDLEN];
     char rawname[MAXIDLEN];
     strcpy(temp, argv[1]);
-    int flag = 0;
     int i = 0;
     while (i < strlen(temp)) {
-        if (temp[i] == *".") {
+        if (temp[i] == *"\0") {
 
             strcat(filename, &temp[i]);
             flag = 1;
-            break;
         }
         i++;
     }
@@ -43,15 +41,7 @@ int main(int argc, char** argv) {
 
 
 
-    if (flag == 1) {
-        filename[i + 1] = *"c";
-        filename[i + 2] = *"\0";
-    }
-    else {
 
-        strcat(temp, ".txt");
-        strcat(filename, ".c");
-    }
     //rintf("%s", temp);
     /*
     if ((fptr= fopen(temp,"r")) == NULL){

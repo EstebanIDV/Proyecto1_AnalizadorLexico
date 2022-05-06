@@ -139,6 +139,7 @@ void prescanner(){
                     if (in_char == '*') {
                         in_char = fgetc(Open_files.array[Open_files.used - 1]);
                         if (in_char == '/') {
+
                             break;
 
                         }
@@ -146,6 +147,7 @@ void prescanner(){
                 } while (in_char != EOF);
             }
             clear_buffer();
+            continue;
         } else if (in_char == '"'){
             buffer_char(in_char);
             for (c = fgetc(Open_files.array[Open_files.used - 1]); c != '"' ; c = fgetc(Open_files.array[Open_files.used - 1]))
