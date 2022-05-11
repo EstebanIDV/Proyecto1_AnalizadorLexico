@@ -26,6 +26,8 @@ extern char filename[MAXIDLEN];
 extern char tempfile[MAXIDLEN];
 extern char flexfile[MAXIDLEN];
 
-
+int yyparse();
+int yylex (void);
+void change_input(FILE *file);
 
 #endif //PROYECTO1_ANALIZADORLEXICO_GLOBAL_H

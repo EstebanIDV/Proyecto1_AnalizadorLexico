@@ -32,7 +32,6 @@ int main(int argc, char** argv) {
         if (temp[i] == *"\0") {
 
             strcat(filename, &temp[i]);
-            flag = 1;
         }
         i++;
     }
@@ -69,8 +68,8 @@ int main(int argc, char** argv) {
 
     start();
 
-    system("pdflatex --interaction=nonstopmode result.tex ");
-    system("evince --fullscreen result.pdf");
+    //system("pdflatex --interaction=nonstopmode result.tex ");
+    //system("evince --fullscreen result.pdf");
 
 
 

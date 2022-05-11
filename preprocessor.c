@@ -7,7 +7,9 @@
 #include <stdlib.h>
 #include "global.h"
 #include "preprocessor.h"
+#include "parser.tab.h"
 #include "scanner.h"
+
 #include "definetable.h"
 #include "symbols_table.h"
 
@@ -328,12 +330,20 @@ void start(){
     expandDefine();
 
     rewind(tempfptr);
-    tempfptr2 = tmpfile();
+    tempfptr2 = fopen("tempprueba.txt","w+");
     replaceDefine();
     closeuserfile();
 
-    generateSlides();
-    putchar(fgetc(tempfptr));
+    rewind(tempfptr2);
+    infile(tempfptr2);
+    if(yyparse()==0){
+        printf("COMPILADO");
+    }else{
+        printf("NO COMPILADO");
+    }
+
+    finish();
+    //generateSlides();
 
 }
 

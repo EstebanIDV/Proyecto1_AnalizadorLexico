@@ -1,9 +1,9 @@
-%token	IDENTIFIER I_CONSTANT F_CONSTANT STRING_LITERAL FUNC_NAME SIZEOF
-%token	PTR_OP INC_OP DEC_OP LEFT_OP RIGHT_OP LE_OP GE_OP EQ_OP NE_OP
-%token	AND_OP OR_OP MUL_ASSIGN DIV_ASSIGN MOD_ASSIGN ADD_ASSIGN
-%token	SUB_ASSIGN LEFT_ASSIGN RIGHT_ASSIGN AND_ASSIGN
-%token	XOR_ASSIGN OR_ASSIGN
-%token	TYPEDEF_NAME ENUMERATION_CONSTANT
+%token	IDENTIFIER INTVAL FLOATVAL CHARVAL STRINGVAL FUNC_NAME SIZEOF
+%token	PTR_OP INCREMENT DECREMENT LSHIFTOP RSHIFTOP LWROREQUALTHANOP GRTROREQUALTHANOP EQUALOP NOTEQUALOP
+%token	ANDOP OROP MULASSIGN DIVASSIGN MODASSIGN ADDASSIGN
+%token	SUBASSIGN LSHIFTASSIGN RSHIFTASSIGN BITWISEASSIGN
+%token	BITWISEXORASSIGN BITWISEANDASSIGN
+//%token	TYPEDEF_NAME ENUMERATION_CONSTANT // NO SÉ QUÉ SON ESTOS
 
 %token	TYPEDEF EXTERN STATIC AUTO REGISTER INLINE
 %token	CONST RESTRICT VOLATILE
@@ -17,9 +17,18 @@
 
 %start translation_unit
 %{
+/* Generate the parser description file. */
+%verbose
+/* Enable run-time traces (yydebug). */
+%define parse.trace
+
+/* Formatting semantic values. */
+%printer { fprintf (yyo, "%s", $$->name); } VAR;
+%printer { fprintf (yyo, "%s()", $$->name); } FUN;
+%printer { fprintf (yyo, "%g", $$); } <double>;
 #include "global.h"
-#include "scanner.h"
 void yyerror(const char *s);
+
 %}
 %locations
 %%
@@ -33,17 +42,14 @@ primary_expression
 	;
 
 constant
-	: I_CONSTANT		/* includes character_constant */
-	| F_CONSTANT
-	| ENUMERATION_CONSTANT	/* after it has been defined as such */
-	;
-
-enumeration_constant		/* before it has been defined as such */
-	: IDENTIFIER
+	: INTVAL
+	| FLOATVAL
+	| CHARVAL
+	| IDENTIFIER	/* after it has been defined as such */
 	;
 
 string
-	: STRING_LITERAL
+	: STRINGVAL
 	| FUNC_NAME
 	;
 
@@ -68,8 +74,8 @@ postfix_expression
 	| postfix_expression '(' argument_expression_list ')'
 	| postfix_expression '.' IDENTIFIER
 	| postfix_expression PTR_OP IDENTIFIER
-	| postfix_expression INC_OP
-	| postfix_expression DEC_OP
+	| postfix_expression INCREMENT
+	| postfix_expression DECREMENT
 	| '(' type_name ')' '{' initializer_list '}'
 	| '(' type_name ')' '{' initializer_list ',' '}'
 	;
@@ -81,8 +87,8 @@ argument_expression_list
 
 unary_expression
 	: postfix_expression
-	| INC_OP unary_expression
-	| DEC_OP unary_expression
+	| INCREMENT unary_expression
+	| DECREMENT unary_expression
 	| unary_operator cast_expression
 	| SIZEOF unary_expression
 	| SIZEOF '(' type_name ')'
@@ -118,22 +124,22 @@ additive_expression
 
 shift_expression
 	: additive_expression
-	| shift_expression LEFT_OP additive_expression
-	| shift_expression RIGHT_OP additive_expression
+	| shift_expression LSHIFTOP additive_expression
+	| shift_expression RSHIFTOP additive_expression
 	;
 
 relational_expression
 	: shift_expression
 	| relational_expression '<' shift_expression
 	| relational_expression '>' shift_expression
-	| relational_expression LE_OP shift_expression
-	| relational_expression GE_OP shift_expression
+	| relational_expression LWROREQUALTHANOP shift_expression
+	| relational_expression GRTROREQUALTHANOP shift_expression
 	;
 
 equality_expression
 	: relational_expression
-	| equality_expression EQ_OP relational_expression
-	| equality_expression NE_OP relational_expression
+	| equality_expression EQUALOP relational_expression
+	| equality_expression NOTEQUALOP relational_expression
 	;
 
 and_expression
@@ -153,12 +159,12 @@ inclusive_or_expression
 
 logical_and_expression
 	: inclusive_or_expression
-	| logical_and_expression AND_OP inclusive_or_expression
+	| logical_and_expression ANDOP inclusive_or_expression
 	;
 
 logical_or_expression
 	: logical_and_expression
-	| logical_or_expression OR_OP logical_and_expression
+	| logical_or_expression OROP logical_and_expression
 	;
 
 conditional_expression
@@ -173,16 +179,16 @@ assignment_expression
 
 assignment_operator
 	: '='
-	| MUL_ASSIGN
-	| DIV_ASSIGN
-	| MOD_ASSIGN
-	| ADD_ASSIGN
-	| SUB_ASSIGN
-	| LEFT_ASSIGN
-	| RIGHT_ASSIGN
-	| AND_ASSIGN
-	| XOR_ASSIGN
-	| OR_ASSIGN
+	| MULASSIGN
+	| DIVASSIGN
+	| MODASSIGN
+	| ADDASSIGN
+	| SUBASSIGN
+	| LSHIFTASSIGN
+	| RSHIFTASSIGN
+	| BITWISEASSIGN
+	| BITWISEXORASSIGN
+	| BITWISEANDASSIGN
 	;
 
 expression
@@ -248,7 +254,7 @@ type_specifier
 	| atomic_type_specifier
 	| struct_or_union_specifier
 	| enum_specifier
-	| TYPEDEF_NAME		/* after it has been defined as such */
+	| IDENTIFIER		/* after it has been defined as such */
 	;
 
 struct_or_union_specifier
@@ -305,8 +311,8 @@ enumerator_list
 	;
 
 enumerator	/* identifiers must be flagged as ENUMERATION_CONSTANT */
-	: enumeration_constant '=' constant_expression
-	| enumeration_constant
+	: IDENTIFIER '=' constant_expression
+	| IDENTIFIER
 	;
 
 atomic_type_specifier
@@ -449,7 +455,7 @@ designator
 	;
 
 static_assert_declaration
-	: STATIC_ASSERT '(' constant_expression ',' STRING_LITERAL ')' ';'
+	: STATIC_ASSERT '(' constant_expression ',' STRINGVAL ')' ';'
 	;
 
 statement
@@ -539,5 +545,11 @@ void yyerror(const char *str)
 {
     fprintf(stderr,"error: %s in line %d, column %d\n", str, yylloc.first_line, yylloc.first_column);
 
-    fprintf(stderr,"^\n");
+}
+
+
+int startParse()
+{
+   yyparse();
+   return 1;
 }
