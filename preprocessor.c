@@ -336,10 +336,11 @@ void start(){
 
     rewind(tempfptr2);
     infile(tempfptr2);
+    printf("*---------------------------------*\n");
     if(yyparse()==0){
-        printf("COMPILADO");
+        printf("COMPILADO \n");
     }else{
-        printf("NO COMPILADO");
+        printf("NO COMPILADO \n");
     }
 
     finish();

@@ -20,6 +20,7 @@
 #include "global.h"
 #include "scanner.h"
 void yyerror(const char *s);
+extern char *lineptr;
 %}
 %locations
 %%
@@ -538,6 +539,8 @@ declaration_list
 void yyerror(const char *str)
 {
     fprintf(stderr,"error: %s in line %d, column %d\n", str, yylloc.first_line, yylloc.first_column);
-
+    fprintf(stderr,"%s", lineptr);
+    for(int i = 0; i < yylloc.first_column - 1; i++)
+        fprintf(stderr,"_");
     fprintf(stderr,"^\n");
 }
