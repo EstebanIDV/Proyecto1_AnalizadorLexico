@@ -1,6 +1,8 @@
 //
 // Created by david on 26/04/22.
 //
+#include <stdlib.h>
+
 
 int palindrome(int num) {
     int reversed = 0, remainder, original;

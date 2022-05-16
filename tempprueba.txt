@@ -1,4 +1,6 @@
 
+
+
 int palindrome(int num) {
     int reversed = 0, remainder, original;
     original = num;

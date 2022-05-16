@@ -18,6 +18,13 @@ FILE *tempfptr2;
 char token_buffer[500];
 Array Open_files;
 
+void clearString(char *string){
+    int i=0;
+    for(i=0;i<strlen(string);i++)
+    {
+        string[i] = 0;
+    }
+}
 
 int is_equal(char* temp, char* token)
 {
@@ -113,7 +120,8 @@ void transportToFile(FILE *fptr){
 };
 
 void prescanner(){
-    int in_char, c,endinclude;
+    int in_char, c,endinclude, findFile;
+    char path[5000];
     clear_buffer();
     if( Open_files.used==0){
         return;
@@ -190,7 +198,7 @@ void prescanner(){
                     clear_buffer();
 
                     // Getting define value
-                    //ToDo: Mejorar la captura del value
+                    // ToDo: Mejorar la captura del value
                     c=fgetc(Open_files.array[Open_files.used-1]);
                     buffer_line(c);
 //                    for(c=fgetc(Open_files.array[Open_files.used-1]);  isalnum(c) || c == '_' || || c == '"';;c=fgetc(Open_files.array[Open_files.used-1]))
@@ -235,12 +243,37 @@ void prescanner(){
 
                         fputc('#', tempfptr);
                         buffer_line(c);
-                        transportToFile(tempfptr);
+                        // ToDo: colocar el error o warning de no existente
                     }else{
-                        if(openFile(token_buffer)==false){
-                            fputc('#', tempfptr);
-                            buffer_line(c);
-                            transportToFile(tempfptr);
+                        findFile = 0;
+
+                        if (endinclude=='"'){
+                            if(openFile(token_buffer)==false){
+                                findFile = 1;
+                            }
+                        }
+                        if (findFile == 0) {
+                            clearString(path);
+                            strcat(path, "/usr/lib/gcc/x86_64-linux-gnu/9/include/");
+                            strcat(path, token_buffer);
+                            if (openFile(path) == false) {
+                                clearString(path);
+                                strcat(path, "/usr/local/include/");
+                                strcat(path, token_buffer);
+                                if (openFile(path) == false) {
+                                    clearString(path);
+                                    strcat(path, "/usr/include/x86_64-linux-gnu/");
+                                    strcat(path, token_buffer);
+                                    if (openFile(path) == false) {
+                                        clearString(path);
+                                        strcat(path, "/usr/include/");
+                                        strcat(path, token_buffer);
+                                        if (openFile(path) == false) {
+                                            printf("Failed to find file: %s", token_buffer);
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
 
@@ -322,7 +355,7 @@ void replaceDefine() {
 
 
 void start(){
-    tempfptr=tmpfile();
+    tempfptr=fopen("tempprueba1.txt","w+");
     initArray(&Open_files, 10);
     openFile(filename);
     prescanner();
@@ -330,7 +363,7 @@ void start(){
     expandDefine();
 
     rewind(tempfptr);
-    tempfptr2 = fopen("tempprueba.txt","w+");
+    tempfptr2 = fopen("tempprueba2.txt","w+");
     replaceDefine();
     closeuserfile();
 
