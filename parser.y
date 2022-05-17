@@ -11,10 +11,10 @@
 %token	COMPLEX IMAGINARY
 %token	STRUCT UNION ENUM ELLIPSIS
 
-%token	CASE DEFAULT IF ELSE SWITCH WHILE DO FOR GOTO CONTINUE BREAK RETURN
+%token	ENDOFFILE CASE DEFAULT IF ELSE SWITCH WHILE DO FOR GOTO CONTINUE BREAK RETURN
 
 %token	ALIGNAS ALIGNOF ATOMIC GENERIC NORETURN STATIC_ASSERT THREAD_LOCAL
-
+%define parse.error custom
 %start translation_unit
 %{
 #include "global.h"
@@ -24,7 +24,6 @@ extern char *lineptr;
 %}
 %locations
 %%
-
 primary_expression
 	: IDENTIFIER
 	| constant
@@ -530,17 +529,41 @@ declaration_list
 	: declaration
 	| declaration_list declaration
 	;
-
 %%
 #include <stdio.h>
-#ifdef YYDEBUG
-  yydebug = 1;
-#endif
+
+int
+yyreport_syntax_error (const yypcontext_t *ctx)
+{
+  int res = 0;
+  fprintf(stderr,"Line %d - column %d", yylloc.first_line, yylloc.first_column);
+  fprintf (stderr, ": syntax error");
+  // Report the tokens expected at this point.
+  {
+    enum { TOKENMAX = 10 };
+    yysymbol_kind_t expected[TOKENMAX];
+    int n = yypcontext_expected_tokens (ctx, expected, TOKENMAX);
+    if (n < 0)
+      // Forward errors to yyparse.
+      res = n;
+    else
+      for (int i = 0; i < n; ++i)
+        fprintf (stderr, "%s %s",
+                 i == 0 ? ": expected" : " or", yysymbol_name (expected[i]));
+  }
+  // Report the unexpected token.
+  {
+    yysymbol_kind_t lookahead = yypcontext_token (ctx);
+    if (lookahead != YYSYMBOL_YYEMPTY)
+      fprintf (stderr, " before %s", yysymbol_name (lookahead));
+  }
+  fprintf (stderr, "\n");
+  return res;
+}
+
 void yyerror(const char *str)
 {
     fprintf(stderr,"error: %s in line %d, column %d\n", str, yylloc.first_line, yylloc.first_column);
-    fprintf(stderr,"%s", lineptr);
-    for(int i = 0; i < yylloc.first_column - 1; i++)
-        fprintf(stderr,"_");
-    fprintf(stderr,"^\n");
+
+    fprintf(stderr,"\n");
 }

@@ -8,23 +8,16 @@ int palindrome(int num) {
     int reversed = 0, remainder, original;
     original = num;
 
-// reversed integer is stored in reversed variable
+    printf("Enter an integer: ");
+    scanf("%d", &num);
+
     while (num != 0) {
         remainder = num % 10;
-        reversed = reversed * 10 + remainder;
-        num /= 10;
+        reverse = reverse * 10 + remainder;
+        num = 10;
     }
 
-// palindrome if orignal and reversed are equal
-    if (original == reversed)
-        printf("%d is a palindrome.", original);
-    else
-        printf("%d is not a palindrome.", original);
+    printf("Reversed number = %d", reverse);
 
     return 0;
-}
-
-void mi_prueba(){
-    palindrome(PI2);
-    reverseNumber(PI);
 }
