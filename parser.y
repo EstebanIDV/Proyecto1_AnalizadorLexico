@@ -470,17 +470,18 @@ labeled_statement
 compound_statement
 	: '{' '}'
 	| '{'  block_item_list '}'
+	| '{'  error '}' {yyerrok;}
 	;
 
 block_item_list
 	: block_item
 	| block_item_list block_item
-	| error ';' {yyerrok;}
 	;
 
 block_item
 	: declaration
 	| statement
+	| error ';' {yyerrok;}
 	;
 
 expression_statement
@@ -491,11 +492,14 @@ expression_statement
 selection_statement
 	: IF '(' expression ')' statement ELSE statement
 	| IF '(' expression ')' statement
+	| IF '(' error ')' {yyerrok;}
 	| SWITCH '(' expression ')' statement
+	| SWITCH '(' error')' {yyerrok;}
 	;
 
 iteration_statement
 	: WHILE '(' expression ')' statement
+	| WHILE '(' error ')' {yyerrok;}
 	| DO statement WHILE '(' expression ')' ';'
 	| FOR '(' expression_statement expression_statement ')' statement
 	| FOR '(' expression_statement expression_statement expression ')' statement
