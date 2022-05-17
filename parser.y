@@ -475,6 +475,7 @@ compound_statement
 block_item_list
 	: block_item
 	| block_item_list block_item
+	| error ';' {yyerrok;}
 	;
 
 block_item
@@ -511,7 +512,9 @@ jump_statement
 	;
 
 translation_unit
-	: external_declaration
+	:
+	external_declaration
+	| error ';' {yyerrok;}
 	| translation_unit external_declaration
 	;
 
@@ -519,6 +522,7 @@ external_declaration
 	: function_definition
 	| declaration
 	;
+
 
 function_definition
 	: declaration_specifiers declarator declaration_list compound_statement
