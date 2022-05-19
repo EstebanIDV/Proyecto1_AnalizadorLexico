@@ -8,6 +8,7 @@
 #include "filearray.h"
 
 extern char token_buffer[500];
+extern int synErrorFound;
 
 
 int is_equal(char* temp, char* token);

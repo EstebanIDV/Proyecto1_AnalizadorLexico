@@ -19,8 +19,10 @@
 %{
 #include "global.h"
 #include "scanner.h"
+#include "preprocessor.h"
 void yyerror(const char *s);
 extern char *lineptr;
+extern int synErrorFound;
 %}
 %locations
 %%
@@ -470,18 +472,18 @@ labeled_statement
 compound_statement
 	: '{' '}'
 	| '{'  block_item_list '}'
-	| '{'  error '}' {yyerrok;}
+	| '{' error '}' {yyerrok; synErrorFound =1;}
 	;
 
 block_item_list
 	: block_item
 	| block_item_list block_item
+	| error block_item {yyerrok; synErrorFound =1;}
 	;
 
 block_item
 	: declaration
 	| statement
-	| error ';' {yyerrok;}
 	;
 
 expression_statement
@@ -492,16 +494,18 @@ expression_statement
 selection_statement
 	: IF '(' expression ')' statement ELSE statement
 	| IF '(' expression ')' statement
-	| IF '(' error ')' {yyerrok;}
+	| IF '(' error ')' {yyerrok; synErrorFound =1;}
 	| SWITCH '(' expression ')' statement
-	| SWITCH '(' error')' {yyerrok;}
+	| SWITCH '(' error')' {yyerrok; synErrorFound =1;}
 	;
 
 iteration_statement
 	: WHILE '(' expression ')' statement
-	| WHILE '(' error ')' {yyerrok;}
+	| WHILE '(' error ')' {yyerrok; synErrorFound =1;}
 	| DO statement WHILE '(' expression ')' ';'
+	| DO statement WHILE '(' error ')' {yyerrok; synErrorFound =1;}
 	| FOR '(' expression_statement expression_statement ')' statement
+	| FOR '(' error ')' {yyerrok; synErrorFound =1;}
 	| FOR '(' expression_statement expression_statement expression ')' statement
 	| FOR '(' declaration expression_statement ')' statement
 	| FOR '(' declaration expression_statement expression ')' statement
@@ -518,7 +522,7 @@ jump_statement
 translation_unit
 	:
 	external_declaration
-	| error ';' {yyerrok;}
+	| error ';' {yyerrok; synErrorFound =1;}
 	| translation_unit external_declaration
 	;
 
@@ -574,4 +578,9 @@ void yyerror(const char *str)
     fprintf(stderr,"error: %s in line %d, column %d\n", str, yylloc.first_line, yylloc.first_column);
 
     fprintf(stderr,"\n");
+}
+
+void errorFound()
+{
+	synErrorFound = 1;
 }
