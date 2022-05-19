@@ -155,6 +155,9 @@ void prescanner(){
                         }
                     }
                 } while (in_char != EOF);
+
+            }else{
+                fputc('/', tempfptr);
             }
             clear_buffer();
             continue;

@@ -65,7 +65,12 @@ int main(int argc, char** argv) {
     //sprintf(command,"nasm -f elf32 %s && gcc -m32 -static %s.o -o %s && ./%s", filename, rawname, rawname,rawname);
     //system(command);
 
-
+    if ((fptr= fopen(filename,"r")) == NULL){
+        printf("Error! when opening file %s\n", argv[1]);
+        // Program exits if the file pointer returns NULL.
+        exit(1);
+    }
+    fclose(fptr);
     start();
 
     //system("pdflatex --interaction=nonstopmode result.tex ");
