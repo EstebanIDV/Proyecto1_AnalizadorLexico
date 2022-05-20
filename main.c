@@ -66,8 +66,9 @@ int main(int argc, char** argv) {
     //system(command);
 
     if ((fptr= fopen(filename,"r")) == NULL){
-        printf("Error! when opening file %s\n", argv[1]);
+        printf("Error! when opening file %s: No such file or directory\n", argv[1]);
         // Program exits if the file pointer returns NULL.
+        printf("NO COMPILADO!\n");
         exit(1);
     }
     fclose(fptr);

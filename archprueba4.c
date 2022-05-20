@@ -1,506 +1,517 @@
-//
-// Created by eidur on 5/19/2022.
-//
+/* Implementing Bubble sort in a C Program
+ * Written by: Chaitanya.
+ */
+#include<stdio.h>
+#include <math.h>
+#include<string.h>
 
-//#include <stdio.h>
-//#include <stdlib.h>
-//#include <math.h>
-//#include <time.h>
-//#include <ctype.h>
-//#include <string.h>
+int main(){
 
-#define DELIM "."
-float poly(float a[], int, float);
+    int count, temp, i, j, number[30];
 
-/*
-Function : extractIpAddress
-Arguments :
-1) sourceString - String pointer that contains ip address
-2) ipAddress - Target variable short type array pointer that will store ip address octets
-*/
-void extractIpAddress(unsigned char *sourceString,short *ipAddress)
-{
-    unsigned short len=0;
-    unsigned char  oct[4]={0},cnt=0,cnt1=0,i,buf[5];
+    printf("How many numbers are u going to enter?: ");
+    scanf("%d",&count);
 
-    len=strlen(sourceString);
-    for(i=0;i<len;i++)
-    {
-        if(sourceString[i]!='.'){
-            buf[cnt++] =sourceString[i];
-        }
-        if(sourceString[i]=='.' || i==len-1){
-            buf[cnt]='\0';
-            cnt=0;
-            oct[cnt1++]=atoi(buf);
-        }
-    }
-    ipAddress[0]=oct[0];
-    ipAddress[1]=oct[1];
-    ipAddress[2]=oct[2];
-    ipAddress[3]=oct[3];
-}
+    printf("Enter %d numbers: ",count);
 
+    for(i=0;i<count;i++)
+        scanf("%d",&number[i]);
 
-int sumOfDigits(int num)
-{
-    int sum = 0;
-    while (num > 0) {
-        sum += (num % 10);
-        num /= 10;
-    }
-    return sum;
-}
-
-float deriv(float a[], int deg, float x)
-{
-    float d[10], pd = 0, ps;
-    int i;
-
-    for (i = 0; i <= deg; i++) {
-//        ps = pow(x, deg - (i + 1));
-        d[i] = (deg - i) * a[deg - i] * ps;
-        pd = pd + d[i];
-    }
-
-    return pd;
-}
-
-int isLeapYear(int year, int mon)
-{
-    int flag = 0;
-    if (year % 100 == 0)
-    {
-        if (year % 400 == 0)
-        {
-            if (mon == 2)
-            {
-                flag = 1;
+    /* This is the main logic of bubble sort algorithm
+     */
+    for(i=count-2;i>=0;i--){
+        for(j=0;j<=i;j++){
+            if(number[j]>number[j+1]){
+                temp=number[j];
+                number[j]=number[j+1];
+                number[j+1]=temp;
             }
         }
     }
-    else if (year % 4 == 0)
-    {
-        if (mon == 2)
-        {
-            flag = 1;
-        }
-    }
-    return (flag);
-}
 
-void emi(){
-    float principal, rate, time, emi;
-
-    printf("Enter principal: ");
-    scanf("%f", &principal);
-
-    printf("Enter rate: ");
-    scanf("%f", &rate);
-
-    printf("Enter time in year: ");
-    scanf("%f", &time);
-
-    rate = rate / (12 * 100); /*one month interest*/
-    time = time * 12; /*one month period*/
-
-//    emi = (principal * rate * pow(1 + rate, time)) / (pow(1 + rate, time) - 1);
-
-    printf("Monthly EMI is= %f\n", emi);
-}
-
-int validateDate(int d, int m, int y)
-{
-    //check year validity
-    if (y >= 1800 && y <= 2999) {
-        //check month validity
-        if (m >= 1 && m <= 12) {
-            //check day validity
-            if (d >= 1 && d <= 31) {
-                if ((d >= 1 && d <= 30) && (m == 4 || m == 6 || m == 9 || m == 11))
-                    return 1; //valid date
-                else if ((d >= 1 && d <= 30) && (m == 1 || m == 3 || m == 5 || m == 7 || m == 8 || m == 10 || m == 12))
-                    return 1; //valid date
-                else if ((d >= 1 && d <= 28) && (m == 2))
-                    return 1; //valid date
-                else if (d == 29 && m == 2 && ((y % 400 == 0) || (y % 4 == 0 && y % 100 != 0)))
-                    return 1; //valid date
-                else
-                    return 0; //invalid day
-            }
-            else {
-                return 0; //day is invalid
-            }
-        }
-        else {
-            return 0; //month is invalid
-        }
-    }
-    else {
-        return 0; //year is invalid
-    }
-}
-
-int wd(int year, int month, int day)
-{
-    int wday = 0;
-    wday = (day + ((153 * (month + 12 * ((14 - month) / 12) - 3) + 2) / 5) + (365 * (year + 4800 - ((14 - month) / 12))) + ((year + 4800 - ((14 - month) / 12)) / 4) - ((year + 4800 - ((14 - month) / 12)) / 100) + ((year + 4800 - ((14 - month) / 12)) / 400) - 32045) % 7;
-    return wday;
-}
-
-int valid_digit(char* ip_str)
-{
-    while (*ip_str) {
-        if (*ip_str >= '0' && *ip_str <= '9')
-            ++ip_str;
-        else
-            return 0;
-    }
-    return 1;
-}
-
-/* return 1 if IP string is valid, else return 0 */
-int is_valid_ip(char* ip_str)
-{
-    int i, num, dots = 0;
-    char* ptr;
-
-    if (ip_str == NULL)
-        return 0;
-
-    ptr = strtok(ip_str, DELIM);
-
-    if (ptr == NULL)
-        return 0;
-
-    while (ptr) {
-
-        /* after parsing string, it must contain only digits */
-        if (!valid_digit(ptr))
-            return 0;
-
-        num = atoi(ptr);
-
-        /* check for valid IP */
-        if (num >= 0 && num <= 255) {
-            /* parse remaining string */
-            ptr = strtok(NULL, DELIM);
-            if (ptr != NULL)
-                ++dots;
-        }
-        else
-            return 0;
-    }
-
-    /* valid IP string must contain 3 dots */
-    if (dots != 3)
-        return 0;
-    return 1;
-}
-
-
-int main()
-{
-    float x, a[10], y1;
-    int deg, i;
-
-    printf("Enter the degree of polynomial equation: ");
-    scanf("%d", &deg);
-
-    printf("Ehter the value of x for which the equation is to be evaluated: ");
-    scanf("%f", &x);
-
-    for (i = 0; i <= deg; i++) {
-        printf("Enter the coefficient of x to the power %d: ", i);
-        scanf("%f", &a[i]);
-    }
-
-    y1 = poly(a, deg, x);
-
-    printf("The value of polynomial equation for the value of x = %.2f is: %.2f", x, y1);
-
-    float  dy1;
-
-    printf("Enter the degree of polynomial equation: ");
-    scanf("%d", &deg);
-
-    printf("Ehter the value of x for which the equation is to be evaluated: ");
-    scanf("%f", &x);
-
-    for (i = 0; i <= deg; i++) {
-        printf("Enter the coefficient of x to the power %d: ", i);
-        scanf("%f", &a[i]);
-    }
-
-    y1 = poly(a, deg, x);
-    dy1 = deriv(a, deg, x);
-
-    printf("The value of polynomial equation for the value of x = %.2f is: %.2f", x, y1);
-    printf("\nThe value of the derivative of the polynomial equation at x = %.2f is: %.2f", x, dy1);
-
-    int xy;
-
-    printf("Enter an integer number: ");
-    scanf("%d", &xy);
-
-    if (xy == 0)
-        printf("%d", 0);
-    else if (xy % 9 == 0)
-        printf("%d", 9);
-    else
-        printf("%d", xy % 9);
-
-    printf("\n");
-
-    float principal, rate, years, ci;
-
-    printf("Enter principal: ");
-    scanf("%f", &principal);
-
-    printf("Enter rate: ");
-    scanf("%f", &rate);
-
-    printf("Enter time in years: ");
-    scanf("%f", &years);
-
-    // calculate compound interest
-
-//    ci = principal * ((pow((1 + rate / 100), years) - 1));
-
-    printf("Compound interest is: %f\n", ci);
-
-    emi();
-
-
-    int DaysInMon[] = {31, 28, 31, 30, 31, 30,
-                       31, 31, 30, 31, 30, 31};
-    int days, month, year;
-    time_t ts;
-    struct tm *ct;
-
-    /* enter date of birth */
-    printf("Enter your date of birth (DD/MM/YYYY): ");
-    scanf("%d/%d/%d",&days,&month, &year);
-
-    /*get current date.*/
-    ts = time(NULL);
-    ct = localtime(&ts);
-
-    printf("Current Date: %d/%d/%d\n",
-           ct->tm_mday, ct->tm_mon + 1, ct->tm_year + 1900);
-
-    days = DaysInMon[month - 1] - days + 1;
-
-    /* leap year checking*/
-    if (isLeapYear(year, month))
-    {
-        days = days + 1;
-    }
-
-    /* calculating age in no of days, years and months */
-    days = days + ct->tm_mday;
-    month = (12 - month) + (ct->tm_mon);
-    year = (ct->tm_year + 1900) - year - 1;
-
-    /* checking for leap year feb - 29 days */
-    if (isLeapYear((ct->tm_year + 1900), (ct->tm_mon + 1)))
-    {
-        if (days >= (DaysInMon[ct->tm_mon] + 1))
-        {
-            days = days - (DaysInMon[ct->tm_mon] + 1);
-            month = month + 1;
-        }
-    }
-    else if (days >= DaysInMon[ct->tm_mon])
-    {
-        days = days - (DaysInMon[ct->tm_mon]);
-        month = month + 1;
-    }
-
-    if (month >= 12)
-    {
-        year = year + 1;
-        month = month - 12;
-    }
-
-    /* print age */
-    printf("\n## Hey you are  %d years %d months and %d days old. ##\n", year, month, days);
-
-
-    char yName[40], pName[40];
-    int sum, sum1, choice;
-    float perc = 0;
-
-    do {
-        printf("Enter your name: ");
-        fflush(stdin);
-//        gets(yName);
-
-        printf("Enter your partner's name: ");
-        fflush(stdin);
-//        gets(pName);
-
-        sum = 0;
-        for (i = 0; i < (strlen(yName)); i++) {
-            sum += tolower(yName[i]);
-        }
-
-        sum1 = 0;
-        for (i = 0; i < (strlen(yName)); i++) {
-            sum1 += tolower(pName[i]);
-        }
-
-        perc = (sumOfDigits(sum) + sumOfDigits(sum1)) + 40;
-        if (perc > 100)
-            perc = 100;
-
-        printf("Your love percentage is: %.02f\n\n", perc);
-
-        printf("Want to calculate with some one else (0 to exit, 1 to continue) ???: ");
-        scanf("%d", &choice);
-
-    } while (choice != 0);
-
-    int day;
-    int wDayNo = 0;
-    char dayNames[][12] = { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" };
-
-    //input date
-    printf("Input date (DD-MM-YYYY): ");
-    scanf("%d-%d-%d", &day, &month, &year);
-
-    //check date is correct or not
-    if (validateDate(day, month, year) == 1) {
-        printf("Date is correct [%02d/%02d/%02d].\n", day, month, year);
-        //get weekday number
-        wDayNo = wd(year, month, day);
-        //print weekday according to wDayNo
-        printf("week day is: %s\n", dayNames[wDayNo]);
-    }
-    else
-        printf("Date is in-correct.\n");
-
-    int random_genNo=0,count=0,num;
-    int stime;
-    long ltime;
-
-    //initialise srand with current time, to get random number on every run
-    ltime = time(NULL);
-    stime = (unsigned) ltime/2;
-    srand(stime);
-
-    //generate random number
-    random_genNo=rand()%1000;
-
-    //run infinite loop
-    while(1)
-    {
-        //increase counter
-        count+=1;
-
-        //read number from user
-        printf("\n\nGuess a number from (0 to 1000): ");
-        scanf("%d",&num);
-
-        //compare entered number with generated number
-
-        if(random_genNo==num){
-            printf("Congratulations, you have guessed a correct number.");
-            break;
-        }
-        else if(random_genNo<num){
-            printf("Generated number is less than entered number, try your luck again...");
-        }
-        else if(random_genNo>num){
-            printf("Generated number is greater than entered number, try your luck again...");
-        }
-
-        if(count==7){
-            printf("\n\n### Maximum limit of atttempt finished, BAD LUCK !!!\n");
-            break;
-        }
-    }
-
-    time_t T = time(NULL);
-    struct tm tm = *localtime(&T);
-
-    printf("System Date is: %02d/%02d/%04d\n", tm.tm_mday, tm.tm_mon + 1, tm.tm_year + 1900);
-    printf("System Time is: %02d:%02d:%02d\n", tm.tm_hour, tm.tm_min, tm.tm_sec);
-
-
-
-    unsigned char ip[20]={0};
-    short ipAddress[4];
-
-    printf("Enter IP Address (xxx.xxx.xxx.xxx format): ");
-    scanf("%s",ip);
-
-    extractIpAddress(ip,&ipAddress[0]);
-
-    printf("\nIp Address: %03d. %03d. %03d. %03d\n",ipAddress[0],ipAddress[1],ipAddress[2],ipAddress[3]);
-
-    if(ipAddress[0]>=0 && ipAddress[0]<=127)
-        printf("Class A Ip Address.\n");
-    if(ipAddress[0]>127 && ipAddress[0]<191)
-        printf("Class B Ip Address.\n");
-    if(ipAddress[0]>191 && ipAddress[0]<224)
-        printf("Class C Ip Address.\n");
-    if(ipAddress[0]>224 && ipAddress[0]<=239)
-        printf("Class D Ip Address.\n");
-    if(ipAddress[0]>239)
-        printf("Class E Ip Address.\n");
-
-
-    int dd,mm,yy;
-
-    printf("Enter date (DD/MM/YYYY format): ");
-    scanf("%d/%d/%d",&dd,&mm,&yy);
-
-    //check year
-    if(yy>=1900 && yy<=9999)
-    {
-        //check month
-        if(mm>=1 && mm<=12)
-        {
-            //check days
-            if((dd>=1 && dd<=31) && (mm==1 || mm==3 || mm==5 || mm==7 || mm==8 || mm==10 || mm==12))
-                printf("Date is valid.\n");
-            else if((dd>=1 && dd<=30) && (mm==4 || mm==6 || mm==9 || mm==11))
-                printf("Date is valid.\n");
-            else if((dd>=1 && dd<=28) && (mm==2))
-                printf("Date is valid.\n");
-            else if(dd==29 && mm==2 && (yy%400==0 ||(yy%4==0 && yy%100!=0)))
-                printf("Date is valid.\n");
-            else
-                printf("Day is invalid.\n");
-        }
-        else
-        {
-            printf("Month is not valid.\n");
-        }
-    }
-    else
-    {
-        printf("Year is not valid.\n");
-    }
-
+    printf("Sorted elements: ");
+    for(i=0;i<count;i++)
+        printf(" %d",number[i]);
 
     return 0;
 }
 
-/* function for finding the value of polynomial at some value of x */
-float poly(float a[], int deg, float x)
-{
-    float p;
-    int i;
+int main2(){
 
-    p = a[deg];
+    /* Here i & j for loop counters, temp for swapping,
+     * count for total number of elements, number[] to
+     * store the input numbers in array. You can increase
+     * or decrease the size of number array as per requirement
+     */
+    int i, j, count, temp, number[25];
 
-    for (i = deg; i >= 1; i--) {
-        p = (a[i - 1] + x * p);
+    printf("How many numbers u are going to enter?: ");
+    scanf("%d",&count);
+
+    printf("Enter %d elements: ", count);
+    // This loop would store the input numbers in array
+    for(i=0;i<count;i++)
+        scanf("%d",&number[i]);
+
+    // Implementation of insertion sort algorithm
+    for(i=1;i<count;i++){
+        temp=number[i];
+        j=i-1;
+        while((temp<number[j])&&(j>=0)){
+            number[j+1]=number[j];
+            j=j-1;
+        }
+        number[j+1]=temp;
     }
 
-    return p;
+    printf("Order of Sorted elements: ");
+    for(i=0;i<count;i++)
+        printf(" %d",number[i]);
+
+    return 0;
+}
+
+int main3(){
+    /* Here i & j for loop counters, temp for swapping,
+     * count for total number of elements, number[] to
+     * store the input numbers in array. You can increase
+     * or decrease the size of number array as per requirement
+     */
+    int i, j, count, temp, number[25];
+
+    printf("How many numbers u are going to enter?: ");
+    scanf("%d",&count);
+
+    printf("Enter %d elements: ", count);
+    // Loop to get the elements stored in array
+    for(i=0;i<count;i++)
+        scanf("%d",&number[i]);
+
+    // Logic of selection sort algorithm
+    for(i=0;i<count;i++){
+        for(j=i+1;j<count;j++){
+            if(number[i]>number[j]){
+                temp=number[i];
+                number[i]=number[j];
+                number[j]=temp;
+            }
+        }
+    }
+
+    printf("Sorted elements: ");
+    for(i=0;i<count;i++)
+        printf(" %d",number[i]);
+
+    return 0;
+}
+
+void quicksort(int number[25],int first,int last){
+    int i, j, pivot, temp;
+
+    if(first<last){
+        pivot=first;
+        i=first;
+        j=last;
+
+        while(i<j){
+            while(number[i]<=number[pivot]&&i<last)
+                i++;
+            while(number[j]>number[pivot])
+                j--;
+            if(i<j){
+                temp=number[i];
+                number[i]=number[j];
+                number[j]=temp;
+            }
+        }
+
+        temp=number[pivot];
+        number[pivot]=number[j];
+        number[j]=temp;
+        quicksort(number,first,j-1);
+        quicksort(number,j+1,last);
+
+    }
+}
+
+int main4(){
+    int i, count, number[25];
+
+    printf("How many elements are u going to enter?: ");
+    scanf("%d",&count);
+
+    printf("Enter %d elements: ", count);
+    for(i=0;i<count;i++)
+        scanf("%d",&number[i]);
+
+    quicksort(number,0,count-1);
+
+    printf("Order of Sorted elements: ");
+    for(i=0;i<count;i++)
+        printf(" %d",number[i]);
+
+    return 0;
+}
+
+int main5()
+{
+    int num1, num2, num3;
+    int *p1, *p2, *p3;
+
+    //taking input from user
+    printf("Enter First Number: ");
+    scanf("%d",&num1);
+    printf("Enter Second Number: ");
+    scanf("%d",&num2);
+    printf("Enter Third Number: ");
+    scanf("%d",&num3);
+
+    //assigning the address of input numbers to pointers
+    p1 = &num1;
+    p2 = &num2;
+    p3 = &num3;
+    if(*p1 > *p2)
+    {
+        if(*p1 > *p3)
+        {
+            printf("%d is the largest number", *p1);
+        }
+        else
+        {
+            printf("%d is the largest number", *p3);
+        }
+    }
+    else
+    {
+        if(*p2 > *p3)
+        {
+            printf("%d is the largest number", *p2);
+        }
+        else
+        {
+            printf("%d is the largest number", *p3);
+        }
+    }
+    return 0;
+}
+
+int main6()
+{
+    char str[100];
+    char *p;
+    int  vCount=0,cCount=0;
+
+    printf("Enter any string: ");
+    fgets(str, 100, stdin);
+
+    //assign base address of char array to pointer
+    p=str;
+
+    //'\0' signifies end of the string
+    while(*p!='\0')
+    {
+        if(*p=='A' ||*p=='E' ||*p=='I' ||*p=='O' ||*p=='U'
+           ||*p=='a' ||*p=='e' ||*p=='i' ||*p=='o' ||*p=='u')
+            vCount++;
+        else
+            cCount++;
+        //increase the pointer, to point next character
+        p++;
+    }
+
+    printf("Number of Vowels in String: %d\n",vCount);
+    printf("Number of Consonants in String: %d",cCount);
+    return 0;
+}
+
+int main7()
+{
+    char str[100];
+    char *p;
+
+    printf("Enter any string: ");
+    fgets(str, 100, stdin);
+
+    /* Assigning the base address str[0] to pointer
+     * p. p = str is same as p = str[0]
+     */
+    p=str;
+
+    printf("The input string is: ");
+    //'\0' signifies end of the string
+    while(*p!='\0')
+        printf("%c",*p++);
+
+    return 0;
+}
+
+// function to swap the two numbers
+void swap(int *x,int *y)
+{
+    int t;
+    t   = *x;
+    *x   = *y;
+    *y   =  t;
+}
+
+int main8()
+{
+    int num1,num2;
+
+    printf("Enter value of num1: ");
+    scanf("%d",&num1);
+    printf("Enter value of num2: ");
+    scanf("%d",&num2);
+
+    //displaying numbers before swapping
+    printf("Before Swapping: num1 is: %d, num2 is: %d\n",num1,num2);
+
+    //calling the user defined function swap()
+    swap(&num1,&num2);
+
+    //displaying numbers after swapping
+    printf("After  Swapping: num1 is: %d, num2 is: %d\n",num1,num2);
+
+    return 0;
+}
+
+int main9(){
+    int num1, num2, quot, rem;
+
+    printf("Enter dividend: ");
+    scanf("%d", &num1);
+
+    printf("Enter divisor: ");
+    scanf("%d", &num2);
+
+    /* The "/" Arithmetic operator returns the quotient
+     * Here the num1 is divided by num2 and the quotient
+     * is assigned to the variable quot
+     */
+    quot = num1 / num2;
+
+    /* The modulus operator "%" returns the remainder after
+     * dividing num1 by num2.
+     */
+    rem = num1 % num2;
+
+    printf("Quotient is: %d\n", quot);
+    printf("Remainder is: %d", rem);
+
+    return 0;
 }
 
 
+/* This function converts the decimal number "decimalnum"
+ * to the equivalent octal number
+ */
+int decimalToOctal(int decimalnum)
+{
+    int octalnum = 0, temp = 1;
+
+    while (decimalnum != 0)
+    {
+        octalnum = octalnum + (decimalnum % 8) * temp;
+        decimalnum = decimalnum / 8;
+        temp = temp * 10;
+    }
+
+    return octalnum;
+}
+int main12()
+{
+    int decimalnum;
+
+    printf("Enter a Decimal Number: ");
+    scanf("%d", &decimalnum);
+
+    printf("Equivalent Octal Number: %d", decimalToOctal(decimalnum));
+
+    return 0;
+}
+
+
+int main14(){
+    char str[25];
+    int i;
+
+    printf("Enter the string:");
+    scanf("%s",str);
+
+    for(i=0;i<=strlen(str);i++){
+        if(str[i]>=97&&str[i]<=122)
+            str[i]=str[i]-32;
+    }
+    printf("\nUpper Case String is: %s",str);
+    return 0;
+}
+
+
+int main16()
+{
+    int circle_radius;
+    float PI_VALUE=3.14, circle_area, circle_circumf;
+
+    //Ask user to enter the radius of circle
+    printf("\nEnter radius of circle: ");
+    //Storing the user input into variable circle_radius
+    scanf("%d",&circle_radius);
+
+    //Calculate and display Area
+    circle_area = PI_VALUE * circle_radius * circle_radius;
+    printf("\nArea of circle is: %f",circle_area);
+
+    //Caluclate and display Circumference
+    circle_circumf = 2 * PI_VALUE * circle_radius;
+    printf("\nCircumference of circle is: %f",circle_circumf);
+
+    return(0);
+}
+
+
+int main17(){
+int triangle_side;
+float triangle_area, temp_variable;
+
+//Ask user to input the length of the side
+printf("\nEnter the Side of the triangle:");
+scanf("%d",&triangle_side);
+
+//Caluclate and display area of Equilateral Triangle
+temp_variable = sqrt(3) / 4 ;
+triangle_area = temp_variable * triangle_side * triangle_side ;
+printf("\nArea of Equilateral Triangle is: %f",triangle_area);
+return(0);
+}
+
+//#include<stdio.h>
+int main18()
+{
+    printf("\n\n\t\tStudytonight - Best place to learn\n\n\n");
+
+    int n, exp, exp1;
+    long long int value = 1;
+
+    printf("Enter the number and its exponential:\n\n");
+    scanf("%d%d",&n, &exp);
+
+    exp1 = exp;   // storing original value for future use
+
+    // same as while((--exp)!=-1)
+    while(exp-- > 0)
+    {
+        value *= n; // multiply n to itself exp times
+    }
+
+    printf("\n\n %d^%d = %lld\n\n", n, exp1, value);
+    printf("\n\n\n\n\t\t\tCoding is Fun !\n\n\n");
+    return 0;
+}
+
+int main20()
+{
+    printf("\n\n\t\tStudytonight - Best place to learn\n\n\n");
+
+    int n, m, c, d, p, q, k, first[10][10], second[10][10], pro[10][10],sum = 0;
+
+    printf("\nEnter the number of rows and columns of the first matrix: \n\n");
+    scanf("%d%d", &m, &n);
+
+    printf("\nEnter the %d elements of the first matrix: \n\n", m*n);
+    for(c = 0; c < m; c++)   // to iterate the rows
+        for(d = 0; d < n; d++)   // to iterate the columns
+            scanf("%d", &first[c][d]);
+
+    printf("\nEnter the number of rows and columns of the first matrix: \n\n");
+    scanf("%d%d", &p, &q);
+
+    if(n != p)
+        printf("Matrices with the given order cannot be multiplied with each other.\n\n");
+
+    else    // matrices can be multiplied
+    {
+        printf("\nEnter the %d elements of the second matrix: \n\n",m*n);
+
+        for(c = 0; c < p; c++)   // to iterate the rows
+            for(d = 0; d < q; d++)   // to iterate the columns
+                scanf("%d", &second[c][d]);
+
+        // printing the first matrix
+        printf("\n\nThe first matrix is: \n\n");
+        for(c = 0; c < m; c++)   // to iterate the rows
+        {
+            for(d = 0; d < n; d++)   // to iterate the columns
+            {
+                printf("%d\t", first[c][d]);
+            }
+            printf("\n");
+        }
+
+        // printing the second matrix
+        printf("\n\nThe second matrix is: \n\n");
+        for(c = 0; c < p; c++)   // to iterate the rows
+        {
+            for(d = 0; d < q; d++)   // to iterate the columns
+            {
+                printf("%d\t", second[c][d]);
+            }
+            printf("\n");
+        }
+
+        for(c = 0; c < m; c++)   // to iterate the rows
+        {
+            for(d = 0; d < q; d++)   // to iterate the columns
+            {
+                for(k = 0; k < p; k++)
+                {
+                    sum = sum + first[c][k]*second[k][d];
+                }
+                pro[c][d] = sum;    // resultant element of pro after multiplication
+                sum = 0;    // to find the next element from scratch
+            }
+        }
+
+        // printing the elements of the product matrix
+        printf("\n\nThe multiplication of the two entered matrices is: \n\n");
+        for(c = 0; c < m; c++)   // to iterate the rows
+        {
+            for(d = 0; d < q; d++)   // to iterate the columns
+            {
+                printf("%d\t", pro[c][d]);
+            }
+            printf("\n"); // to take the control to the next row
+        }
+    }
+    printf("\n\n\t\t\tCoding is Fun !\n\n\n");
+    return 0;
+}
+
+int main21()
+{
+    printf("\n\n\t\tStudytonight - Best place to learn\n\n\n");
+
+    int a[2][2], i, j;
+    long determinant;
+
+    printf("\n\nEnter the 4 elements of the array\n");
+    for(i = 0; i < 2; i++)
+        for(j = 0; j < 2; j++)
+            scanf("%d", &a[i][j]);
+
+    printf("\n\nThe entered matrix is: \n\n");
+    for(i = 0; i < 2; i++)
+    {
+        for(j = 0; j < 2; j++)
+        {
+            printf("%d\t", a[i][j]);   // to print the complete row
+        }
+        printf("\n"); // to move to the next row
+    }
+
+    // finding the determinant of a 2x2 matrix
+    determinant = a[0][0]*a[1][1] - a[1][0]*a[0][1];
+    printf("\n\nDterminant of 2x2 matrix is : %d - %d =  %ld", a[0][0]*a[1][1], a[1][0]*a[0][1], determinant);
+
+    printf("\n\n\t\t\tCoding is Fun !\n\n\n");
+    return 0;
+}
