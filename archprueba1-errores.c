@@ -3,9 +3,9 @@
 // Obtenido de https://www.programiz.com/c-programming/examples/octal-binary-convert
 int convert(long long bin);
 int main() {
-    long long bin;
+    long long bin
     printf("Enter a binary number: ");
-    scanf("%lld", &bin);
+    scanf("%lld", &bin)
     printf("%lld in binary = %d in octal", bin, convert(bin));
     return 0;
 }
@@ -22,7 +22,7 @@ int convert(long long bin) {
     i = 1;
 
     // converting to decimal to octal
-    while (dec != 0) {
+    while (dec 0) {
         oct += (dec % 8) * i;
         dec /= 8;
         i *= 10;
@@ -34,7 +34,7 @@ int convert(long long bin) {
 
 // Obtenido de https://www.programiz.com/c-programming/examples/octal-decimal-convert
 int convertDecimalToOctal(int decimalNumber);
-int main2()
+int main2
 {
     int decimalNumber;
 
@@ -65,7 +65,7 @@ int addition(int num1, int num2)
 {
     int sum;
     /* Arguments are used here*/
-    sum = num1+num2;
+    sum = num1+num2
 
     /* Function return type is integer so we are returning
      * an integer value, the sum of the passed numbers.
@@ -76,7 +76,7 @@ int addition(int num1, int num2)
 int main4()
 {
     int var1, var2;
-    printf("Enter number 1: ");
+    printf("Enter number 1: ";
     scanf("%d",&var1);
     printf("Enter number 2: ");
     scanf("%d",&var2);
@@ -99,7 +99,7 @@ int main5()
     int m = 22, n = 44;
     // calling swap function by value
     printf(" values before swap  m = %d \nand n = %d", m, n);
-    swap(m, n);
+    swap(m n);
 }
 
 void swap(int a, int b)
@@ -113,7 +113,7 @@ void swap(int a, int b)
 
 
 // Obtenido de https://www.includehelp.com/c-programs/polynomial-and-differential-equations.aspx
-float poly(float a[], int, float);
+float poly(float a[] int, float);
 
 int main6()
 {
@@ -144,7 +144,7 @@ float poly(float a[], int deg, float x)
     float p;
     int i;
 
-    p = a[deg];
+    p  a[deg ;
 
     for (i = deg; i >= 1; i--) {
         p = (a[i - 1] + x * p);
@@ -177,7 +177,7 @@ int pid()
         // So if u will check parent process id
         // it will show different process id
         printf("\nChild process \n");
-        printf("ID: %d\n", getpid());
+        printf("ID: %d\n", getpid()
         printf("Parent -ID: %d\n", getppid());
     }
     else {
@@ -202,7 +202,7 @@ int allocation(){
     ptr = (int*)malloc(limit * sizeof(int));
 
     //read array elements
-    for (i = 0; i < limit; i++) {
+    for () {
         printf("Enter element %02d: ", i + 1);
         scanf("%d", (ptr + i));
     }
@@ -240,7 +240,7 @@ int isLeapYear(int year, int mon)
     {
         if (year % 400 == 0)
         {
-            if (mon == 2)
+            if [[]]
             {
                 flag = 1;
             }
@@ -287,8 +287,8 @@ int main7()
     }
 
     /* calculating age in no of days, years and months */
-    days = days + ct->tm_mday;
-    month = (12 - month) + (ct->tm_mon);
+    days  days + ct->tm_mday;
+    month = (12 - month)  (ct->tm_mon);
     year = (ct->tm_year + 1900) - year - 1;
 
     /* checking for leap year feb - 29 days */
@@ -379,7 +379,7 @@ int main8()
 int main9()
 {
 
-    char str[100];
+    char str[100
     int i,j,len,len1;
 
     /*read string*/
@@ -476,7 +476,7 @@ int substring(char* source, int from, int n, char* target)
     }
 
     //get substring in target
-    for (i = 0; i < n; i++) {
+    for (i = 0; ) {
         target[i] = source[from + i];
     }
     target[i] = '\0'; //assign null at last

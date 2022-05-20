@@ -1,4 +1,4 @@
-#include <math.h>
+//#include <math.h>
 #include <stdio.h>
 // Obtenido de https://www.programiz.com/c-programming/examples/octal-binary-convert
 int convert(long long bin);
@@ -187,7 +187,6 @@ int pid()
     return 0;
 }
 
-#include <stdio.h>
 #include <stdlib.h>
 int allocation(){
     int* ptr; //declaration of integer pointer
@@ -229,7 +228,6 @@ int allocation(){
 
 /*Age Calculator (C program to calculate age).*/
 
-#include <stdio.h>
 #include <time.h>
 
 /*check given year is leap year or not*/
@@ -264,7 +262,7 @@ int main7()
                        31, 31, 30, 31, 30, 31};
     int days, month, year;
     char dob[100];
-    time_t ts;
+//    int ts;
     struct tm *ct;
 
     /* enter date of birth */
@@ -272,11 +270,10 @@ int main7()
     scanf("%d/%d/%d",&days,&month, &year);
 
     /*get current date.*/
-    ts = time(NULL);
-    ct = localtime(&ts);
+//    ts = time(NULL);
+//    ct = localtime(&ts);
 
-    printf("Current Date: %d/%d/%d\n",
-           ct->tm_mday, ct->tm_mon + 1, ct->tm_year + 1900);
+    printf("Current Date: %d/%d/%d\n");
 
     days = DaysInMon[month - 1] - days + 1;
 
@@ -320,12 +317,6 @@ int main7()
 
 
 /*C program to guess a random number.*/
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
-
-
 int main8()
 {
     int random_genNo=0,count=0,num;
@@ -373,9 +364,6 @@ int main8()
 }
 
 /*C program to remove consecutive repeated characters from string.*/
-
-#include <stdio.h>
-
 int main9()
 {
 
@@ -415,9 +403,6 @@ int main9()
 
 /*EMI Calculator (C program to calculate EMI).*/
 
-#include <stdio.h>
-#include <math.h>
-
 int main10()
 {
     float principal, rate, time, emi;
@@ -443,8 +428,6 @@ int main10()
 
 
 /*C program to implement substring function.*/
-
-#include <stdio.h>
 
 /*
 function : substring

@@ -29,7 +29,7 @@ int main(){
     for(i=count-2;i>=0;i--){
         for(j=0;j<=i;j++){
             if(number[j]>number[j+1]){
-                temp=number[j];
+                temp=number[j]
                 number[j]=number[j+1];
                 number[j+1]=temp;
             }
@@ -50,7 +50,7 @@ int main2(){
      * store the input numbers in array. You can increase
      * or decrease the size of number array as per requirement
      */
-    int i, j, count, temp, number[25];
+    int i, j, count  temp, number[25];
 
     printf("How many numbers u are going to enter?: ");
     scanf("%d",&count);
@@ -65,10 +65,10 @@ int main2(){
         temp=number[i];
         j=i-1;
         while((temp<number[j])&&(j>=0)){
-            number[j+1]=number[j];
+            number j+1]=number[j];
             j=j-1;
         }
-        number[j+1]=temp;
+        number[j+1] temp;
     }
 
     printf("Order of Sorted elements: ");
@@ -89,9 +89,10 @@ int main3(){
     printf("How many numbers u are going to enter?: ");
     scanf("%d",&count);
 
-    printf("Enter %d elements: ", count);
+    printf("Enter %d elements: ", count)
     // Loop to get the elements stored in array
-    for(i=0;i<count;i++)
+    for(i=0;i count;i++)
+    for(i=0;i count;i++)
         scanf("%d",&number[i]);
 
     // Logic of selection sort algorithm
@@ -147,7 +148,7 @@ int main4(){
     printf("How many elements are u going to enter?: ");
     scanf("%d",&count);
 
-    printf("Enter %d elements: ", count);
+    printf("Enter %d elements: " count);
     for(i=0;i<count;i++)
         scanf("%d",&number[i]);
 
@@ -179,7 +180,7 @@ int main5()
     p3 = &num3;
     if(*p1 > *p2)
     {
-        if(*p1 > *p3)
+        if(*p1  *p3)
         {
             printf("%d is the largest number", *p1);
         }
@@ -236,8 +237,8 @@ int main7()
     char str[100];
     char *p;
 
-    printf("Enter any string: ");
-    fgets(str, 100, stdin);
+    printf("Enter any string: " ;
+    fgets str, 100, stdin);
 
     /* Assigning the base address str[0] to pointer
      * p. p = str is same as p = str[0]
@@ -295,12 +296,12 @@ int main9(){
      * Here the num1 is divided by num2 and the quotient
      * is assigned to the variable quot
      */
-    quot = num1 / num2;
+    quot  num1 / num2;
 
     /* The modulus operator "%" returns the remainder after
      * dividing num1 by num2.
      */
-    rem = num1 % num2;
+    rem = num1 num2;
 
     printf("Quotient is: %d\n", quot);
     printf("Remainder is: %d", rem);
@@ -340,7 +341,7 @@ int main12()
 
 int main14(){
     char str[25];
-    int i;
+    int i
 
     printf("Enter the string:");
     scanf("%s",str);
@@ -516,7 +517,7 @@ int main21()
     }
 
     // finding the determinant of a 2x2 matrix
-    determinant = a[0][0]*a[1][1] - a[1][0]*a[0][1];
+    determinant = a 0][0]*a[1][1] - a[1][0]*a[0][1];
     printf("\n\nDterminant of 2x2 matrix is : %d - %d =  %ld", a[0][0]*a[1][1], a[1][0]*a[0][1], determinant);
 
     printf("\n\n\t\t\tCoding is Fun !\n\n\n");
