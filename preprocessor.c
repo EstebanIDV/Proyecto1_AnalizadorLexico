@@ -18,6 +18,8 @@ FILE *tempfptr2;
 char token_buffer[500];
 Array Open_files;
 
+int synErrorFound = 0;
+
 void clearString(char *string){
     int i=0;
     for(i=0;i<strlen(string);i++)
@@ -379,7 +381,7 @@ void start(){
     rewind(tempfptr2);
     infile(tempfptr2);
     printf("*---------------------------------*\n");
-    if(yyparse()==0){
+    if(yyparse()==0 && synErrorFound == 0){
         printf("COMPILADO \n");
     }else{
         printf("NO COMPILADO \n");
