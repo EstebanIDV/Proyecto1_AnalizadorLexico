@@ -7,7 +7,7 @@
 
 #include "filearray.h"
 
-extern char token_buffer[500];
+extern char token_buffer[10000];
 extern int synErrorFound;
 
 

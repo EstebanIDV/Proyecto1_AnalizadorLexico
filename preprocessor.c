@@ -15,7 +15,7 @@
 
 FILE *tempfptr;
 FILE *tempfptr2;
-char token_buffer[500];
+char token_buffer[10000];
 Array Open_files;
 
 int synErrorFound = 0;
@@ -97,7 +97,7 @@ void closeuserfile(){
 
 
  void buffer_char(int c){
-    if (strlen(token_buffer)<500)
+    if (strlen(token_buffer)<10000)
         token_buffer[strlen(token_buffer)] = c;
     else{
         printf("ERROR! An ID or expression exceeds length limits!\n");
@@ -123,7 +123,7 @@ void transportToFile(FILE *fptr){
 
 void prescanner(){
     int in_char, c,endinclude, findFile;
-    char path[5000];
+    char path[100000];
     clear_buffer();
     if( Open_files.used==0){
         return;
@@ -198,7 +198,7 @@ void prescanner(){
 //                        printf("El char name es: %c \n", c);
                         buffer_char(c);
                     }
-                    char defineName[500];
+                    char defineName[10000];
                     strcpy(defineName, token_buffer);
 
                     clear_buffer();

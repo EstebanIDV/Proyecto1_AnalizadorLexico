@@ -7,7 +7,7 @@
 
 #include <stdio.h>
 #include "preprocessor.h"
-typedef char string[500];
+typedef char string[10000];
 
 struct define {
     string defineName;

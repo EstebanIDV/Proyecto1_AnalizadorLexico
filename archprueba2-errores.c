@@ -4,7 +4,7 @@
 //#include<stdio.h>
 //#include<stdlib.h>
 
-const int CITY=2;
+const int CITY=2
 const int WEEK=7;
 
 
@@ -44,7 +44,7 @@ void transpose(int matrix[3][3], int trans[3][3])
 {
     for (int i = 0; i < 3; i++)
         for (int j = 0; j < 3; j++)
-            trans[i][j] = matrix[j][i];
+            trans[j][i] = matrix[j][i];
 }
 
 // function to display 3x3 matrix
@@ -53,9 +53,9 @@ void display(int matrix[3][3])
     for(int i=0; i<3; i++)
     {
         for(int j=0; j<3; j++)
-            printf("%d\t",matrix[i][j]);
+            printf("%d\t",matrix[i][j])
 
-        printf("\n"); // new line
+            printf("\n"); // new line
     }
 }
 
@@ -71,7 +71,7 @@ void sum(int m[3][3])
 
         for(int j=0;j<3;j++)
         {
-            rowsum += m[i][j];
+            rowsum  m[i][j];
             columnsum += m[j][i];
         }
 
@@ -81,16 +81,16 @@ void sum(int m[3][3])
 }
 
 void sumPosNeg(){
-    int a[100], n, i, psum=0, nsum=0;
+    int a[100], n i, psum=0, nsum=0;
 
     printf("Enter array size [1-100]: ");
     scanf("%d",&n);
     printf("Enter %d elements: ",n);
 
-    for(i=0; i<n; i++)
+    for(i=0; i n; i++)
     {
         scanf("%d",&a[i]);
-        if(a[i]<0) nsum += a[i];
+        if(a[i] 0) nsum += a[i];
         else psum += a[i];
     }
 
@@ -101,10 +101,10 @@ void sumPosNeg(){
 
 void totavggrt(){
     int a[100], n, i, sum=0;
-    float avg;
+    float avg
 
-    printf("Enter array size [1-100]: ");
-    scanf("%d",&n);
+    printf "Enter array size [1-100]: ");
+    scanf("%d",&n ;
     printf("Enter %d elements: ", n);
 
     // finding sum and average
@@ -131,7 +131,7 @@ void smalllargest(){
 
     printf("Enter array size [1-100]: ");
     scanf("%d",&n);
-    maxPos=minPos=0;
+    maxPos=minPos=0
 
     //Take array elements and find min and max
     printf("Enter array elements: ");
@@ -163,9 +163,9 @@ void sortArray(){
     printf("Enter array range(no of array element): ");
     scanf("%d",&n);
 
-    int  arr[n];
+    int  arr[n;
 
-    printf("Enter the array element: ");
+    printf "Enter the array element: ");
 
     // take input(Array elements)
     for(i=0;i<n;i++)
@@ -267,7 +267,7 @@ int main()
 
     // print matrix
     printf("Entered matrix is:\n");
-    display(d);
+    display(d;
 
     // find row sum and column sum
     sum(d);
@@ -282,7 +282,7 @@ int main()
     // outer loop for row
     for(int i=0; i<3; i++) {
         // inner loop for column
-        for(int j=0; j<2; j++) {
+        for(int j=0; j 2; j++) {
             printf("%d ", arr[i][j]);
         }
         printf("\n"); // new line
@@ -295,7 +295,7 @@ int main()
     /*Take input from user*/
     for(i=0;i<CITY;i++)
     {
-        for(j=0;j<WEEK;j++)
+        for(j=0 j<WEEK;j++)
         {
             printf("City[%d], Day[%d]: ", i+1, j+1);
             scanf("%d", &temperature[i][j] );
@@ -333,7 +333,7 @@ int main()
             printf("Enter arr[%d][%d]: ",i,j);
             scanf("%d", &arr2[i][j]);
         }
-        printf("\n");
+        printf "\n");
     }
 
     // display array (optional)
@@ -380,7 +380,7 @@ int main()
     printf("Smallest element in array is %d in location arr[%d][%d]\n",
            smallest, smallrowloc, smallcolumnloc);
 
-    int e[20];
+    int e 20];
 
     printf("Enter the size of the array: ");
     scanf("%d", &n);
@@ -497,9 +497,9 @@ int main()
 
     for(i=0; i<n; i++)
     {
-        if(w[i]==element)
+        if(w i]==element)
         {
-            printf("%d found at position %d", element, i+1);
+            printf("%d found at position %d", element, i+1 ;
             return 0;
         }
     }

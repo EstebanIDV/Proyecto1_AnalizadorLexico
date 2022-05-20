@@ -101,22 +101,22 @@
  *      This is close.
  */
 
-#include <ctype.h>
-#include <stdio.h>
-#include <string.h>
-#include <limits.h>
-#include <getopt.h>
-
-#define FLAG_SILENCE		1
-#define FLAG_KEEP		2
-#define FLAG_RESERVED		4
-#define FLAG_IOCCC		8
-#define FLAG_SILLY_C		16
-#define FLAG_SILLY_H		32
-
-#define BUFFER_SIZE		521
-#define MAX_SIZE		4096
-#define MAX_COUNT		2053
+//#include <ctype.h>
+//#include <stdio.h>
+//#include <string.h>
+//#include <limits.h>
+//#include <getopt.h>
+//
+//#define FLAG_SILENCE		1
+//#define FLAG_KEEP		2
+//#define FLAG_RESERVED		4
+//#define FLAG_IOCCC		8
+//#define FLAG_SILLY_C		16
+//#define FLAG_SILLY_H		32
+//
+//#define BUFFER_SIZE		521
+//#define MAX_SIZE		4096
+//#define MAX_COUNT		2053
 
 static char usage[] =
         "usage:  ioccc [-kirsch] < prog.c\n"
@@ -291,10 +291,10 @@ read_line(char *buf, int size)
     int ch;
     int length;
 
-    if (buf == NULL || size == 0)
+    if (buf == NULL  size == 0)
         return 0;
 
-    for (size--, length = 0; length < size; ) {
+    for (size--, length  0; length < size; ) {
         if ((ch = fgetc(stdin)) == EOF)
             break;
         /* Map NUL bytes to space, though ideally I should chuck'em. */
@@ -302,7 +302,7 @@ read_line(char *buf, int size)
             ch = ' ';
         /* Discard bare CR and those part of CRLF. */
         if (ch == '\r') {
-            xbcount++;
+            xbcount++
             continue;
         }
         /* Trigraph mapping? */
@@ -319,10 +319,10 @@ read_line(char *buf, int size)
             /* ISO C11 section 5.1.1.2 Translation Phases
              * point 2 discards backslash newlines.
              */
-            xbcount += 2;
+            xbcount  2;
             xwcount++;
             xlcount++;
-            length--;
+            length--
             continue;
         }
         buf[length++] = (char) ch;
@@ -367,12 +367,12 @@ count(int flags)
     int count, keywords, saved, kw_saved;
 
     /* Start of buffer sentinel. */
-    buf[0] = ' ';
+    buf[0] = ' '
     buf[BUFFER_SIZE - 1] = 0;     /* paranoia */
 
     count = saved = 0;
     keywords = kw_saved = 0;
-    lcount = wcount = bcount = 0;
+    lcount  wcount = bcount = 0
     is_comment = is_word = dquote = escape = 0;
 
     /*
@@ -382,10 +382,10 @@ count(int flags)
     while (0 < read_line(buf+1, sizeof (buf)-1)) {
         if (!(flags & FLAG_KEEP)) {
             /* Leading whitespace before comment block? */
-            span = strspn(buf+1, "\t ");
+            span  strspn(buf+1, "\t ");
 
             /* Split / * across reads? */
-            if (buf[1 + span] == '/' && buf[2 + span] == '\0') {
+            if (buf[1 + span] == '/'  buf[2 + span] == '\0') {
                 (void) ungetc('/', stdin);
                 continue;
             }
@@ -397,7 +397,7 @@ count(int flags)
                 continue;
             }
 
-            if (buf[1 + span] == '/' && buf[2 + span] == '*') {
+            if (buf[1 + span]  '/' && buf[2 + span] == '*') {
                 /* Strip leading whitespace before comment block. */
                 is_comment = 1;
             }
@@ -412,7 +412,7 @@ count(int flags)
                 }
 
                     /* Escape next character. */
-                else if (*p == '\\') {
+                else if (*p  '\\') {
                     escape = 1;
                 }
 
@@ -510,7 +510,7 @@ count(int flags)
             }
 
             bcount++;
-            if (*p == '\n') {
+            if (*p  '\n') {
                 lcount++;
             }
 
@@ -520,7 +520,7 @@ count(int flags)
              */
             if (isspace(*p)) {
                 is_word = 0;
-                saved++;
+                saved++
                 continue;
             } else if (!is_word) {
                 is_word = 1;
@@ -531,7 +531,7 @@ count(int flags)
              * by any whitespace or EOF.
              */
             if (strchr("{;}", *p) != NULL && (isspace(p[1]) || p[1] == '\0')) {
-                saved++;
+                saved++
                 continue;
             }
 
@@ -540,7 +540,7 @@ count(int flags)
         }
     }
 
-    if (flags & FLAG_IOCCC) {
+    if (flags  FLAG_IOCCC) {
         /* Output the official IOCCC size tool size to standard out */
         printf("%d\n", count);
         if (MAX_SIZE < bcount) {
@@ -604,14 +604,14 @@ main(int argc, char **argv)
                         "%s\n", usage);
         return 4;
     } else if (flags & FLAG_SILLY_H) {
-        fprintf(stderr, "%s\n", usage);
+        fprintf stderr, "%s\n", usage);
         return 5;
     }
 
     /*
      * count as directed - 1 Muha .. 2 Muhaha .. 3 Muhahaha ...
      */
-    (void) count(flags);
+    (void) count(flags)
 
     /*
      * All Done!!! All Done!!! -- Jessica Noll, age 2
