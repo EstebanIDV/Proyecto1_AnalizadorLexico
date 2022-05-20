@@ -10,7 +10,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c24c6931-b0f6-41ed-b582-c375d7b4b452" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/preprocessor.c" beforeDir="false" afterPath="$PROJECT_DIR$/preprocessor.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/a.out" beforeDir="false" afterPath="$PROJECT_DIR$/a.out" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/archprueba1.c" beforeDir="false" afterPath="$PROJECT_DIR$/archprueba1.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/archprueba4.c" beforeDir="false" afterPath="$PROJECT_DIR$/archprueba4.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scanner" beforeDir="false" afterPath="$PROJECT_DIR$/scanner" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tempprueba.txt" beforeDir="false" afterPath="$PROJECT_DIR$/tempprueba.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tempprueba1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/tempprueba1.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tempprueba2.txt" beforeDir="false" afterPath="$PROJECT_DIR$/tempprueba2.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,6 +26,9 @@
   </component>
   <component name="ClangdSettings">
     <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectApplicationVersion">
     <option name="ide" value="CLion" />

@@ -1,5 +1,5 @@
 //#include <math.h>
-#include <stdio.h>
+//#include <stdio.h>
 // Obtenido de https://www.programiz.com/c-programming/examples/octal-binary-convert
 int convert(long long bin);
 int main() {
@@ -187,7 +187,8 @@ int pid()
     return 0;
 }
 
-#include <stdlib.h>
+//#include <stdio.h>
+//#include <stdlib.h>
 int allocation(){
     int* ptr; //declaration of integer pointer
     int limit; //to store array limit
@@ -228,7 +229,8 @@ int allocation(){
 
 /*Age Calculator (C program to calculate age).*/
 
-#include <time.h>
+//#include <stdio.h>
+//#include <time.h>
 
 /*check given year is leap year or not*/
 int isLeapYear(int year, int mon)
@@ -262,7 +264,7 @@ int main7()
                        31, 31, 30, 31, 30, 31};
     int days, month, year;
     char dob[100];
-//    int ts;
+    int ts;
     struct tm *ct;
 
     /* enter date of birth */
@@ -317,6 +319,12 @@ int main7()
 
 
 /*C program to guess a random number.*/
+
+//#include <stdio.h>
+//#include <stdlib.h>
+//#include <time.h>
+
+
 int main8()
 {
     int random_genNo=0,count=0,num;
@@ -364,6 +372,9 @@ int main8()
 }
 
 /*C program to remove consecutive repeated characters from string.*/
+
+//#include <stdio.h>
+
 int main9()
 {
 
@@ -403,6 +414,9 @@ int main9()
 
 /*EMI Calculator (C program to calculate EMI).*/
 
+//#include <stdio.h>
+//#include <math.h>
+
 int main10()
 {
     float principal, rate, time, emi;
@@ -428,6 +442,8 @@ int main10()
 
 
 /*C program to implement substring function.*/
+
+//#include <stdio.h>
 
 /*
 function : substring

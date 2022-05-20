@@ -1,9 +1,8 @@
 /* Implementing Bubble sort in a C Program
  * Written by: Chaitanya.
  */
-//#include<stdio.h>
-//#include <math.h>
-//#include<string.h>
+//#include <stdio.h>
+//#include <string.h>
 
 
 int main(){
