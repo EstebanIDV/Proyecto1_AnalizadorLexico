@@ -2,12 +2,14 @@
 // Created by eidur on 5/19/2022.
 //
 
+/*
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
 #include <time.h>
 #include <ctype.h>
 #include <string.h>
+*/
 
 #define DELIM "."
 float poly(float a[], int, float);

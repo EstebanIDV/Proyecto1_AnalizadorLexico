@@ -1,8 +1,8 @@
 //
 // Created by eidur on 5/19/2022.
 //
-#include<stdio.h>
-#include<stdlib.h>
+//#include<stdio.h>
+//#include<stdlib.h>
 
 const int CITY=2;
 const int WEEK=7;

@@ -78,7 +78,7 @@ void error(int in_char){
 bool openFile(char *filename){
     FILE *newfile = fopen(filename,"r");
     if(newfile==NULL){
-        printf("No se abrió el archivo %s.\n", filename);
+        //printf("No se abrió el archivo %s\n", filename);
         return false;
     }else{
         insertArray(&Open_files,newfile);
@@ -158,6 +158,7 @@ void prescanner(){
 
             }else{
                 fputc('/', tempfptr);
+                fputc(c, tempfptr);
             }
             clear_buffer();
             continue;
@@ -272,7 +273,12 @@ void prescanner(){
                                         strcat(path, "/usr/include/");
                                         strcat(path, token_buffer);
                                         if (openFile(path) == false) {
-                                            printf("Failed to find file: %s", token_buffer);
+                                            clearString(path);
+                                            strcat(path, "/usr/linux/");
+                                            strcat(path, token_buffer);
+                                            if (openFile(path) == false) {
+                                                printf("Failed to find file: %s\n", token_buffer);
+                                            }
                                         }
                                     }
                                 }

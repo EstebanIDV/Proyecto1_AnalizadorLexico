@@ -111,7 +111,7 @@ void expandDefine() {
             int checkExpansion = 0;
             replaceCounter = 0;
 
-            printf("Revisando el name %s \n", tmp->defineName);
+            //printf("Revisando el name %s \n", tmp->defineName);
 
             for (int j = 0; j < strlen(tmp->defineValue); ++j) {
 
