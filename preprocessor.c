@@ -381,6 +381,7 @@ void start(){
     rewind(tempfptr2);
     infile(tempfptr2);
     printf("*---------------------------------*\n");
+    //grammar based of http://www.quut.com/c/ANSI-C-grammar-y.html
     if(yyparse()==0 && synErrorFound == 0){
         printf("COMPILADO \n");
     }else{

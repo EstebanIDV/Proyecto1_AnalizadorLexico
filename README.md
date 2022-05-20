@@ -1,9 +1,9 @@
-# Proyecto: Scanner 💻
+# Proyecto: Parser 💻
 
-Este es un Analizador Léxico, escrito con C y Flex para el lenguaje C, la entrada del programa es un archivo de código 
-C y la salida es un PDF con la información del análisis lexico del código. Se toman en cuenta rutinas de C como 
-#include, que incluye archhivos externos y #define que sirve para reemplazar el valor dado en las apariciones (usos) 
-del #define, para ello se realiza una fase de preprocesado de código y un postprocesado que genera la salida PDF de LaTeX.
+Este es un Analizador Léxico y sintáctico, escrito con C, Bison y Flex para el lenguaje C, la entrada del programa es un archivo de código 
+C e imprime los resultados del análisis sintáctico en consola. Se toman en cuenta rutinas de C como 
+#include, que incluye archhivos externos y librerías de c y #define que sirve para reemplazar el valor dado en las apariciones (usos) 
+del #define, para ello se realiza una fase de preprocesado de código y un proceso de parsing que revisa que efectivamente siga la sintáxis de C.
 
 
 ## Instituto Tecnológico de Costa Rica - Escuela de Ing. en Computación
@@ -28,13 +28,14 @@ del #define, para ello se realiza una fase de preprocesado de código y un postp
 3. git
 4. LaTex
 5. Flex
+6. Bison 3.8
 
 ### Pasos de ejecución del proyecto 🖱️
 
 0. Clonar el proyecto desde GitHub
 1. Abrir una terminal en la raíz del proyecto
 2. Ejecutar el comando en terminal: make
-3. Lanzar el ejecutable llamado svanner junto con la entrada: ./scanner entrada.c, dónde el archivo
+3. Lanzar el ejecutable llamado scanner junto con la entrada: ./scanner entrada.c, dónde el archivo
    de entrada contiene código de lenguaje C
 
 #### Ejemplo de ejecución
@@ -44,21 +45,14 @@ del #define, para ello se realiza una fase de preprocesado de código y un postp
 2. make
 3. ./scanner entrada.c
 
-Contenido de entrada.c:
-#define ab 0
-#define ba (20 + ab) c
-#define c 33 z
-#define z ab
-#define y 1
+Se incluyen archivos de prueba "archpruebaX.c" que incluyen ejemplos de c que debería compilar tanto en gcc como en este programa
 
-int a = 1;
-char b ='ab';
-int ba = bac + ab + ab - ba;
 
 ### Construido con ayuda de 🛠️
 
 * C
 * Flex
+* Bison
 * Clion
 * Linux
 * LaTeX
