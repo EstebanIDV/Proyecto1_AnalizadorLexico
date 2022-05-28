@@ -10,7 +10,7 @@ struct pilaSymTable* newNode();
 int isEmptyTS(struct pilaSymTable* root);
 void pushpilaSymTable(struct pilaSymTable** root);
 void poppilaSymTable(struct pilaSymTable** root);
-void insert_TS(char *tkname, char *type);
+void insert_TS(char *tkname, char *type, int line);
 int lookupPilaTS(struct pilaSymTable* root, char *tkname);
 int toppilaSymTable(struct pilaSymTable* root);
 void iniciarPilaTS();

@@ -13,8 +13,9 @@ enum tipoRegistroSemantico{
 typedef enum tipoRegistroSemantico tipoRegistroSemantico;
 
 struct RegistroSemantico{
-    enum tipoRegistroSemantico tipo;
-    char* tokenType;
+    tipoRegistroSemantico tipo;
+    char *tokenType;
+    int linea;
 };
 
 // A structure to represent a stack
@@ -33,9 +34,9 @@ struct PilaSemantica* retrievePS(struct PilaSemantica* root, char* tipoRS);
 struct PilaSemantica* deletePS(struct PilaSemantica* root, char* ripoRS);
 struct PilaSemantica* updatePS(struct PilaSemantica* root, char* tipoRS);
 
-void guardarTipo();
-void guardarID();
-void guardarFuncion();
+void guardarTipo(int linea);
+void guardarID(int linea);
+void guardarFuncion(int linea);
 void fin_declaracion();
 void open_scope();
 void close_scope();

@@ -8,11 +8,12 @@
 struct nodeSymTable {
     char* name;
     char* type;
+    int linea;
     struct nodeSymTable *next;
 };
 typedef char string[10000];
 extern int lookupST(struct nodeSymTable* root, char* sym);
-extern void enter(struct nodeSymTable** root, char* nameVar, char* symType);
+extern void enter(struct nodeSymTable** root, char* nameVar, char* symType, int linea);
 extern void printAllSym(struct nodeSymTable* root);
 //extern int len();
 //extern char * symbolByIndex(int index);

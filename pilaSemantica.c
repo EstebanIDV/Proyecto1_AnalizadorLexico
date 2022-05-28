@@ -24,6 +24,7 @@ typedef enum tipoRegistroSemantico tipoRegistroSemantico;
 struct RegistroSemantico{
     tipoRegistroSemantico tipo;
     char *tokenType;
+    int linea;
 };
 
 // A structure to represent a stack
@@ -32,7 +33,7 @@ struct PilaSemantica {
     struct PilaSemantica* next;
 };
 
-struct PilaSemantica* newNodePilaSemantica(char * token, enum tipoRegistroSemantico tipoRS)
+struct PilaSemantica* newNodePilaSemantica(char * token, enum tipoRegistroSemantico tipoRS, int line)
 {
     struct PilaSemantica* registroNuevo =
             (struct PilaSemantica*)
@@ -42,6 +43,7 @@ struct PilaSemantica* newNodePilaSemantica(char * token, enum tipoRegistroSemant
     strcpy(registroNuevo->registroSemantico->tokenType, token);
     registroNuevo->next = NULL;
     registroNuevo->registroSemantico->tipo = tipoRS;
+    registroNuevo->registroSemantico->linea = line;
 
     return registroNuevo;
 }
@@ -51,9 +53,9 @@ int isEmptyPS(struct PilaSemantica* root)
     return !root;
 }
 
-void pushPilaSemantica(struct PilaSemantica** root,char * curr_token, enum tipoRegistroSemantico RS)
+void pushPilaSemantica(struct PilaSemantica** root,char * curr_token, enum tipoRegistroSemantico RS, int line)
 {
-    struct PilaSemantica* PilaSemantica = newNodePilaSemantica(curr_token, RS);
+    struct PilaSemantica* PilaSemantica = newNodePilaSemantica(curr_token, RS, line);
     PilaSemantica->next = *root;
     *root = PilaSemantica;
     //printf("%d pushed to stack\n", data);
@@ -105,22 +107,18 @@ struct PilaSemantica* updatePS(struct PilaSemantica* root, char* tipoRS){
     return root;
 }
 
-void guardarTipo(){
+void guardarTipo(int linea){
 //    printf("Guarda TIPO: %s\n", yyget_text());
-    pushPilaSemantica(&rootPS, yyget_text(), TIPO);
-
+    pushPilaSemantica(&rootPS, yyget_text(), TIPO, linea);
 }
 
-void guardarID(){
+void guardarID(int linea){
 //    printf("Guarda ID: %s\n", yyget_text());
-    pushPilaSemantica(&rootPS, yyget_text(), ID);
-
+    pushPilaSemantica(&rootPS, yyget_text(), ID, linea);
 }
 
-void guardarFuncion(){
-    printf("Guarda FUNCTION: %s\n", yyget_text());
-    pushPilaSemantica(&rootPS, yyget_text(), FUNCTION);
-
+void guardarFuncion(int linea){
+    pushPilaSemantica(&rootPS, yyget_text(), FUNCTION, linea);
 }
 
 // gancho de pasar a TS
@@ -130,7 +128,7 @@ void fin_declaracion(){
     struct PilaSemantica *tmp = retrievePS(rootPS, TIPO);
 
     while (rootPS->registroSemantico->tipo == ID){
-        insert_TS(rootPS->registroSemantico->tokenType, tmp->registroSemantico->tokenType);
+        insert_TS(rootPS->registroSemantico->tokenType, tmp->registroSemantico->tokenType, rootPS->registroSemantico->linea);
         popPilaSemantica(&rootPS);
     }
     popPilaSemantica(&rootPS);

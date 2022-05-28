@@ -328,7 +328,7 @@ void replaceDefine() {
 
             if (lookup(token_buffer)==1 && (strcmp(defAux.defineValue, ""))!=0){
                 // ToDo: Mostrar error que hay una variable con el nombre de un define
-                printf("\nERROR: e ha encontrado la variable: %s con el mismo nombre de un DEFINE\n.", token_buffer);
+//                printf("\nERROR: e ha encontrado la variable: %s con el mismo nombre de un DEFINE\n.", token_buffer);
             }
             else {
                 if ((strcmp(defAux.defineValue, ""))!=0)

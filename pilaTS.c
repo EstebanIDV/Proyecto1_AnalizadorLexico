@@ -50,8 +50,8 @@ void poppilaSymTable(struct pilaSymTable** root)
     free(temp);
 }
 
-void insert_TS(char *tkname, char *type){
-    enter(&rootSymTable->symbolTable, tkname, type);
+void insert_TS(char *tkname, char *type, int line){
+    enter(&rootSymTable->symbolTable, tkname, type, line);
 }
 
 int lookupPilaTS(struct pilaSymTable* root, char *tkname){

@@ -236,17 +236,17 @@ storage_class_specifier
 	;
 
 type_specifier
-	: VOID { guardarTipo(); }
-	| CHAR { guardarTipo(); }
-	| SHORT { guardarTipo(); }
-	| INT { guardarTipo(); }
-	| LONG { guardarTipo(); }
-	| FLOAT { guardarTipo(); }
-	| DOUBLE { guardarTipo(); }
-	| SIGNED { guardarTipo(); }
-	| UNSIGNED { guardarTipo(); }
-	| BOOL { guardarTipo(); }
-	| COMPLEX { guardarTipo(); }
+	: VOID { guardarTipo(yylloc.first_line); }
+	| CHAR { guardarTipo(yylloc.first_line); }
+	| SHORT { guardarTipo(yylloc.first_line); }
+	| INT { guardarTipo(yylloc.first_line); }
+	| LONG { guardarTipo(yylloc.first_line); }
+	| FLOAT { guardarTipo(yylloc.first_line); }
+	| DOUBLE { guardarTipo(yylloc.first_line); }
+	| SIGNED { guardarTipo(yylloc.first_line); }
+	| UNSIGNED { guardarTipo(yylloc.first_line); }
+	| BOOL { guardarTipo(yylloc.first_line); }
+	| COMPLEX { guardarTipo(yylloc.first_line); }
 	| IMAGINARY   	/* non-mandated extension */
 	| atomic_type_specifier
 	| struct_or_union_specifier
@@ -339,7 +339,7 @@ declarator
 	;
 
 direct_declarator
-	: IDENTIFIER { guardarID(); }
+	: IDENTIFIER { guardarID(yylloc.first_line); }
 	| '(' declarator ')'
 	| direct_declarator '[' ']'
 	| direct_declarator '[' '*' ']'

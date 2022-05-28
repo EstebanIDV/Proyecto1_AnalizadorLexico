@@ -2227,73 +2227,73 @@ yyreduce:
 
   case 114: /* type_specifier: VOID  */
 #line 239 "parser.y"
-               { guardarTipo(); }
+               { guardarTipo(yylloc.first_line); }
 #line 2232 "parser.tab.c"
     break;
 
   case 115: /* type_specifier: CHAR  */
 #line 240 "parser.y"
-               { guardarTipo(); }
+               { guardarTipo(yylloc.first_line); }
 #line 2238 "parser.tab.c"
     break;
 
   case 116: /* type_specifier: SHORT  */
 #line 241 "parser.y"
-                { guardarTipo(); }
+                { guardarTipo(yylloc.first_line); }
 #line 2244 "parser.tab.c"
     break;
 
   case 117: /* type_specifier: INT  */
 #line 242 "parser.y"
-              { guardarTipo(); }
+              { guardarTipo(yylloc.first_line); }
 #line 2250 "parser.tab.c"
     break;
 
   case 118: /* type_specifier: LONG  */
 #line 243 "parser.y"
-               { guardarTipo(); }
+               { guardarTipo(yylloc.first_line); }
 #line 2256 "parser.tab.c"
     break;
 
   case 119: /* type_specifier: FLOAT  */
 #line 244 "parser.y"
-                { guardarTipo(); }
+                { guardarTipo(yylloc.first_line); }
 #line 2262 "parser.tab.c"
     break;
 
   case 120: /* type_specifier: DOUBLE  */
 #line 245 "parser.y"
-                 { guardarTipo(); }
+                 { guardarTipo(yylloc.first_line); }
 #line 2268 "parser.tab.c"
     break;
 
   case 121: /* type_specifier: SIGNED  */
 #line 246 "parser.y"
-                 { guardarTipo(); }
+                 { guardarTipo(yylloc.first_line); }
 #line 2274 "parser.tab.c"
     break;
 
   case 122: /* type_specifier: UNSIGNED  */
 #line 247 "parser.y"
-                   { guardarTipo(); }
+                   { guardarTipo(yylloc.first_line); }
 #line 2280 "parser.tab.c"
     break;
 
   case 123: /* type_specifier: BOOL  */
 #line 248 "parser.y"
-               { guardarTipo(); }
+               { guardarTipo(yylloc.first_line); }
 #line 2286 "parser.tab.c"
     break;
 
   case 124: /* type_specifier: COMPLEX  */
 #line 249 "parser.y"
-                  { guardarTipo(); }
+                  { guardarTipo(yylloc.first_line); }
 #line 2292 "parser.tab.c"
     break;
 
   case 169: /* direct_declarator: IDENTIFIER  */
 #line 342 "parser.y"
-                     { guardarID(); }
+                     { guardarID(yylloc.first_line); }
 #line 2298 "parser.tab.c"
     break;
 

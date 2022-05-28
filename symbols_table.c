@@ -26,10 +26,15 @@ int lookupST(struct nodeSymTable* root, char* sym) {
 }
 
 // Function to insert a new symbol into the table giving the symbol to insert, should execute after lookup
-void enter(struct nodeSymTable** root, char* nameVar, char* symType) {
+void enter(struct nodeSymTable** root, char* nameVar, char* symType, int linea) {
+    if (lookupST(*root, nameVar)==1){
+        printf("ERROR: multiple definitions for variable: %s in line: %i\n", nameVar, linea);
+        return;
+    }
     struct nodeSymTable *newSymNode = malloc(sizeof(struct nodeSymTable));
     newSymNode->name = strdup(nameVar);
     newSymNode->type = strdup(symType);
+    newSymNode->linea = linea;
     newSymNode->next = *root;
     *root = newSymNode;
 }
