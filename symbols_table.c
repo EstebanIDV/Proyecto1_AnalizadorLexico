@@ -8,19 +8,16 @@
 //#include "definetable.h"
 
 // A simple node to use a linked symbol list as a symbol table, not another info needed
-struct node {
-    string name;
-    struct node *next;
+struct nodeSymTable {
+    char* name;
+    char* type;
+    struct nodeSymTable *next;
 };
-
-struct node *symHeadNode = NULL;
-struct node *symActualNode = NULL;
-int symListLen = -1;
 
 // Function to check if the given symbol exists into the symbol table
 // The function returns 1 if the symbol already exits or 0 if not
-int lookup(string sym) {
-    struct node *tmp = symHeadNode;
+int lookup(struct nodeSymTable* root, char* sym) {
+    struct nodeSymTable *tmp = root;
 
     while (tmp != NULL) {
         // strcmp(x, y) = 0 means both strings are the same
@@ -34,29 +31,24 @@ int lookup(string sym) {
 }
 
 // Function to insert a new symbol into the table giving the symbol to insert, should execute after lookup
-void enter(string sym) {
-    struct node *newSymNode = malloc(sizeof(struct node));
-    strcpy(newSymNode->name, "");
-    strcpy(newSymNode->name, sym);
+void enter(struct nodeSymTable* root, char* symType, char* nameVar) {
+    struct nodeSymTable *newSymNode = malloc(sizeof(struct nodeSymTable));
+    newSymNode->name = (char *) malloc(strlen(nameVar)+1);
+    newSymNode->type = (char *) malloc(strlen(symType)+1);
+    strcpy(newSymNode->name, nameVar);
+    strcpy(newSymNode->type, symType);
     newSymNode->next = NULL;
 
-    // This is the first insertion where list if full empty
-    if (symHeadNode == NULL) {
-        symHeadNode = newSymNode;
-        symActualNode = newSymNode;
-    } else {
-        // When the list is not empty just update the last pointer to point to the new node and update the actual node
-        symActualNode->next = newSymNode;
-        symActualNode = newSymNode;
-    }
-    symListLen++;
+    newSymNode->next = *root;
+    *root = newSymNode;
 }
 
-void printAllSym() {
-    struct node *tmp = symHeadNode;
+void printAllSym(struct nodeSymTable* root) {
+    struct nodeSymTable *tmp = root;
+    printf("\n*************************** Nueva Tabla de Simbolos***************************\n")
     while (tmp != NULL) {
-        printf("Name: %s \n", tmp->name);
-        tmp = (struct node *) tmp->next;
+        printf("Name: %s, Type: \n", tmp->name, tmp->type);
+        tmp = (struct nodeSymTable *) tmp->next;
     }
 }
 

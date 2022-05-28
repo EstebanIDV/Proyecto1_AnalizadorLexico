@@ -7,7 +7,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "parser.tab.h"
 #include "scanner.h"
 #define MAXRSLEN 100
 
@@ -126,6 +125,9 @@ void guardarFuncion(){
 
 }
 
+void fin_declaracion(){
+    printf("Terminamos declaracion, se inserta en TS\n");
+}
 /*int main()
 {
     pushPilaSemantica(&rootPS, "10", TIPO);

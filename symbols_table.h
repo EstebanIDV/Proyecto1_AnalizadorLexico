@@ -5,10 +5,12 @@
 #define MICROCOMPILER_SYMBOLS_TABLE_H
 #include "definetable.h"
 #include <string.h>
-extern int lookup(string sym);
-extern void enter(string sym);
-extern void printAllSym();
-extern int len();
+struct nodeSymTable;
+typedef char string[10000];
+extern int lookup(struct nodeSymTable* root, char* sym);
+extern void enter(struct nodeSymTable* root, char* symType, char* nameVar);
+extern void printAllSym(struct nodeSymTable* root);
+//extern int len();
 //extern char * symbolByIndex(int index);
 
 #endif //MICROCOMPILER_SYMBOLS_TABLE_H

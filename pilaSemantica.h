@@ -36,5 +36,6 @@ struct PilaSemantica* updatePS(struct PilaSemantica* root, char* tipoRS);
 void guardarTipo();
 void guardarID();
 void guardarFuncion();
+void fin_declaracion();
 
 #endif //PROYECTO3_SYMTABLE_PILASEMANTICA_H
