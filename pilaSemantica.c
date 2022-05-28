@@ -71,11 +71,11 @@ int popPilaSemantica(struct PilaSemantica** root)
     return popped;
 }
 
-int topPilaSemantica(struct PilaSemantica* root)
+void topPilaSemantica(struct PilaSemantica* root)
 {
     if (isEmpty(root))
         return INT_MIN;
-    return root->registroSemantico->tipo;
+    return;
 }
 
 //RETRIEVE:regresa puntero al primer RS del tipo indicado desde el TOP

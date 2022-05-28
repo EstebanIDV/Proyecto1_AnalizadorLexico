@@ -8,11 +8,6 @@
 //#include "definetable.h"
 
 // A simple node to use a linked symbol list as a symbol table, not another info needed
-struct nodeSymTable {
-    char* name;
-    char* type;
-    struct nodeSymTable *next;
-};
 
 // Function to check if the given symbol exists into the symbol table
 // The function returns 1 if the symbol already exits or 0 if not
@@ -31,7 +26,7 @@ int lookup(struct nodeSymTable* root, char* sym) {
 }
 
 // Function to insert a new symbol into the table giving the symbol to insert, should execute after lookup
-void enter(struct nodeSymTable* root, char* symType, char* nameVar) {
+void enter(struct nodeSymTable* root, char* nameVar, char* symType) {
     struct nodeSymTable *newSymNode = malloc(sizeof(struct nodeSymTable));
     newSymNode->name = (char *) malloc(strlen(nameVar)+1);
     newSymNode->type = (char *) malloc(strlen(symType)+1);
