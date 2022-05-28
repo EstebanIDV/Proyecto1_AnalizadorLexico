@@ -11,7 +11,7 @@
 #include "scanner.h"
 
 #include "definetable.h"
-#include "symbols_table.h"
+#include "pilaTS.h"
 
 FILE *tempfptr;
 FILE *tempfptr2;
@@ -328,6 +328,7 @@ void replaceDefine() {
 
             if (lookup(token_buffer)==1 && (strcmp(defAux.defineValue, ""))!=0){
                 // ToDo: Mostrar error que hay una variable con el nombre de un define
+                printf("\nERROR: e ha encontrado la variable: %s con el mismo nombre de un DEFINE\n.", token_buffer);
             }
             else {
                 if ((strcmp(defAux.defineValue, ""))!=0)
@@ -381,6 +382,7 @@ void start(){
     tempfptr2 = fopen("tempprueba2.txt","w+");
     replaceDefine();
     closeuserfile();
+    iniciarPilaTS();
 
     rewind(tempfptr2);
     infile(tempfptr2);

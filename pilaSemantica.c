@@ -31,7 +31,7 @@ struct PilaSemantica {
     struct PilaSemantica* next;
 };
 
-struct PilaSemantica* newNode(char * token, enum tipoRegistroSemantico tipoRS)
+struct PilaSemantica* newNodePilaSemantica(char * token, enum tipoRegistroSemantico tipoRS)
 {
     struct PilaSemantica* registroNuevo =
             (struct PilaSemantica*)
@@ -45,14 +45,14 @@ struct PilaSemantica* newNode(char * token, enum tipoRegistroSemantico tipoRS)
     return registroNuevo;
 }
 
-int isEmpty(struct PilaSemantica* root)
+int isEmptyPS(struct PilaSemantica* root)
 {
     return !root;
 }
 
 void pushPilaSemantica(struct PilaSemantica** root,char * curr_token, enum tipoRegistroSemantico RS)
 {
-    struct PilaSemantica* PilaSemantica = newNode(curr_token, RS);
+    struct PilaSemantica* PilaSemantica = newNodePilaSemantica(curr_token, RS);
     PilaSemantica->next = *root;
     *root = PilaSemantica;
     //printf("%d pushed to stack\n", data);
@@ -60,7 +60,7 @@ void pushPilaSemantica(struct PilaSemantica** root,char * curr_token, enum tipoR
 
 int popPilaSemantica(struct PilaSemantica** root)
 {
-    if (isEmpty(*root)) {
+    if (isEmptyPS(*root)) {
         return INT_MIN;
     }
     struct PilaSemantica* temp = *root;
@@ -71,11 +71,11 @@ int popPilaSemantica(struct PilaSemantica** root)
     return popped;
 }
 
-void topPilaSemantica(struct PilaSemantica* root)
+int topPilaSemantica(struct PilaSemantica* root)
 {
-    if (isEmpty(root))
+    if (isEmptyPS(root))
         return INT_MIN;
-    return;
+    return 1;
 }
 
 //RETRIEVE:regresa puntero al primer RS del tipo indicado desde el TOP

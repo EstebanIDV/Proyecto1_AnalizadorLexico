@@ -25,19 +25,19 @@ int listLen = -1;
 
 // Function to check if the given symbol exists into the symbol table
 // The function returns 1 if the symbol already exits or 0 if not
-//int lookup(char* sym) {
-//    struct node *tmp = headNode;
-//
-//    while (tmp != NULL) {
-//        // strcmp(x, y) = 0 means both Strings are the same
-//        if (strcmp(tmp->name, sym) == 0) {
-//            return 1;
-//        }
-//        tmp = tmp->next;
-//    }
-////    printf("%s", #include "symbols_table.c"s);
-//    return 0;
-//}
+int lookup(char* sym) {
+    struct node *tmp = headNode;
+
+    while (tmp != NULL) {
+        // strcmp(x, y) = 0 means both Strings are the same
+        if (strcmp(tmp->defineName, sym) == 0) {
+            return 1;
+        }
+        tmp = tmp->next;
+    }
+//    printf("%s", #include "symbols_table.c"s);
+    return 0;
+}
 
 // Function to insert a new define into the table giving define name and its value, should execute after lookup
 void insertDefine(string name, string value) {

@@ -23,5 +23,6 @@ struct define getDefineValue(string defineName);
 void replaceDefineValue();
 struct define checkDefineExists(string defineName);
 void insertError(string name);
+int lookup(char* sym);
 
 #endif //PROYECTO1_ANALIZADORLEXICO_DEFINETABLE_H

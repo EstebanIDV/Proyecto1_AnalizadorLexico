@@ -25,7 +25,7 @@ struct PilaSemantica {
 
 
 struct PilaSemantica* newNode(char * token, enum tipoRegistroSemantico tipoRS);
-int isEmpty(struct PilaSemantica* root);
+int isEmptyPS(struct PilaSemantica* root);
 void pushPilaSemantica(struct PilaSemantica** root,char * curr_token, enum tipoRegistroSemantico RS);
 int topPilaSemantica(struct PilaSemantica* root);
 int topPilaSemantica(struct PilaSemantica* root);

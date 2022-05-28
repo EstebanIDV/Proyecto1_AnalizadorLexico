@@ -11,7 +11,7 @@
 
 // Function to check if the given symbol exists into the symbol table
 // The function returns 1 if the symbol already exits or 0 if not
-int lookup(struct nodeSymTable* root, char* sym) {
+int lookupST(struct nodeSymTable* root, char* sym) {
     struct nodeSymTable *tmp = root;
 
     while (tmp != NULL) {
@@ -32,17 +32,15 @@ void enter(struct nodeSymTable* root, char* nameVar, char* symType) {
     newSymNode->type = (char *) malloc(strlen(symType)+1);
     strcpy(newSymNode->name, nameVar);
     strcpy(newSymNode->type, symType);
-    newSymNode->next = NULL;
-
-    newSymNode->next = *root;
-    *root = newSymNode;
+    newSymNode->next = root;
+    root = newSymNode;
 }
 
 void printAllSym(struct nodeSymTable* root) {
     struct nodeSymTable *tmp = root;
-    printf("\n*************************** Nueva Tabla de Simbolos***************************\n")
+    printf("\n*************************** Nueva Tabla de Simbolos***************************\n");
     while (tmp != NULL) {
-        printf("Name: %s, Type: \n", tmp->name, tmp->type);
+        printf("Name: %s, Type: %s\n", tmp->name, tmp->type);
         tmp = (struct nodeSymTable *) tmp->next;
     }
 }

@@ -11,7 +11,7 @@ struct nodeSymTable {
     struct nodeSymTable *next;
 };
 typedef char string[10000];
-extern int lookup(struct nodeSymTable* root, char* sym);
+extern int lookupST(struct nodeSymTable* root, char* sym);
 extern void enter(struct nodeSymTable* root, char* nameVar, char* symType);
 extern void printAllSym(struct nodeSymTable* root);
 //extern int len();

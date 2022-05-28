@@ -21,17 +21,16 @@ struct pilaSymTable* newNode()
                     malloc(sizeof(struct pilaSymTable));
     registroNuevo->symbolTable = NULL;
     registroNuevo->next = NULL;
-
     return registroNuevo;
 }
 
-int isEmpty(struct pilaSymTable* root)
+int isEmptyTS(struct pilaSymTable* root)
 {
     return !root;
 }
 
 // abrimos contexto
-void pushpilaSymTable(struct pilaSymTable** root,char * name, char* tipo)
+void pushpilaSymTable(struct pilaSymTable** root)
 {
     struct pilaSymTable* pilaSymTable = newNode();
     pilaSymTable->next = *root;
@@ -42,8 +41,9 @@ void pushpilaSymTable(struct pilaSymTable** root,char * name, char* tipo)
 // cerramos contexto
 void poppilaSymTable(struct pilaSymTable** root)
 {
-    if (isEmpty(*root)) {
-        return INT_MIN;
+    if (isEmptyTS(*root)) {
+        printf("\n ERRROOOOOOOR: Se esta haciendo POP en la pila Sym table vacía\n");
+        return;
     }
     struct pilaSymTable* temp = *root;
     printAllSym(temp->symbolTable);
@@ -56,13 +56,17 @@ void insert_TS(struct pilaSymTable* root, char *tkname, char *type){
     enter(root->symbolTable, tkname, type);
 }
 
-int lookup(struct pilaSymTable* root, char *tkname){
-    lookup(root->symbolTable,tkname);
+int lookupPilaTS(struct pilaSymTable* root, char *tkname){
+    return lookupST(root->symbolTable,tkname);
 }
 
-int toppilaSymTable(struct pilaSymTable* root)
+struct pilaSymTable* toppilaSymTable(struct pilaSymTable* root)
 {
-    if (isEmpty(root))
-        return INT_MIN;
-    return root->registroSemantico->tipo;
+    if (isEmptyTS(root))
+        return root;
+    return root;
+}
+
+void iniciarPilaTS() {
+    pushpilaSymTable(&rootSymTable);
 }
