@@ -20,6 +20,7 @@
 #include "global.h"
 #include "scanner.h"
 #include "preprocessor.h"
+#include "pilaSemantica.h"
 void yyerror(const char *s);
 extern char *lineptr;
 extern int synErrorFound;
@@ -222,7 +223,7 @@ init_declarator_list
 
 init_declarator
 	: declarator '=' initializer
-	| declarator
+	| declarator { guardarID(); }
 	;
 
 storage_class_specifier
@@ -236,17 +237,17 @@ storage_class_specifier
 
 type_specifier
 	: VOID
-	| CHAR
-	| SHORT
-	| INT
-	| LONG
-	| FLOAT
-	| DOUBLE
-	| SIGNED
-	| UNSIGNED
-	| BOOL
-	| COMPLEX
-	| IMAGINARY	  	/* non-mandated extension */
+	| CHAR { guardarTipo(); }
+	| SHORT { guardarTipo(); }
+	| INT { guardarTipo(); }
+	| LONG { guardarTipo(); }
+	| FLOAT { guardarTipo(); }
+	| DOUBLE { guardarTipo(); }
+	| SIGNED { guardarTipo(); }
+	| UNSIGNED { guardarTipo(); }
+	| BOOL { guardarTipo(); }
+	| COMPLEX { guardarTipo(); }
+	| IMAGINARY   	/* non-mandated extension */
 	| atomic_type_specifier
 	| struct_or_union_specifier
 	| enum_specifier

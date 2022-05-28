@@ -1595,27 +1595,25 @@ YY_RULE_SETUP
 #line 164 "scanner.lex"
 { return '?'; }
 	YY_BREAK
-case YY_STATE_EOF(INITIAL):
-#line 165 "scanner.lex"
-{ return ENDOFFILE;}
-	YY_BREAK
 case 104:
 /* rule 104 can match eol */
 YY_RULE_SETUP
-#line 166 "scanner.lex"
+#line 165 "scanner.lex"
 { /* whitespace separates tokens */ }
 	YY_BREAK
 case 105:
 YY_RULE_SETUP
-#line 167 "scanner.lex"
+#line 166 "scanner.lex"
 { /* discard bad characters */ }
 	YY_BREAK
 case 106:
 YY_RULE_SETUP
-#line 169 "scanner.lex"
+#line 168 "scanner.lex"
 ECHO;
 	YY_BREAK
-#line 1619 "lex.yy.c"
+#line 1615 "lex.yy.c"
+case YY_STATE_EOF(INITIAL):
+	yyterminate();
 
 	case YY_END_OF_BUFFER:
 		{
@@ -2630,7 +2628,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 169 "scanner.lex"
+#line 168 "scanner.lex"
 
 
 int yywrap(void)        /* called at end of input */

@@ -1,0 +1,13 @@
+
+
+int main(){
+
+    int variable, abc, bcd, main;
+    main = 45;
+    return 1;
+}
+
+
+
+
+

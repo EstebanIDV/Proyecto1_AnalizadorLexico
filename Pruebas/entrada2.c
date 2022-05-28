@@ -1,10 +1,12 @@
 
-int a = 45;
 
 int main(){
 
+    int variable, abc, bcd, main;
+    main = 45;
     return 1;
 }
+
 /*int a = ;
 int = 1;
 

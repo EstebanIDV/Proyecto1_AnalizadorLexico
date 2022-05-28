@@ -9,11 +9,6 @@ char flexfile[MAXIDLEN];
 char tempfile[MAXIDLEN];
 
 int main(int argc, char** argv) {
-
-
-
-
-
     if (argc <= 1) {
         printf("Error, no program given to compile.\n");
         exit(1);
@@ -22,7 +17,7 @@ int main(int argc, char** argv) {
         exit(1);
     }
     if (strlen(argv[1]) > MAXIDLEN) {
-        printf("Error, the name of the file must be 32 characters long of lower.\n");
+        printf("Error, the name of the file must be 32 characters long or lower.\n");
     }
     char temp[MAXIDLEN];
     char rawname[MAXIDLEN];
@@ -37,9 +32,6 @@ int main(int argc, char** argv) {
     }
 
     strcpy(filename, temp);
-
-
-
 
     //rintf("%s", temp);
     /*

@@ -30,6 +30,7 @@ typedef struct tokens{
 } token;
 
 token GetToken();*/
+char *yyget_text  (void);
 void infile(FILE *file);
 void finish();
 #endif //PROYECTO1_ANALIZADORLEXICO_SCANNER_H
