@@ -26,14 +26,12 @@ int lookupST(struct nodeSymTable* root, char* sym) {
 }
 
 // Function to insert a new symbol into the table giving the symbol to insert, should execute after lookup
-void enter(struct nodeSymTable* root, char* nameVar, char* symType) {
+void enter(struct nodeSymTable** root, char* nameVar, char* symType) {
     struct nodeSymTable *newSymNode = malloc(sizeof(struct nodeSymTable));
-    newSymNode->name = (char *) malloc(strlen(nameVar)+1);
-    newSymNode->type = (char *) malloc(strlen(symType)+1);
-    strcpy(newSymNode->name, nameVar);
-    strcpy(newSymNode->type, symType);
-    newSymNode->next = root;
-    root = newSymNode;
+    newSymNode->name = strdup(nameVar);
+    newSymNode->type = strdup(symType);
+    newSymNode->next = *root;
+    *root = newSymNode;
 }
 
 void printAllSym(struct nodeSymTable* root) {

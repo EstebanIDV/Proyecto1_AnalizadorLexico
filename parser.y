@@ -73,8 +73,8 @@ postfix_expression
 	| postfix_expression PTR_OP IDENTIFIER
 	| postfix_expression INC_OP
 	| postfix_expression DEC_OP
-	| '(' type_name ')' '{' initializer_list '}'
-	| '(' type_name ')' '{' initializer_list ',' '}'
+	| '(' type_name ')' open_scope initializer_list close_scope
+	| '(' type_name ')' open_scope initializer_list ',' close_scope
 	;
 
 argument_expression_list
@@ -198,8 +198,8 @@ constant_expression
 	;
 
 declaration
-	: declaration_specifiers ';'
-	| declaration_specifiers init_declarator_list ';'
+	: declaration_specifiers ';' { fin_declaracion(); }
+	| declaration_specifiers init_declarator_list ';' { fin_declaracion(); }
 	| static_assert_declaration
 	;
 
@@ -223,7 +223,7 @@ init_declarator_list
 
 init_declarator
 	: declarator '=' initializer
-	| declarator { guardarID(); }
+	| declarator
 	;
 
 storage_class_specifier
@@ -236,7 +236,7 @@ storage_class_specifier
 	;
 
 type_specifier
-	: VOID
+	: VOID { guardarTipo(); }
 	| CHAR { guardarTipo(); }
 	| SHORT { guardarTipo(); }
 	| INT { guardarTipo(); }
@@ -255,8 +255,8 @@ type_specifier
 	;
 
 struct_or_union_specifier
-	: struct_or_union '{' struct_declaration_list '}'
-	| struct_or_union IDENTIFIER '{' struct_declaration_list '}'
+	: struct_or_union open_scope struct_declaration_list close_scope
+	| struct_or_union IDENTIFIER open_scope struct_declaration_list close_scope
 	| struct_or_union IDENTIFIER
 	;
 
@@ -295,10 +295,10 @@ struct_declarator
 	;
 
 enum_specifier
-	: ENUM '{' enumerator_list '}'
-	| ENUM '{' enumerator_list ',' '}'
-	| ENUM IDENTIFIER '{' enumerator_list '}'
-	| ENUM IDENTIFIER '{' enumerator_list ',' '}'
+	: ENUM open_scope enumerator_list close_scope
+	| ENUM open_scope enumerator_list ',' close_scope
+	| ENUM IDENTIFIER open_scope enumerator_list close_scope
+	| ENUM IDENTIFIER open_scope enumerator_list ',' close_scope
 	| ENUM IDENTIFIER
 	;
 
@@ -339,7 +339,7 @@ declarator
 	;
 
 direct_declarator
-	: IDENTIFIER
+	: IDENTIFIER { guardarID(); }
 	| '(' declarator ')'
 	| direct_declarator '[' ']'
 	| direct_declarator '[' '*' ']'
@@ -425,8 +425,8 @@ direct_abstract_declarator
 	;
 
 initializer
-	: '{' initializer_list '}'
-	| '{' initializer_list ',' '}'
+	: open_scope initializer_list close_scope
+	| open_scope initializer_list ',' close_scope
 	| assignment_expression
 	;
 
@@ -471,9 +471,17 @@ labeled_statement
 	;
 
 compound_statement
-	: '{' '}'
-	| '{'  block_item_list '}'
-	| '{' error '}' {yyerrok; synErrorFound =1;}
+	: open_scope close_scope
+	| open_scope  block_item_list close_scope
+	| open_scope error close_scope {yyerrok; synErrorFound =1;}
+	;
+
+open_scope
+	: '{' { open_scope(); }
+	;
+
+close_scope
+	: '}' { close_scope(); }
 	;
 
 block_item_list

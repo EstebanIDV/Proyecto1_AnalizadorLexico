@@ -104,14 +104,14 @@ void closeuserfile(){
         error(c);
         exit(1);
     }
-};
+}
 
 void buffer_line(char c){
     buffer_char(c);
     for(c=fgetc(Open_files.array[Open_files.used-1]); c!='\n'&&c!=EOF;c=fgetc(Open_files.array[Open_files.used-1]))
         buffer_char(c);
 
-};
+}
 
 
 
@@ -119,7 +119,7 @@ void transportToFile(FILE *fptr){
     for(int i=0; i<strlen(token_buffer);i++)
         fputc(token_buffer[i], fptr);
     clear_buffer();
-};
+}
 
 void prescanner(){
     int in_char, c,endinclude, findFile;
@@ -367,7 +367,7 @@ void replaceDefine() {
             clear_buffer();
         }
     }
-};
+}
 
 
 void start(){
@@ -389,9 +389,12 @@ void start(){
     printf("*---------------------------------*\n");
     //grammar based of http://www.quut.com/c/ANSI-C-grammar-y.html
     if(yyparse()==0 && synErrorFound == 0){
-        printf("COMPILADO \n");
+        poppilaSymTable(&rootSymTable);
+        printf("*---------------------------------*\n");
+        printf("\nCOMPILADO \n");
     }else{
-        printf("NO COMPILADO \n");
+        printf("*---------------------------------*\n");
+        printf("\nNO COMPILADO \n");
     }
 
     finish();

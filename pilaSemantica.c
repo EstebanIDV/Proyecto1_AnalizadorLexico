@@ -8,6 +8,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "scanner.h"
+#include "pilaTS.h"
 #define MAXRSLEN 100
 
 struct PilaSemantica* rootPS = NULL;
@@ -58,17 +59,14 @@ void pushPilaSemantica(struct PilaSemantica** root,char * curr_token, enum tipoR
     //printf("%d pushed to stack\n", data);
 }
 
-int popPilaSemantica(struct PilaSemantica** root)
+void popPilaSemantica(struct PilaSemantica** root)
 {
     if (isEmptyPS(*root)) {
-        return INT_MIN;
+        return;
     }
     struct PilaSemantica* temp = *root;
     *root = (*root)->next;
-    int popped = temp->registroSemantico->tipo;
     free(temp);
-
-    return popped;
 }
 
 int topPilaSemantica(struct PilaSemantica* root)
@@ -108,13 +106,13 @@ struct PilaSemantica* updatePS(struct PilaSemantica* root, char* tipoRS){
 }
 
 void guardarTipo(){
-    printf("Guarda TIPO: %s\n", yyget_text());
+//    printf("Guarda TIPO: %s\n", yyget_text());
     pushPilaSemantica(&rootPS, yyget_text(), TIPO);
 
 }
 
 void guardarID(){
-    printf("Guarda ID: %s\n", yyget_text());
+//    printf("Guarda ID: %s\n", yyget_text());
     pushPilaSemantica(&rootPS, yyget_text(), ID);
 
 }
@@ -125,8 +123,27 @@ void guardarFuncion(){
 
 }
 
+// gancho de pasar a TS
+
 void fin_declaracion(){
-    printf("Terminamos declaracion, se inserta en TS\n");
+//    printf("Terminamos declaracion, se inserta en TS\n");
+    struct PilaSemantica *tmp = retrievePS(rootPS, TIPO);
+
+    while (rootPS->registroSemantico->tipo == ID){
+        insert_TS(rootPS->registroSemantico->tokenType, tmp->registroSemantico->tokenType);
+        popPilaSemantica(&rootPS);
+    }
+    popPilaSemantica(&rootPS);
+}
+
+void open_scope(){
+//    printf("Abrimos SCOPE\n");
+    pushpilaSymTable(&rootSymTable);
+}
+
+void close_scope(){
+//    printf("Cerramos SCOPE\n");
+    poppilaSymTable(&rootSymTable);
 }
 /*int main()
 {

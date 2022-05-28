@@ -12,7 +12,7 @@ struct nodeSymTable {
 };
 typedef char string[10000];
 extern int lookupST(struct nodeSymTable* root, char* sym);
-extern void enter(struct nodeSymTable* root, char* nameVar, char* symType);
+extern void enter(struct nodeSymTable** root, char* nameVar, char* symType);
 extern void printAllSym(struct nodeSymTable* root);
 //extern int len();
 //extern char * symbolByIndex(int index);

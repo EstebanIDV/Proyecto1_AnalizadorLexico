@@ -37,5 +37,7 @@ void guardarTipo();
 void guardarID();
 void guardarFuncion();
 void fin_declaracion();
+void open_scope();
+void close_scope();
 
 #endif //PROYECTO3_SYMTABLE_PILASEMANTICA_H

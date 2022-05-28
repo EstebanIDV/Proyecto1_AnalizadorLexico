@@ -5,7 +5,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "scanner.h"
 #include "symbols_table.h"
 struct pilaSymTable* rootSymTable = NULL;
 
@@ -49,11 +48,10 @@ void poppilaSymTable(struct pilaSymTable** root)
     printAllSym(temp->symbolTable);
     *root = (*root)->next;
     free(temp);
-
 }
 
-void insert_TS(struct pilaSymTable* root, char *tkname, char *type){
-    enter(root->symbolTable, tkname, type);
+void insert_TS(char *tkname, char *type){
+    enter(&rootSymTable->symbolTable, tkname, type);
 }
 
 int lookupPilaTS(struct pilaSymTable* root, char *tkname){
