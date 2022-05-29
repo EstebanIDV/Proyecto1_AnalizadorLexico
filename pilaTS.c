@@ -54,8 +54,17 @@ void insert_TS(char *tkname, char *type, int line){
     enter(&rootSymTable->symbolTable, tkname, type, line);
 }
 
-int lookupPilaTS(struct pilaSymTable* root, char *tkname){
-    return lookupST(root->symbolTable,tkname);
+int lookupPilaTS(char *tkname){
+//    printf("entra lookup pila TS\n");
+    struct pilaSymTable *tmp = rootSymTable;
+    while (tmp!=NULL) {
+//        printf("itera lookup pila TS\n");
+        if (lookupST(tmp->symbolTable, tkname)==1){
+            return 1;
+        }
+        tmp = (struct pilaSymTable*) tmp->next;
+    }
+    return 0;
 }
 
 struct pilaSymTable* toppilaSymTable(struct pilaSymTable* root)

@@ -21,6 +21,7 @@
 #include "scanner.h"
 #include "preprocessor.h"
 #include "pilaSemantica.h"
+#include <stdio.h>
 void yyerror(const char *s);
 extern char *lineptr;
 extern int synErrorFound;
@@ -28,8 +29,7 @@ extern int synErrorFound;
 %locations
 %%
 primary_expression
-	: IDENTIFIER
-	| constant
+	: constant
 	| string
 	| '(' expression ')'
 	| generic_selection
@@ -66,6 +66,7 @@ generic_association
 
 postfix_expression
 	: primary_expression
+	| IDENTIFIER { ck_declaration(yylloc.first_line); }
 	| postfix_expression '[' expression ']'
 	| postfix_expression '(' ')'
 	| postfix_expression '(' argument_expression_list ')'
@@ -448,7 +449,7 @@ designator_list
 
 designator
 	: '[' constant_expression ']'
-	| '.' IDENTIFIER
+	| '.' IDENTIFIER { printf("\nVARIABLE A USAR\n"); }
 	;
 
 static_assert_declaration

@@ -9,10 +9,12 @@
 #include <string.h>
 #include "scanner.h"
 #include "pilaTS.h"
+#include "preprocessor.h"
+#include "global.h"
 #define MAXRSLEN 100
 
 struct PilaSemantica* rootPS = NULL;
-
+char *lastID;
 
 enum tipoRegistroSemantico{
     TIPO = 1,
@@ -142,6 +144,16 @@ void open_scope(){
 void close_scope(){
 //    printf("Cerramos SCOPE\n");
     poppilaSymTable(&rootSymTable);
+}
+
+void ck_declaration(int line){
+
+    if (lookupPilaTS(lastID)==0){
+        fprintf(stderr,"Line %d ", line);
+        fprintf (stderr, ": semantic error Variable '%s' used but not defined.\n", lastID);
+        synErrorFound = 1;
+    }
+
 }
 /*int main()
 {

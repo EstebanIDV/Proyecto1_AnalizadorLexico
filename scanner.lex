@@ -25,6 +25,7 @@ WS  [ \t\v\n\f]
 #include <stdio.h>
 
 #include "parser.tab.h"
+#include <string.h>
 #include "global.h"
 #include "scanner.h"
 
@@ -185,6 +186,7 @@ static int check_type(void)
     case ENUMERATION_CONSTANT:        /* previously defined */
         return ENUMERATION_CONSTANT;
     default:                          /* includes undefined */
+        lastID = strdup(yyget_text());
         return IDENTIFIER;
     }
 

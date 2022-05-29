@@ -5,6 +5,7 @@
 #include "symbols_table.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include "preprocessor.h"
 //#include "definetable.h"
 
 // A simple node to use a linked symbol list as a symbol table, not another info needed
@@ -28,7 +29,9 @@ int lookupST(struct nodeSymTable* root, char* sym) {
 // Function to insert a new symbol into the table giving the symbol to insert, should execute after lookup
 void enter(struct nodeSymTable** root, char* nameVar, char* symType, int linea) {
     if (lookupST(*root, nameVar)==1){
-        printf("ERROR: multiple definitions for variable: %s in line: %i\n", nameVar, linea);
+        fprintf(stderr,"Line %d ", linea);
+        fprintf (stderr, ": semantic error multiple definitions for variable: %s\n", nameVar);
+        synErrorFound = 1;
         return;
     }
     struct nodeSymTable *newSymNode = malloc(sizeof(struct nodeSymTable));

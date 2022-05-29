@@ -393,6 +393,7 @@ void start(){
         printf("*---------------------------------*\n");
         printf("\nCOMPILADO \n");
     }else{
+        poppilaSymTable(&rootSymTable);
         printf("*---------------------------------*\n");
         printf("\nNO COMPILADO \n");
     }

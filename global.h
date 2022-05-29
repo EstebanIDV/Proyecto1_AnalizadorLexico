@@ -22,6 +22,7 @@ extern FILE *tempfptr2;
 typedef enum  directive_types{
     INCLUDE, DEFINE, NADA
 } directive;
+extern char *lastID;
 extern char filename[MAXIDLEN];
 extern char tempfile[MAXIDLEN];
 extern char flexfile[MAXIDLEN];

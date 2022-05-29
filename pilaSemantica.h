@@ -40,5 +40,6 @@ void guardarFuncion(int linea);
 void fin_declaracion();
 void open_scope();
 void close_scope();
+void ck_declaration(int line);
 
 #endif //PROYECTO3_SYMTABLE_PILASEMANTICA_H

@@ -1,12 +1,11 @@
 
 int variable, abc, bcd;
-float variable;
 
 int main(){
 
-    int variable, abc, bcd;
-    float variable;
+    int abc, bcd;
     variable = 45;
+    variable = abc + y;
     return 1;
 }
 
