@@ -254,7 +254,7 @@ void prescanner(){
                         findFile = 0;
 
                         if (endinclude=='"'){
-                            printf("%s\n", token_buffer);
+                            //printf("%s\n", token_buffer);
                             clearString(path);
 //                            strcat(path, "/");
                             strcat(path, token_buffer);
