@@ -326,17 +326,11 @@ void replaceDefine() {
 //            printf("Revisando el string: %s \n", token_buffer);
 //            printf("El valor del define es: %s \n\n", defAux.defineValue);
 
-            if (lookup(token_buffer)==1 && (strcmp(defAux.defineValue, ""))!=0){
-                // ToDo: Mostrar error que hay una variable con el nombre de un define
-//                printf("\nERROR: e ha encontrado la variable: %s con el mismo nombre de un DEFINE\n.", token_buffer);
-            }
-            else {
-                if ((strcmp(defAux.defineValue, ""))!=0)
-                {
-                    clear_buffer();
-                    strcpy(token_buffer, defAux.defineValue);
-                }
-
+            // Checking the define exists for this token
+            if ((strcmp(defAux.defineValue, ""))!=0)
+            {
+                clear_buffer();
+                strcpy(token_buffer, defAux.defineValue);
             }
 
             transportToFile(tempfptr2);
@@ -377,6 +371,8 @@ void start(){
     prescanner();
     // Call the function to expand the defines in case is necessary
     expandDefine();
+//    printAll();
+
 
     rewind(tempfptr);
     tempfptr2 = fopen("tempprueba2.txt","w+");

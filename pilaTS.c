@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "symbols_table.h"
+#include "pilaTS.h"
 struct pilaSymTable* rootSymTable = NULL;
 
 struct pilaSymTable {
