@@ -54,6 +54,9 @@ void poppilaSymTable(struct pilaSymTable** root)
 void insert_TS(char *tkname, char *type, int line){
     enter(&rootSymTable->symbolTable, tkname, type, line);
 }
+void insert_TSFunction(char *tkname, char *type, int line){
+    enterFunction(&rootSymTable->symbolTable, tkname, type, line);
+}
 
 int lookupPilaTS(char *tkname){
 //    printf("entra lookup pila TS\n");
@@ -61,6 +64,19 @@ int lookupPilaTS(char *tkname){
     while (tmp!=NULL) {
 //        printf("itera lookup pila TS\n");
         if (lookupST(tmp->symbolTable, tkname)==1){
+            return 1;
+        }
+        tmp = (struct pilaSymTable*) tmp->next;
+    }
+    return 0;
+}
+
+int lookupPilaTSFunction(char *tkname){
+//    printf("entra lookup pila TS\n");
+    struct pilaSymTable *tmp = rootSymTable;
+    while (tmp!=NULL) {
+//        printf("itera lookup pila TS\n");
+        if (lookupSTFunction(tmp->symbolTable, tkname)==1){
             return 1;
         }
         tmp = (struct pilaSymTable*) tmp->next;

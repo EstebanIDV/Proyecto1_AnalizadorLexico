@@ -1,13 +1,42 @@
-/* Comentario que debe desaparecer */
-Esto debe aparecer
-no hay nada malo aca
-#include "a.h"
-/* Comentario que debe desaparecer */
+//
+//char juan = 002;
+//
+//int main(int test, char test2){
+//    int a =0;
+//    {
+//        float hola = 12;
+//        {
+//            char y = 9;
+//        }
+//    }
+//
+//
+//
+//
+//}
+//
+//void main2(int testing){
+////    testing = 1;
+//}
 
-Esto va en medio
-/* Comentario que debe desaparecer */
 
-#include "b.h"
+//int main(int testing){
+//    for (i = 1; i < 11; ++i)
+//    {
+//        printf("%d ", i);
+//    }
+//}
+void test(){
 
+}
+int main(int hola, char variable3){
+    hola = 1;
+    variable3 = 'o';
+    char a,b,c,d,e,f;
+    test();
 
-/* Comentario que debe desaparecer */
+    for (int i = 1; i < 11; ++i)
+    {
+
+    }
+}

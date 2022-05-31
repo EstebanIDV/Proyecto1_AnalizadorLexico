@@ -12,6 +12,8 @@ void pushpilaSymTable(struct pilaSymTable** root);
 void poppilaSymTable(struct pilaSymTable** root);
 void insert_TS(char *tkname, char *type, int line);
 int lookupPilaTS(char *tkname);
+void insert_TSFunction(char *tkname, char *type, int line);
+int lookupPilaTSFunction(char *tkname);
 //int toppilaSymTable(struct pilaSymTable* root);
 void iniciarPilaTS();
 

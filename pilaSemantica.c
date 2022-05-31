@@ -128,11 +128,16 @@ void guardarFuncion(int linea){
 void fin_declaracion(){
 //    printf("Terminamos declaracion, se inserta en TS\n");
     struct PilaSemantica *tmp = retrievePS(rootPS, TIPO);
-
-    while (rootPS->registroSemantico->tipo == ID){
-        insert_TS(rootPS->registroSemantico->tokenType, tmp->registroSemantico->tokenType, rootPS->registroSemantico->linea);
+    if(strcmp(yyget_text(), "(") == 0){
+        insert_TSFunction(rootPS->registroSemantico->tokenType, tmp->registroSemantico->tokenType, rootPS->registroSemantico->linea);
         popPilaSemantica(&rootPS);
+    }else{
+        while (rootPS->registroSemantico->tipo == ID){
+            insert_TS(rootPS->registroSemantico->tokenType, tmp->registroSemantico->tokenType, rootPS->registroSemantico->linea);
+            popPilaSemantica(&rootPS);
+        }
     }
+
     popPilaSemantica(&rootPS);
 }
 
@@ -148,11 +153,20 @@ void close_scope(){
 
 void ck_declaration(int line){
 
-    if (lookupPilaTS(lastID)==0){
-        fprintf(stderr,"Line %d ", line);
-        fprintf (stderr, ": semantic error Variable '%s' used but not defined.\n", lastID);
-        synErrorFound = 1;
+    if(strcmp(yyget_text(), "(") == 0){
+        if (lookupPilaTSFunction(lastID)==0){
+            fprintf(stderr,"Line %d ", line);
+            fprintf (stderr, ": semantic error Function '%s' used but not defined.\n", lastID);
+            synErrorFound = 1;
+        }
+    }else{
+        if (lookupPilaTS(lastID)==0){
+            fprintf(stderr,"Line %d ", line);
+            fprintf (stderr, ": semantic error Variable '%s' used but not defined.\n", lastID);
+            synErrorFound = 1;
+        }
     }
+
 
 }
 /*int main()
