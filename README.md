@@ -4,7 +4,8 @@ Este es un Analizador Léxico y sintáctico, escrito con C, Bison y Flex para el
 C e imprime los resultados del análisis sintáctico en consola. Se toman en cuenta rutinas de C como 
 #include, que incluye archhivos externos y librerías de c y #define que sirve para reemplazar el valor dado en las apariciones (usos) 
 del #define, para ello se realiza una fase de preprocesado de código y un proceso de parsing que revisa que efectivamente siga la sintáxis de C.
-
+La principalidad funcionalidad de esta etapa del proyecto es la de mostrar todos los errores posibles y su ubicación,
+esto gracias a la tabla de símbolos, cada vez que finaliza un scope, la tabla de símbolos de dicho scope es impresa.
 
 ## Instituto Tecnológico de Costa Rica - Escuela de Ing. en Computación
 
