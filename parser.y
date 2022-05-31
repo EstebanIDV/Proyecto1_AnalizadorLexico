@@ -351,11 +351,13 @@ direct_declarator
 	| direct_declarator '[' type_qualifier_list assignment_expression ']'
 	| direct_declarator '[' type_qualifier_list ']'
 	| direct_declarator '[' assignment_expression ']'
-	| direct_declarator '(' parameter_type_list ')'
-	| direct_declarator '(' ')'
-	| direct_declarator '(' identifier_list ')'
+	| direct_declarator leftpar parameter_type_list ')' { fin_declaracion(); }
+	| direct_declarator leftpar ')'
+	| direct_declarator leftpar identifier_list ')' { fin_declaracion(); }
 	;
 
+leftpar
+	: '(' { fin_declaracion(); } ;
 pointer
 	: '*' type_qualifier_list pointer
 	| '*' type_qualifier_list
@@ -376,7 +378,7 @@ parameter_type_list
 
 parameter_list
 	: parameter_declaration
-	| parameter_list ',' parameter_declaration
+	| parameter_list comma parameter_declaration
 	;
 
 parameter_declaration
@@ -386,10 +388,12 @@ parameter_declaration
 	;
 
 identifier_list
-	: IDENTIFIER
-	| identifier_list ',' IDENTIFIER
+	: IDENTIFIER { guardarID(yylloc.first_line); }
+	| identifier_list comma IDENTIFIER { guardarID(yylloc.first_line); }
 	;
 
+comma
+	: ',' { fin_declaracion(); } ;
 type_name
 	: specifier_qualifier_list abstract_declarator
 	| specifier_qualifier_list
