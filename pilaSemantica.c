@@ -110,12 +110,12 @@ struct PilaSemantica* updatePS(struct PilaSemantica* root, char* tipoRS){
 }
 
 void guardarTipo(int linea){
-//    printf("Guarda TIPO: %s\n", yyget_text());
+    //printf("Guarda TIPO: %s\n", yyget_text());
     pushPilaSemantica(&rootPS, yyget_text(), TIPO, linea);
 }
 
 void guardarID(int linea){
-//    printf("Guarda ID: %s\n", yyget_text());
+    //printf("Guarda ID: %s\n", yyget_text());
     pushPilaSemantica(&rootPS, yyget_text(), ID, linea);
 }
 
@@ -128,17 +128,20 @@ void guardarFuncion(int linea){
 void fin_declaracion(){
 //    printf("Terminamos declaracion, se inserta en TS\n");
     struct PilaSemantica *tmp = retrievePS(rootPS, TIPO);
-    if(strcmp(yyget_text(), "(") == 0){
-        insert_TSFunction(rootPS->registroSemantico->tokenType, tmp->registroSemantico->tokenType, rootPS->registroSemantico->linea);
-        popPilaSemantica(&rootPS);
-    }else{
-        while (rootPS->registroSemantico->tipo == ID){
-            insert_TS(rootPS->registroSemantico->tokenType, tmp->registroSemantico->tokenType, rootPS->registroSemantico->linea);
+    if(tmp !=NULL){
+        if(strcmp(yyget_text(), "(") == 0){
+            insert_TSFunction(rootPS->registroSemantico->tokenType, tmp->registroSemantico->tokenType, rootPS->registroSemantico->linea);
             popPilaSemantica(&rootPS);
+        }else{
+            while (rootPS->registroSemantico->tipo == ID){
+                insert_TS(rootPS->registroSemantico->tokenType, tmp->registroSemantico->tokenType, rootPS->registroSemantico->linea);
+                popPilaSemantica(&rootPS);
+            }
         }
+
+        popPilaSemantica(&rootPS);
     }
 
-    popPilaSemantica(&rootPS);
 }
 
 void open_scope(){

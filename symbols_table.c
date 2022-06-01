@@ -68,9 +68,10 @@ void enterFunction(struct nodeSymTable** root, char* nameVar, char* symType, int
     struct nodeSymTable *newSymNode = malloc(sizeof(struct nodeSymTable));
     newSymNode->name = strdup(nameVar);
     newSymNode->type = strdup(symType);
+    newSymNode->symType = 1; // 1 means function
     newSymNode->linea = linea;
     newSymNode->next = *root;
-    newSymNode->symType = 1; // 1 means function
+
     *root = newSymNode;
 }
 
