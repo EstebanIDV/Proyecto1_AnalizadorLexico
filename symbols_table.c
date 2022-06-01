@@ -104,18 +104,20 @@ void enterFunction(struct nodeSymTable** root, char* nameVar, char* symType, int
 
 void printAllSym(struct nodeSymTable* root) {
     struct nodeSymTable *tmp = root;
-    printf("\n*************************** Nueva Tabla de Simbolos***************************\n");
+    printf("\n*************************** Nueva Tabla de Simbolos ***************************\n");
     while (tmp != NULL) {
+        printf("*\t");
         if (tmp->symType == 0){
-            printf("Variable Name: %s, Type: %s\n", tmp->name, tmp->type);
+            printf("Variable Name: %s, Type: %s", tmp->name, tmp->type);
         }else if (tmp->symType == 2){
-            printf("Parameter Name: %s, Type: %s\n", tmp->name, tmp->type);
+            printf("Parameter Name: %s, Type: %s", tmp->name, tmp->type);
         }else{
-            printf("Function Name: %s, Return Type: %s\n", tmp->name, tmp->type);
+            printf("Function Name: %s, Return Type: %s", tmp->name, tmp->type);
         }
-
+        printf("\n");
         tmp = (struct nodeSymTable *) tmp->next;
     }
+    printf("*                                                                              *\n*********************************************************************************\n");
 }
 
 //char *symbolByIndex(int index) {
