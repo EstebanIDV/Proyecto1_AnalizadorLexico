@@ -144,6 +144,26 @@ void fin_declaracion(){
 
 }
 
+
+
+void fin_declaracionParametro(){
+//    printf("Terminamos declaracion, se inserta en TS\n");
+    struct PilaSemantica *tmp = retrievePS(rootPS, TIPO);
+    if(tmp !=NULL){
+
+        while (rootPS->registroSemantico->tipo == ID){
+            insert_TSParametro(rootPS->registroSemantico->tokenType, tmp->registroSemantico->tokenType, rootPS->registroSemantico->linea);
+            popPilaSemantica(&rootPS);
+        }
+
+
+        popPilaSemantica(&rootPS);
+    }
+
+}
+
+
+
 void open_scope(){
 //    printf("Abrimos SCOPE\n");
     pushpilaSymTable(&rootSymTable);

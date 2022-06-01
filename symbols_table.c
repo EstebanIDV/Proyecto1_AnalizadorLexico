@@ -12,16 +12,19 @@
 
 // Function to check if the given symbol exists into the symbol table
 // The function returns 1 if the symbol already exits or 0 if not
-int lookupST(struct nodeSymTable* root, char* sym) {
+int lookupST(struct nodeSymTable* root, char* sym, int flag) {
     struct nodeSymTable *tmp = root;
-
     while (tmp != NULL) {
         // strcmp(x, y) = 0 means both strings are the same
-        if (strcmp(tmp->name, sym) == 0 && tmp->symType == 0) {
+        if (strcmp(tmp->name, sym) == 0 && tmp->symType == 0 && flag==0) {
+            return 1;
+        }
+        if (strcmp(tmp->name, sym) == 0 && tmp->symType == 2 && flag==1) {
             return 1;
         }
         tmp = tmp->next;
     }
+
 //    printf("%s", #include "symbols_table.c"s);
     return 0;
 }
@@ -42,7 +45,7 @@ int lookupSTFunction(struct nodeSymTable* root, char* sym) {
 
 // Function to insert a new symbol into the table giving the symbol to insert, should execute after lookup
 void enter(struct nodeSymTable** root, char* nameVar, char* symType, int linea) {
-    if (lookupST(*root, nameVar)==1){
+    if (lookupST(*root, nameVar, 0)==1){
         fprintf(stderr,"Line %d ", linea);
         fprintf (stderr, ": semantic error multiple definitions for variable: %s\n", nameVar);
         synErrorFound = 1;
@@ -53,6 +56,30 @@ void enter(struct nodeSymTable** root, char* nameVar, char* symType, int linea) 
     newSymNode->type = strdup(symType);
     newSymNode->linea = linea;
     newSymNode->symType = 0; // 0 means variable
+    newSymNode->next = *root;
+    *root = newSymNode;
+}
+
+void enterParametro(struct nodeSymTable** root, char* nameVar, char* symType, int linea, struct nodeSymTable** root2) {
+    if (lookupST(*root, nameVar,1)==1 ){
+        fprintf(stderr,"Line %d ", linea);
+        fprintf (stderr, ": semantic error multiple definitions for variable: %s, Previously defined as a parameter\n", nameVar);
+        synErrorFound = 1;
+        return;
+    }
+    if(root2!=NULL){
+        if(lookupST(*root2, nameVar, 1)==1){
+            fprintf(stderr,"Line %d ", linea);
+            fprintf (stderr, ": semantic error multiple definitions for variable: %s, Previously defined as a parameter\n", nameVar);
+            synErrorFound = 1;
+            return;
+        }
+    }
+    struct nodeSymTable *newSymNode = malloc(sizeof(struct nodeSymTable));
+    newSymNode->name = strdup(nameVar);
+    newSymNode->type = strdup(symType);
+    newSymNode->linea = linea;
+    newSymNode->symType = 2; // 2 means parameter
     newSymNode->next = *root;
     *root = newSymNode;
 }
@@ -81,6 +108,8 @@ void printAllSym(struct nodeSymTable* root) {
     while (tmp != NULL) {
         if (tmp->symType == 0){
             printf("Variable Name: %s, Type: %s\n", tmp->name, tmp->type);
+        }else if (tmp->symType == 2){
+            printf("Parameter Name: %s, Type: %s\n", tmp->name, tmp->type);
         }else{
             printf("Function Name: %s, Return Type: %s\n", tmp->name, tmp->type);
         }

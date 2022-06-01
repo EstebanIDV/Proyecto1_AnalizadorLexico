@@ -16,5 +16,6 @@ void insert_TSFunction(char *tkname, char *type, int line);
 int lookupPilaTSFunction(char *tkname);
 //int toppilaSymTable(struct pilaSymTable* root);
 void iniciarPilaTS();
+void insert_TSParametro(char *tkname, char *type, int line);
 
 #endif //PROYECTO3_SYMTABLE_PILATS_H

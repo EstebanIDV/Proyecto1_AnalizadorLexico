@@ -2299,13 +2299,13 @@ yyreduce:
 
   case 180: /* direct_declarator: direct_declarator leftpar parameter_type_list ')'  */
 #line 354 "parser.y"
-                                                            { fin_declaracion(); }
+                                                            { fin_declaracionParametro(); }
 #line 2304 "parser.tab.c"
     break;
 
   case 182: /* direct_declarator: direct_declarator leftpar identifier_list ')'  */
 #line 356 "parser.y"
-                                                        { fin_declaracion(); }
+                                                        { fin_declaracionParametro(); }
 #line 2310 "parser.tab.c"
     break;
 
@@ -2329,7 +2329,7 @@ yyreduce:
 
   case 199: /* comma: ','  */
 #line 396 "parser.y"
-              { fin_declaracion(); }
+              { fin_declaracionParametro(); }
 #line 2334 "parser.tab.c"
     break;
 

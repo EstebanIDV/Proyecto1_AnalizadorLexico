@@ -351,9 +351,9 @@ direct_declarator
 	| direct_declarator '[' type_qualifier_list assignment_expression ']'
 	| direct_declarator '[' type_qualifier_list ']'
 	| direct_declarator '[' assignment_expression ']'
-	| direct_declarator leftpar parameter_type_list ')' { fin_declaracion(); }
+	| direct_declarator leftpar parameter_type_list ')' { fin_declaracionParametro(); }
 	| direct_declarator leftpar ')'
-	| direct_declarator leftpar identifier_list ')' { fin_declaracion(); }
+	| direct_declarator leftpar identifier_list ')' { fin_declaracionParametro(); }
 	;
 
 leftpar
@@ -393,7 +393,7 @@ identifier_list
 	;
 
 comma
-	: ',' { fin_declaracion(); } ;
+	: ',' { fin_declaracionParametro(); } ;
 type_name
 	: specifier_qualifier_list abstract_declarator
 	| specifier_qualifier_list

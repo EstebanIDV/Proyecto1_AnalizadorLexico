@@ -33,7 +33,7 @@ int topPilaSemantica(struct PilaSemantica* root);
 struct PilaSemantica* retrievePS(struct PilaSemantica* root, char* tipoRS);
 struct PilaSemantica* deletePS(struct PilaSemantica* root, char* ripoRS);
 struct PilaSemantica* updatePS(struct PilaSemantica* root, char* tipoRS);
-
+void fin_declaracionParametro();
 void guardarTipo(int linea);
 void guardarID(int linea);
 void guardarFuncion(int linea);
